@@ -1,4 +1,5 @@
 const User = require("../models/user.model")
+const mongoose = require('mongoose')
 
 module.exports.create = (req, res, next) => {
     User.create(req.body)
@@ -8,6 +9,7 @@ module.exports.create = (req, res, next) => {
     .catch((err) => {
       if (err instanceof mongoose.Error.ValidationError) {
         res.status(400).json(err.errors);
+        console.log(err)
       } else {
         next(err);
       }

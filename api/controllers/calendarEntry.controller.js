@@ -1,6 +1,5 @@
 const CalendarEntry = require("../models/calendarEntry.model")
 const dayjs = require("dayjs")
-const Planning = require("../models/planning.model")
 const User = require("../models/user.model")
 
 module.exports.create = (req, res, next) => {

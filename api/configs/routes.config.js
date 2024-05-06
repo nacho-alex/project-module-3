@@ -10,7 +10,7 @@ const planning = require("../controllers/planning.controller");
 const calendarEntry = require("../controllers/calendarEntry.controller");
 
 // CRUD USER
-router.post("/login", user.login);
+// router.post("/login", user.login);
 router.post("/users", user.create);
 
 router.get("/users/:id", auth.checkAuth, user.profile);

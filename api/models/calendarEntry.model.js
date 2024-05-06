@@ -38,7 +38,7 @@ const calendarEntrySchema = new Schema(
             default: dayjs().format('dddd, D, MMMM, YYYY')
         },
         owner: {
-            Type: Schema.Types.ObjectId,
+            type: Schema.Types.ObjectId,
             ref: "User"
         }
       },

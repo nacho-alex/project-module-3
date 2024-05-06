@@ -19,10 +19,13 @@ const userSchema = new Schema(
         password: {
             type: String,
             required: true,
+            minLength: 8,
+
         },
         username: {
             type: String,
             required: true,
+            unique: true
         },
         avatar: {
             type: String
@@ -49,6 +52,10 @@ const userSchema = new Schema(
         },
         weight: {type: Number},
         height: {type: Number},
+        activityLevel: {
+            type: Number,
+            enum: [1.2, 1.375, 1.55, 1.725, 1.9]
+        },
         goal: {
             type: String,
             enum: ["gain", "lose"]
