@@ -4,6 +4,17 @@ const foods = require("../data/foods.json")
 const exercises = require("../data/exercises.json")
 const Food = require('../models/food.model')
 const Exercise = require('../models/exercise.model')
+const CalendarEntry = require('../models/calendarEntry.model')
+const dayjs = require("dayjs")
+
+createExercises()
+
+function createExercises() {
+        Workout.create({planning: "hola"})
+            .then(() => console.log("created"))
+            .catch((error) => console.error(error))
+}
+
 
 // createExercises()
 
@@ -15,14 +26,14 @@ const Exercise = require('../models/exercise.model')
 //     })
 // }
 
-createFoods()
+// createFoods()
 
-function createFoods() {
-    foods.forEach((fd, index) => {
-        Food.create(fd)
-            .then(() => console.log(`Food created ${index}/${foods.length}`))
-            .catch((error) => console.error(error))
-    })
-}
+// function createFoods() {
+//     foods.forEach((fd, index) => {
+//         Food.create(fd)
+//             .then(() => console.log(`Food created ${index}/${foods.length}`))
+//             .catch((error) => console.error(error))
+//     })
+// }
 
 
