@@ -25,10 +25,15 @@ const userSchema = new Schema(
         username: {
             type: String,
             required: true,
-            unique: true
+            unique: [true, 'This username is already in use']
         },
         avatar: {
-            type: String
+            type: String,
+            default: "/src/assets/3e79edd8850e4f1d73052f548f2f399d.jpg"
+        },
+        avtScale: {
+            type: Number,
+            default: 1
         },
         liked_workouts: { 
             type: [Schema.Types.ObjectId],
@@ -48,16 +53,25 @@ const userSchema = new Schema(
         },
         genre: {
             type: String,
+            required: true,
             enum: ["male", "female"]
         },
-        weight: {type: Number},
-        height: {type: Number},
+        weight: {
+            type: Number,
+            required: true
+        },
+        height: {
+            type: Number,
+            required: true
+        },
         activityLevel: {
             type: Number,
+            required: true,
             enum: [1.2, 1.375, 1.55, 1.725, 1.9]
         },
         goal: {
             type: String,
+            required: true,
             enum: ["gain", "lose"]
         },
         planning: {

@@ -1,11 +1,31 @@
-import React from 'react'
-import Logo from '../../assets/green-heart-emoji-2048x1835-ime8vvj2.png'
-import './login.css'
-import { Link } from 'react-router-dom'
+import React, { useState } from 'react';
+import Logo from '../../assets/green-heart-emoji-2048x1835-ime8vvj2.png';
+import './login.css';
+import { Link } from 'react-router-dom';
+import axios from 'axios'
+import { useContext } from 'react';
+import AuthContext from '../../contexts/auth.context';
+import { useNavigate } from 'react-router-dom';
 
-function login() {
+function Login() {
 
+  const [ formData, setFormData ] = useState({username:"", password: ""});
+  const { doLogin } = useContext(AuthContext);
+  const navigate = useNavigate();
 
+  const handleChange = (event) => {
+    const { name, value } = event.currentTarget; 
+    setFormData({...formData, [name]: value});
+  }
+
+  async function handleSubmit(event) {
+    event.preventDefault();
+    try {
+      await doLogin(formData)
+      navigate("/");
+    } catch {
+    }
+  }
 
   return (
     <div className='container'>
@@ -13,9 +33,9 @@ function login() {
             <img className='logo' src={Logo}></img>
         </div>
         <h2>Sign in</h2>
-        <form className='d-flex flex-column'>
-            <input type='text' placeholder='Username' name='username'></input>
-            <input type='password' placeholder='Password' name='password'></input>
+        <form className='d-flex flex-column' onSubmit={handleSubmit}>
+            <input type='text' placeholder='Username' name='username' value={formData.username} onChange={handleChange} autoComplete="username"></input>
+            <input type='password' placeholder='Password' name='password' value={formData.password} onChange={handleChange} autoComplete="current-password"></input>
             <button type='submit'>Log in</button>
         </form>
 
@@ -31,4 +51,4 @@ function login() {
   )
 }
 
-export default login
+export default Login

@@ -1,6 +1,12 @@
 import React from 'react'
 import { useState } from 'react'
-import axios from 'axios'
+import { createUser } from '../../services/api.service';
+import './register.css'
+import { Link, Navigate } from 'react-router-dom';
+import exampleImg from '../../assets/3e79edd8850e4f1d73052f548f2f399d.jpg'
+import gainIMG from '../../assets/gain.png'
+import loseIMG from '../../assets/loseDES.png'
+import { useNavigate } from 'react-router-dom';
 
 
 const initialState = {
@@ -17,23 +23,81 @@ const initialState = {
     activityLevel: '',
 
     goal: '',
+    avtScale: '',
 }
 
 function register() {
 const [pageState, setPage] = useState(1)
 const [formData, setFormData] = useState(initialState)
+const [avatarOpen, setAvatarOpen] = useState(false);
+const [scale, setScale] = useState(1);
+const [errors, setErrors] = useState(initialState);
+const navigate = useNavigate();
 
 
-const handlePage = () => {
-    setPage( pageState + 1)
-}
+const handlePageNext = (e) => {
+    e.preventDefault();
+    const newErrors = {};
 
-const handleSubmit = (e) => {
-    e.preventDefault()
-    console.log(formData)
-    axios.post("http://localhost:3000/api/v1/users", formData)
+    if (pageState === 1) {
+        if (!formData.name) newErrors.name = "Name is required";
+        if (!formData.username) newErrors.username = "Username is required";
+        if (!formData.email) newErrors.email = "Email is required";
+        if (formData.password.length < 8) newErrors.password = "Password must be at least 8 characters long";
+
+        if (Object.keys(newErrors).length === 0) {
+            setPage(2);
+        } else {
+            setErrors(newErrors);
+        }
+    }
+
+    if (pageState === 2) {
+        if (!formData.birthDate) newErrors.birthDate = "Birth date is required";
+        if (!formData.weight) newErrors.weight = "Weight is required";
+        if (!formData.height) newErrors.height = "Height is required";
+        if (!formData.genre) newErrors.genre = "Genre is required";            
+        if (!formData.activityLevel) newErrors.activityLevel = "ActivityLevel is required";
     
-}
+        if (Object.keys(newErrors).length === 0) {
+            setPage(3);
+        } else {
+            setErrors(newErrors);
+        }
+    }
+};
+
+const handlePageBack = (e) => {
+    e.preventDefault();
+    setPage(pageState - 1);
+    setErrors(initialState);
+
+    if (formData.avatar === undefined) setFormData({...formData, avatar: ''}) 
+};
+
+async function handleSubmit(e) {
+    e.preventDefault();
+    const newErrors = {};
+    if (!formData.goal) newErrors.goal = "Goal is required";
+
+    if(formData.avatar === '') setFormData({...formData, avatar: undefined}) 
+
+    if (Object.keys(newErrors).length === 0) {
+
+    try {
+        await createUser(formData)
+        navigate("/login")
+    } catch (err) {
+        newErrors.exist = err.message
+        console.log(newErrors)
+        setErrors(newErrors)
+        setPage(1)
+    }
+    } else {
+        setErrors(newErrors);
+    }
+};
+
 
 const handleChange = (event) => {
     const{name, value} = event.currentTarget
@@ -43,55 +107,204 @@ const handleChange = (event) => {
 
 }
 
+const handleScale = (event) => {
+    setScale(event.target.value);
+    setFormData({ ...formData, avtScale: event.target.value});
+  };
+
+const handleAvatarClick = (e) => {
+    e.preventDefault();
+    setAvatarOpen(!avatarOpen);
+}
+
+const handleGenreSelect = (genre) => {
+
+    setFormData({ ...formData, genre });
+};
+
+const handleActivitySelect = (activityLevel) => {
+
+    setFormData({ ...formData, activityLevel });
+};
+
+const handleGoalSelect = (goal) => {
+
+    setFormData({ ...formData, goal });
+};
+
+const imagesArr = ["login-image-container1", "login-image-container2", "login-image-container3"]
+let imageIndex = 0
   return (
     <>
+    <div className="register-page">
+        <div className={"login-image-container1"}>
+        {pageState >= 2 && ( <div className="login-image-container2">
+        {pageState === 3 && ( <div className="login-image-container3"></div>)}
+        </div>)}
+        
+        
+        </div>
+
+        
+   
         <form onSubmit={handleSubmit} >
-            {pageState === 1 && (
-            <>
-                <p>info 1</p>
-                <input onChange={handleChange} name='avatar' type="text" value={formData.avatar} placeholder='Avatar'/>
-                <input onChange={handleChange} name='username' required type="text" value={formData.username} placeholder='Username'/>
-                <input onChange={handleChange} name='name' maxLength="20" type="text" value={formData.name} placeholder='Name'/>
-                <input onChange={handleChange} name='email' type="email" value={formData.email} placeholder='E-mail'/>
-                <input onChange={handleChange} name='password' required  minLength="8" maxLength="20" type="password" value={formData.password} placeholder='password'/>
-                <button onClick={handlePage} >hola</button>
-            </>
-                
-            )}
-            {pageState === 2 && (
-            <>
-                <p>info 2</p>
-                    <input onChange={handleChange} name='birthDate' type="date" value={formData.birthDate} placeholder='birth date'/>
-                    <input onChange={handleChange} name='weight' type="number" value={formData.weight} placeholder='weight'/>
-                    <input onChange={handleChange} name='height' type="number" value={formData.height} placeholder='height'/>
-                    <select onChange={handleChange} name='genre'>
-                        <option value='' >select genre</option>
-                        <option value='male' >male</option>
-                        <option value='female' >female</option>
-                    </select>
-                    <select onChange={handleChange} name='activityLevel'>
-                        <option value='' >select activityLevel</option>
-                        <option value='1.2' >sedentary</option>
-                        <option value='1.375' >sightly active</option>
-                        <option value='1.55' >active</option>
-                        <option value='1.725' >very active</option>
-                        <option value='1.9' >A FCKING MACHINE</option>
-                    </select>
-                    <button onClick={handlePage} >hola</button>
-            </>
-            )}
-            {pageState === 3 && (
-            <>
-                <p>info 3</p>
-                <select onChange={handleChange} name='goal'>
-                        <option value='' >select goal</option>
-                        <option value='gain' >gain</option>
-                        <option value='lose' >lose</option>
-                    </select>
-                    <button type='submit'>holas</button>
-            </>
-            )}
+             <div className="register-container">
+                <div className={'register-box' + (pageState === 1 ? ' slide-in-right' : '')}>
+                {pageState === 1 && (
+                <>
+                    <h1 className="register-h1">Sign up</h1>
+                    <p className='register-p'>The registration form has three simple steps, let's start with your account information.</p>
+                    <label className="activitylabel"> Avatar: </label>
+                    <div className="avatar-preview">
+                        <div  onClick={handleAvatarClick}  className="avatar-preview-overlay"><i className="fa-solid fa-plus"></i></div>
+                        <img src={(formData.avatar ? formData.avatar : exampleImg)} style={{ transform: `scale(${scale})`, width: '100px', height: 'auto' }} alt="" />
+                    </div>
+
+                    <div className="range-input">
+                        <i className="fa-solid fa-magnifying-glass-minus"></i>
+                        <input type="range" min="1" max="2" step="0.1" name='avtScale' value={scale} onChange={handleScale}/>
+                        <i className="fa-solid fa-magnifying-glass-plus"></i>
+                    </div>
+
+                    <div className="input-group">
+                            <input className={"avatarinput" + (avatarOpen ? " openinp" : "")} id='avatarinp' onChange={handleChange} name='avatar' type="text" value={formData.avatar} placeholder='Introduce an URL image...'/>
+                    </div>
+                    <div className="input-group">
+                            <i className="inp-icon fa-solid fa-user"></i>
+                            <label htmlFor="usernameinp"> Username: </label>
+                            <input onChange={handleChange} id='usernameinp' name='username' required type="text" value={formData.username} placeholder='Choose an username...'/>
+                            {errors.username && <p>{errors.username}</p>}
+                    </div>
+                    <div className="input-group">
+                            <i className="inp-icon fa-regular fa-face-smile"></i>
+                            <label htmlFor="nameinp"> Name: </label>             
+                            <input onChange={handleChange} id='nameinp' name='name' maxLength="20" type="text" value={formData.name} placeholder='Your real name...'/>                                               
+                    </div>
+                    <div className="input-group">
+                            <i className="inp-icon fa-solid fa-envelope"></i>
+                            <label htmlFor="emailinp"> E-mail: </label> 
+                            <input onChange={handleChange} id='emailinp' name='email' type="email" value={formData.email} placeholder='E-mail address...'/>                       
+                    </div>
+                    <div className="input-group">
+                            <i className="inp-icon fa-solid fa-lock"></i>
+                            <label htmlFor="passwordinp"> Password: </label>                                                   
+                            <input onChange={handleChange} id='passwordinp' name='password' required  minLength="8" maxLength="20" type="password" value={formData.password} placeholder='Choose a secure password '/>                                               
+                    </div>
+                    <Link to={'/login'}><button type='button' className='register-btn-cancel' >Cancel</button></Link>
+                    <button className='register-btn' onClick={handlePageNext} >Next</button>
+                </>
+                    
+                )}
+                {pageState === 2 && (
+                <>
+                <div className={"pag2"}>
+                    <h1 className="register-h1">Sign up</h1>
+                        <p className='register-p'>Now let's take a look at some more personal data to help us calculate your caloric intake.</p>
+                        <label className='genrelabel' htmlFor="genreinp"> Choose genre </label>
+                        <div className="genre-buttons">
+                                
+                                <button type='button'
+                                    className={`genre-button ${formData.genre === 'male' ? 'selected-btn' : ''}`}
+                                    onClick={() => handleGenreSelect('male')}
+                                >
+                                    <i className="fa-solid fa-mars"></i>
+                                </button>
+                                <button type='button'
+                                    className={`genre-button ${formData.genre === 'female' ? 'selected-btn' : ''}`}
+                                    onClick={() => handleGenreSelect('female')}
+                                >
+                                    <i className="fa-solid fa-venus"></i>
+                                </button>
+                        </div>
+                        
+                        <div className="input-group">
+                                <i className="inp-icon fa-solid fa-cake-candles"></i>
+                                <label htmlFor="birthdateinp"> Birth date: </label>
+                                <input id='birthdateinp' onChange={handleChange} name='birthDate' type="date" value={formData.birthDate} placeholder='birth date'/>
+                        </div>
+
+                        <div className="input-group">
+                                <i className="inp-icon fa-solid fa-weight-scale"></i>
+                                <label htmlFor="weightinp"> Weight: </label>
+                                <input id='weightinp' onChange={handleChange} name='weight' type="number" value={formData.weight} placeholder='weight (kg)'/>
+                        </div>
+
+                        <div className="input-group">
+                                <i className="inp-icon fa-solid fa-ruler-vertical"></i>
+                                <label htmlFor="heightinp"> Height: </label>
+                                <input id='heightinp' onChange={handleChange} name='height' type="number" value={formData.height} placeholder='height (cm)'/>
+                        </div>
+
+                        <label className='activitylabel' htmlFor="genreinp"> Choose your daily activity level </label>
+                            <div className="activity-buttons">
+                                <button type='button'
+                                    className={`activity-button ${formData.activityLevel === '1.2' ? 'selected-btn-ac' : ''}`}
+                                    onClick={() => handleActivitySelect('1.2')}>
+                                    Sedentary
+                                </button>
+                                <button type='button'
+                                    className={`activity-button ${formData.activityLevel === '1.375' ? 'selected-btn-ac' : ''}`}
+                                    onClick={() => handleActivitySelect('1.375')}>
+                                    slightly active
+                                </button>
+                                <button type='button'
+                                    className={`activity-button ${formData.activityLevel === '1.55' ? 'selected-btn-ac' : ''}`}
+                                    onClick={() => handleActivitySelect('1.55')}>
+                                    Moderate
+                                </button>
+                                <button type='button'
+                                    className={`activity-button ${formData.activityLevel === '1.725' ? 'selected-btn-ac' : ''}`}
+                                    onClick={() => handleActivitySelect('1.725')}>
+                                    High
+                                </button>
+                                <button type='button'
+                                    className={`activity-button ${formData.activityLevel === '1.9' ? 'selected-btn-ac' : ''}`}
+                                    onClick={() => handleActivitySelect('1.9')}>
+                                    Very high
+                                </button>
+                            </div>
+                </div>
+                    <button type='button' className='register-btn-cancel' onClick={handlePageBack} >Back</button>
+                    <button className='register-btn' onClick={handlePageNext} >Next</button>
+                </>
+                )}
+                {pageState === 3 && (
+                <>
+                <div className="pag3">
+                <h1 className="register-h1">Your goal</h1>
+                    <p className='goallabel'>Finally, tell us what is your goal</p>
+
+                    <div className="goal-buttons">  
+                        <div>
+                                <button type='button'
+                                    className={`goal-button ${formData.goal === 'gain' ? 'selected-btn-goal' : ''}`}
+                                    onClick={() => handleGoalSelect('gain')}>
+                                    <img src={gainIMG} alt="" />
+                                </button>
+                                <h2 className={`${formData.goal === 'gain' ? 'selected-btn-goal-text' : ''}`} >Gain muscle</h2>
+                        </div> 
+                        <div>
+                                <button type='button'
+                                    className={`goal-button ${formData.goal === 'lose' ? 'selected-btn-goal' : ''}`}
+                                    onClick={() => handleGoalSelect('lose')} >
+                                    <img src={loseIMG} alt="" />
+                                </button>
+                                <h2 className={`${formData.goal === 'lose' ? 'selected-btn-goal-text' : ''}`} >Lose weight</h2>
+                        </div>
+                    </div>                       
+                </div>
+                <button type='button' className='register-btn-cancel' onClick={handlePageBack} >Back</button>
+                <button className='register-btn' type='submit'>Sign up</button>
+                {errors.goal && <p>{errors.goal}</p>}
+                  
+                </>
+                )}
+                </div>
+            </div>
         </form>
+        
+    </div>
+       
   </>
   )
 }

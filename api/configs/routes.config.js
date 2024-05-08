@@ -10,12 +10,12 @@ const planning = require("../controllers/planning.controller");
 const calendarEntry = require("../controllers/calendarEntry.controller");
 
 // CRUD USER
-// router.post("/login", user.login);
+router.post("/login", user.login);
 router.post("/users", user.create);
 
-router.get("/users/:id", auth.checkAuth, user.profile);
-router.patch("/users/:id", auth.checkAuth, user.update);
-router.delete("users/:id", auth.checkAuth, user.delete);
+router.get("/profile", auth.checkAuth, user.profile);
+router.patch("/profile", auth.checkAuth, user.update);
+router.delete("profile", auth.checkAuth, user.delete);
 
 router.get("/exercises", auth.checkAuth, exercise.list);
 router.get("/exercises/:id", auth.checkAuth, exercise.detail);
