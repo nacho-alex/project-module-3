@@ -1,4 +1,5 @@
 const Workout = require("../models/workout.model")
+const mongoose = require('mongoose')
 
 module.exports.create = (req, res, next) => {
     Workout.create(req.body)
@@ -29,7 +30,7 @@ module.exports.list = (req, res, next) => {
       .catch(next);
   };
 
-module.exports.detail = (req, res) => {
+module.exports.detail = (req, res, next) => {
     Workout.findById(req.params.id)
         .then((work) => {
             if (work) {
@@ -38,7 +39,9 @@ module.exports.detail = (req, res) => {
                 res.status(404).json({ message: "Workout not found" });
               }
         })
-        .catch(next)
+        .catch((error) => {
+          console.log(error)
+        })
 };
 
 module.exports.update = (req, res, next) => {

@@ -1,4 +1,137 @@
 .logo {
-    width: 10%;
-    height: 10%;
+   color: #83cb61;
+   z-index: 1000;
+    width: 100px;
+    height: 100px;
+    margin-bottom: 20px;
 }
+
+.login-page{
+    background-image: url(../../assets/1446b5db-6afb-47a6-9949-d61105fbf62d.png);
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 90px 90px;
+}
+
+.login-container{
+    width: min-content;
+    min-width: 350px;
+    background-color: rgba(255, 255, 255, 0.806);
+    height: 100%;
+    box-shadow: 10px 10px 5px -6px rgba(0, 0, 0, 0.401);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px 40px;
+    position: relative;
+
+}
+
+.login-container input{
+    background-color: #ffffff;
+    min-width: 250px;
+    height: 40px;
+    border: none;
+    padding: 5px 10px 5px 50px;
+    font-size: 14px;
+    position: relative;
+}
+
+
+.login-container i {
+    position: absolute;
+    left: 10px;
+    z-index: 999;
+    color: #818181;
+}
+
+
+
+.login-btn{
+    margin-top: 20px;
+    width: 100%;
+}
+
+.login-container form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-container h2{
+    font-size: 40px;
+    margin-bottom: 30px;
+}
+
+.login-container a{
+    color: #83cb61;
+    font-weight: 700; 
+}
+
+.login-container p {
+    font-size: 14px;
+    margin-top: 20px;
+}
+
+
+.login-img-container {
+    width: 60%;
+    overflow: hidden;
+    height: 100%;
+    margin-left: 40px;
+    box-shadow: 10px 10px 5px -6px rgba(0, 0, 0, 0.401);
+    position: relative;
+    
+  }
+  
+  .login-img-wrapper {
+    display: flex;
+    flex-direction: row;
+    transition: transform 0.5s ease;
+
+  }
+  
+  .login-img-wrapper img {
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover;
+    
+  }
+
+  .login-img-text {
+    position: absolute;
+    z-index: 999;
+    bottom: 20px;
+    left: 20px;
+    background-color: #00000087;
+    padding: 20px 50px;
+    width: 90%;
+  }
+
+  .login-img-text h1 {
+    color: #83cb61;
+    font-family: "Bebas Neue", sans-serif;
+    font-weight: 400;
+    font-size: 64px;
+  }
+
+  .login-img-text h2 {
+    color: white;
+    font-family: "Bebas Neue", sans-serif;
+    font-weight: 400;
+    font-size: 20px;
+  }
+
+  .login-img-text p{
+    color: white;
+    font-family: "Merriweather", serif;
+    font-weight: 400;
+    font-size: 14px;
+    max-width: 500px;
+  }

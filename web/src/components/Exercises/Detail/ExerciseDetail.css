@@ -1,0 +1,32 @@
+.workout-detail-container{
+    background-color: #83cb613c;;
+    border-radius: 15px;
+    padding: 20px 70px 40px 20px;
+    margin: 20px;
+    width: fit-content;
+
+}
+
+.workout-detail-box{
+    display: flex;
+    flex-direction: row;
+}
+
+.workout-image{
+    width: 350px;
+    height: 350px;
+    margin-right: 30px;
+}
+
+.workout-image img{
+    width: 350px;
+    height: 350px;
+}
+
+.workout-detail-container h1{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.workout-detail-box p{
+    max-width: 900px;
+}

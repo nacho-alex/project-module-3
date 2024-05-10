@@ -4,7 +4,7 @@ import AuthContext from '../../contexts/auth.context'
 function Home() {
     const context = useContext(AuthContext)
   return (
-    <div>{context.user?.name}</div>
+    <div>{context.user?.name}asdasd</div>
   )
 }
 

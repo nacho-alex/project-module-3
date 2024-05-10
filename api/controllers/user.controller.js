@@ -29,7 +29,8 @@ module.exports.profile = (req, res) => {
 };
 
 module.exports.update = (req, res, next) => {
-  User.findByIdAndUpdate(req.params.id, req.body, {
+  console.log(req.body)
+  User.findByIdAndUpdate(req.body.id, req.body, {
     runValidators: true,
     new: true,
   })

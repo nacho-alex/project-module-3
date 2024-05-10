@@ -26,7 +26,7 @@ module.exports.list = (req, res, next) => {
     Exercise.find(criterial)
       .sort({ _id: -1 })
       .skip(page * limit)
-      .limit(limit)
+      .limit()
       .then((exercises) => res.json(exercises))
       .catch(next);
   };

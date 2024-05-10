@@ -7,6 +7,8 @@ import exampleImg from '../../assets/3e79edd8850e4f1d73052f548f2f399d.jpg'
 import gainIMG from '../../assets/gain.png'
 import loseIMG from '../../assets/loseDES.png'
 import { useNavigate } from 'react-router-dom';
+import SpeechError from '../../components/speechError';
+
 
 
 const initialState = {
@@ -31,21 +33,21 @@ const [pageState, setPage] = useState(1)
 const [formData, setFormData] = useState(initialState)
 const [avatarOpen, setAvatarOpen] = useState(false);
 const [scale, setScale] = useState(1);
-const [errors, setErrors] = useState(initialState);
+const [errors, setErrors] = useState(null);
 const navigate = useNavigate();
-
 
 const handlePageNext = (e) => {
     e.preventDefault();
     const newErrors = {};
 
     if (pageState === 1) {
-        if (!formData.name) newErrors.name = "Name is required";
+        if (!formData.name) newErrors.name = "Name is required" ;
         if (!formData.username) newErrors.username = "Username is required";
         if (!formData.email) newErrors.email = "Email is required";
-        if (formData.password.length < 8) newErrors.password = "Password must be at least 8 characters long";
+        if (formData.password.length < 8) newErrors.password = "The password must contain at least 8 characters";
 
         if (Object.keys(newErrors).length === 0) {
+            setErrors(null)
             setPage(2);
         } else {
             setErrors(newErrors);
@@ -60,6 +62,7 @@ const handlePageNext = (e) => {
         if (!formData.activityLevel) newErrors.activityLevel = "ActivityLevel is required";
     
         if (Object.keys(newErrors).length === 0) {
+            setErrors(null)
             setPage(3);
         } else {
             setErrors(newErrors);
@@ -70,7 +73,7 @@ const handlePageNext = (e) => {
 const handlePageBack = (e) => {
     e.preventDefault();
     setPage(pageState - 1);
-    setErrors(initialState);
+    setErrors(null);
 
     if (formData.avatar === undefined) setFormData({...formData, avatar: ''}) 
 };
@@ -89,7 +92,6 @@ async function handleSubmit(e) {
         navigate("/login")
     } catch (err) {
         newErrors.exist = err.message
-        console.log(newErrors)
         setErrors(newErrors)
         setPage(1)
     }
@@ -104,7 +106,6 @@ const handleChange = (event) => {
     setFormData({...formData, 
     [name]: value
     })
-
 }
 
 const handleScale = (event) => {
@@ -118,17 +119,14 @@ const handleAvatarClick = (e) => {
 }
 
 const handleGenreSelect = (genre) => {
-
     setFormData({ ...formData, genre });
 };
 
 const handleActivitySelect = (activityLevel) => {
-
     setFormData({ ...formData, activityLevel });
 };
 
 const handleGoalSelect = (goal) => {
-
     setFormData({ ...formData, goal });
 };
 
@@ -136,17 +134,19 @@ const imagesArr = ["login-image-container1", "login-image-container2", "login-im
 let imageIndex = 0
   return (
     <>
+     
     <div className="register-page">
+    {errors ? <SpeechError errors={errors} direction='right' y='40' x='40'/> : null }
         <div className={"login-image-container1"}>
-        {pageState >= 2 && ( <div className="login-image-container2">
-        {pageState === 3 && ( <div className="login-image-container3"></div>)}
-        </div>)}
-        
-        
+            {pageState >= 2 && ( 
+            <div className="login-image-container2">
+                {pageState === 3 && ( 
+                <div className="login-image-container3"></div>)}
+            </div>)}
         </div>
 
-        
    
+
         <form onSubmit={handleSubmit} >
              <div className="register-container">
                 <div className={'register-box' + (pageState === 1 ? ' slide-in-right' : '')}>
@@ -173,7 +173,6 @@ let imageIndex = 0
                             <i className="inp-icon fa-solid fa-user"></i>
                             <label htmlFor="usernameinp"> Username: </label>
                             <input onChange={handleChange} id='usernameinp' name='username' required type="text" value={formData.username} placeholder='Choose an username...'/>
-                            {errors.username && <p>{errors.username}</p>}
                     </div>
                     <div className="input-group">
                             <i className="inp-icon fa-regular fa-face-smile"></i>
@@ -294,9 +293,7 @@ let imageIndex = 0
                     </div>                       
                 </div>
                 <button type='button' className='register-btn-cancel' onClick={handlePageBack} >Back</button>
-                <button className='register-btn' type='submit'>Sign up</button>
-                {errors.goal && <p>{errors.goal}</p>}
-                  
+                <button className='register-btn' type='submit'>Sign up</button>                  
                 </>
                 )}
                 </div>

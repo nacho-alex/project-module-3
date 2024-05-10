@@ -5,9 +5,10 @@ const http = axios.create({
 });
 
 http.interceptors.request.use(function (config) {
-  config.headers.authorization = `BEARER ${localStorage.getItem("token")}`;
+  config.headers.authorization = localStorage.getItem("token");
   return config;
 });
+
 
 // Add a response interceptor
 http.interceptors.response.use(
@@ -54,4 +55,40 @@ export function getProfile() {
 
 export function logout() {
   localStorage.removeItem("token");
+}
+
+export function createWorkout(data) {
+  return http.post("/workouts", data)
+      .catch(error => {
+        if (error) {
+          const errorMessage = error.response.data.message || "Error occurred"; 
+          throw new Error(errorMessage); 
+        } else {
+          throw error; 
+        }
+      });
+}
+
+export function getExercises() {
+  return http.get("/exercises");
+}
+
+export function getWorkouts() {
+  return http.get("/workouts");
+}
+
+export function postPlan(data) {
+  return http.patch(`/profile`, data)
+      .catch(error => {
+        if (error) {
+          const errorMessage = error.response.data.message || "Error occurred"; 
+          throw new Error(errorMessage); 
+        } else {
+          throw error; 
+        }
+      });
+}
+
+export function getWorkout(params) {
+  return http.get(`/workouts/${params.id}`)
 }

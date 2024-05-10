@@ -3,20 +3,29 @@ const Schema = mongoose.Schema;
 
 const exercisesWOSchema = new Schema(
     {
-        exercise: {
-            type: Schema.Types.ObjectId,
-            ref: "Exercise",
-            required: true
+
+        bodyPart: { type: [String]},
+        equipment: {type: [String]},
+        name: {type: String},
+        target: {type: String},
+        secundaryMuscles: {type: [String]},
+        instructions: {type: [String]},
+        work: {
+            sets: {
+                type: Number,
+                required: true
+            },
+            reps: {
+                type: Number
+            }
         },
-        sets: {type: Number},
-        reps: {
-            type: [Number]
-        },
-        duration: {
-            type: Number
+        schedule: {
+            type: [String],
+            enum: ["M","T", "W", "TH", "F", "S", "SU"]
         }
     }
 )
+
 
 const workoutSchema = new Schema(
     {
@@ -34,7 +43,7 @@ const workoutSchema = new Schema(
         exercises: {
             type: [exercisesWOSchema],
             required: true,
-            min: 1,
+            minLength: 1,
         },
         time: {
             type: Number,
@@ -46,6 +55,9 @@ const workoutSchema = new Schema(
         owner: { 
             type: Schema.Types.ObjectId,
             ref: "User"
+        },
+        ownername: {
+            type: String
         }
     }
 );
