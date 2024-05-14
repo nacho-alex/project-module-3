@@ -136,7 +136,7 @@ let imageIndex = 0
     <>
      
     <div className="register-page">
-    {errors ? <SpeechError errors={errors} direction='right' y='40' x='40'/> : null }
+        {errors ? <SpeechError errors={errors} direction='right' y='40' x='40'/> : null }
         <div className={"login-image-container1"}>
             {pageState >= 2 && ( 
             <div className="login-image-container2">

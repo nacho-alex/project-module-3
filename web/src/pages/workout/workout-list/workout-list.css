@@ -1,5 +1,4 @@
 .wo-list-page{
-    background-color: rgb(255, 255, 255);
     margin: 0;
     padding-bottom: 50px;
     z-index: -1;
@@ -20,14 +19,15 @@
     margin: 10px;
     margin-top: 0;
     z-index: 998;
+    background-color: #dfdfdf;
 }
 
 
 
 .selected-filter{
     border-bottom: none !important;
-    background-color: white;
-    color: #588940;
+    background-color: #f6f6f6 !important;
+    color: #818181;
     font-weight: 700;
 
 }

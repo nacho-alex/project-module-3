@@ -10,6 +10,7 @@ import jumboImg from '../../../assets/banner3.jpg'
 import './workout-edit.css'
 import FiresInput from "../../../components/workouts/FiresInput/FiresInput";
 import '../../../components/workouts/Workout-Item/workoutItem.css'
+import SpeechError from "../../../components/UI/speechError";
 
 
 
@@ -21,7 +22,6 @@ function EditWorkout(props) {
         title: '',
         description:'',
         exercises: [],
-        difficult: 0
     }
     const params = useParams();
     const [workout, setWorkout] = useState(initialState);
@@ -30,6 +30,8 @@ function EditWorkout(props) {
 
     const [page, setPage] = useState(1);
     const [actualDay, setDay] = useState('mon')
+    const [errors, setValidateErrors] = useState({});
+
 
 
     useEffect(() => {
@@ -103,13 +105,35 @@ function EditWorkout(props) {
     async function handleSubmit(e) {
         e.preventDefault();
         console.log(workout)
-        try {
-            const response = await updateWorkout(params, workout)
-            navigate(`/workout/${params.id}`)
-        } catch (err) {
-            console.log(err)
+        
+        const validateErrors = {};
+        if (!workout.title) validateErrors.title = "Title is required";
+        if (!workout.description) validateErrors.description = "Description is required";
+        if (!workout.exercises.length) validateErrors.exercises = "Add at least 1 exercise";
+
+        if (workout.exercises.length) {
+            workout.exercises.forEach(exercise => {
+                if (!exercise.work || !exercise.work.sets) validateErrors.sets = `sets is required`;
+                if (!exercise.work || !exercise.work.reps) validateErrors.reps = `reps is required`;
+            });
+        }
+        
+        if (!Object.keys(validateErrors).length) {
+            setWorkout({...workout, owner: context.user.id, ownername: context.user.name})
+
+            try {
+                const response = await updateWorkout(params, workout)
+                setValidateErrors({});
+                navigate(`/workout/${params.id}`)
+            } catch (err) {
+                console.log(err)
+            }
+        } else {
+            setValidateErrors(validateErrors);
         }
     }
+
+    
   
     return (
         <>
@@ -124,8 +148,11 @@ function EditWorkout(props) {
                 </div>
             </div>
 
+            {Object.values(errors).length > 0 ? <SpeechError errors={errors} direction='right' y='20' x='10'/> : null }
+
             
             {page === 1 && (
+                
                 
                 <form onSubmit={handleSubmit}>
                     <Link className="back-btn" to={'/list-workout'}> <i className="fa-solid fa-arrow-left"></i> Back </Link>
@@ -154,7 +181,11 @@ function EditWorkout(props) {
                                         <p className="workout-p">
                                             <strong>Difficult:</strong> 
                                         </p>
-                                        <FiresInput handleDifficult={handleDifficult}></FiresInput>
+
+                                        
+                                            <FiresInput prevState={workout.difficult} handleDifficult={handleDifficult}></FiresInput>
+                                        
+
                                     </div>
                                     
                             </div>

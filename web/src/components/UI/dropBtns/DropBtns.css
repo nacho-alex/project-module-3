@@ -5,6 +5,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 2000;
 }
 
 .drop-btn{
@@ -36,22 +37,24 @@
     color: #83cb61;
     border: #83cb61 solid 3px;
     text-decoration: none;
+    background-color: white;
 }
 
 .link-drop:hover .drop-link-text {
-    width: 200px; 
+    width: fit-content; 
     margin-left: 10px; 
-    padding: 3px 10px 4px 10px !important;
+    padding: 3px 10px 3px 10px;
     opacity: 1;
     font-weight: 700;
-    border: #83cb61 solid 3px;
-    background-color: white;
+    font-size: 14px;
+    border: #83cb61 solid 2px;
+
  
 }
 
 .link-drop:hover  i{
     color: #83cb61;
-    background-color: white;
+
 }
 
 .link-drop, .selected-trash:hover  i{
@@ -59,7 +62,7 @@
 }
 
 .link-drop i{
-    font-size: 22px;
+    font-size: 18px;
     border-radius: 25px;
     padding: 0;
     text-align: center;
@@ -72,19 +75,20 @@
 .selected-workout{
     display: flex;
     align-items: center;
-    border: #83cb61 3px solid;
+    border: #83cb61 2px solid;
     border-radius: 25px;
     padding: 3px 10px 3px 10px;
     background-color: white;
     margin-right: 10px;
     white-space: nowrap;
-    width: auto;
+    font-size: 14px;
+    
 }
 .selected-trash{
     display: flex;
     align-items: center;
     border-radius: 25px;
-    background-color: white;
+
     color:  rgb(255, 54, 54);
 }
 
@@ -93,13 +97,12 @@
 }
 
 .link-drop:hover .trash-link-text {
-    width: 200px; 
+    width: fit-content; 
     margin-left: 10px; 
-    padding: 3px 10px 4px 10px !important;
+    padding: 3px 10px 3px 10px;
     opacity: 1;
     font-weight: 700;
-    border: rgb(255, 54, 54) solid 3px;
-    background-color: white;
+    border: rgb(255, 54, 54) solid 2px;
  
 }
 
@@ -115,12 +118,13 @@
     margin-right: 0;
     align-self: center;
     text-decoration: none;
+    background-color: white;
 }
 
 .selected-workout:hover{
     display: flex;
     align-items: center;
-    border:  rgb(255, 54, 54) 3px solid;
+    border:  rgb(255, 54, 54) 2px solid;
     border-radius: 25px;
     padding: 3px 10px 4px 10px;
     background-color: white;

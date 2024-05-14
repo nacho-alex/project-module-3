@@ -1,7 +1,15 @@
 .detail-page{
-    padding: 30px;
-    background-image: url(../../../assets/1446b5db-6afb-47a6-9949-d61105fbf62d.png);
+    position: relative;
+    padding: 60px 0;
+}
 
+.infinite-bg{
+    background-image: url(../../../assets/1446b5db-6afb-47a6-9949-d61105fbf62d.png);
+    background-size: cover;
+    position: fixed;
+    top: 62px;
+    z-index: -1;
+    width: 100%;
 }
 
 .plane-box{
@@ -12,6 +20,10 @@
     border: none;
     margin-top: 20px;
     box-shadow: 5px 5px 3px 0px rgba(0, 0, 0, 0.131);
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.797);
+    backdrop-filter: blur(20px);
     position: relative;
 }
+
+
+

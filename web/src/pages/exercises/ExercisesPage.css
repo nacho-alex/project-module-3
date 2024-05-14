@@ -1,0 +1,13 @@
+.exercises-page{
+    padding-bottom: 60px;
+    min-height: 90vh;
+}
+
+.exercises-page .jumbo{
+    height: 250px;
+}
+.exercises-page .plane-box{
+    min-height: 450px;
+    background-color: rgba(255, 255, 255, 0.797);
+    backdrop-filter: blur(20px);
+}

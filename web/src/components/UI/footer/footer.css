@@ -1,15 +1,14 @@
 
-
-
-
 .footer {
     background-color: #3c3c3c;
     min-height: 300px;
-    z-index: 999;
+    z-index: 2999;
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 50px;
+    position: absolute;
+    width: 100vw;
 }
 
 .footer img{

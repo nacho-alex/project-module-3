@@ -18,28 +18,33 @@ const toggleExerciseExpansion = (exerciseId) => {
 };
 
 
+// const handleChange = (event) => {
+//   const { name, value } = event.currentTarget;
+//   const updatedExercise = { ...exercise };
+
+//   updatedExercise.work = {
+//       ...updatedExercise.work,
+//       [name]: value
+//   };
+
+//   if (onEditWork) {
+//       onEditWork(updatedExercise.work, exercise._id);
+//   }
+
+// };
+
 const handleChange = (event) => {
   const { name, value } = event.currentTarget;
-  const updatedExercise = { ...exercise };
-
-  updatedExercise.work = {
-      ...updatedExercise.work,
-      [name]: value
-  };
-
   if (onEditWork) {
-      onEditWork(updatedExercise.work, exercise._id);
-  }
-
-};
-
-
-
-const handleBlur = () => {
-  if (onEditWork) {
-      onEditWork(exercise.work, exercise._id);
+      onEditWork({ ...exercise.work, [name]: value }, exercise._id);
   }
 };
+
+// const handleBlur = () => {
+//   if (onEditWork) {
+//       onEditWork(exercise.work, exercise._id);
+//   }
+// };
 
   return (
     <div className='exercise-capsule'>
@@ -78,8 +83,8 @@ const handleBlur = () => {
 
           <div className="buttons-capsule">
           <div className="info-ex">
-            <strong>Part:</strong><p>{exercise.bodyPart}</p>
-            <strong>Equipment:</strong><p>{exercise.equipment}</p>
+            <p>{exercise.bodyPart}</p>
+            <p>{exercise.equipment}</p>
            
           </div>
 
@@ -90,8 +95,10 @@ const handleBlur = () => {
                       {onEditWork &&
                       <>
                         <p>Work:</p>
-                        <input value={exercise.work.sets} name='sets' type="number" placeholder='Sets...' onChange={handleChange} onBlur={handleBlur} />
-                        <input value={exercise.work.reps} name='reps' type="number" placeholder='Reps...' onChange={handleChange} onBlur={handleBlur} />
+                        <label>Sets:</label>
+                        <input value={exercise.work.sets} name='sets' type="number"  onChange={handleChange}  />
+                        <label>Reps:</label>
+                        <input value={exercise.work.reps} name='reps' type="number"  onChange={handleChange}  />
                       </>
                       }
 

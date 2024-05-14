@@ -28,7 +28,7 @@ function Login() {
   const [ formData, setFormData ] = useState({username:"", password: ""});
   const { doLogin } = useContext(AuthContext);
   const navigate = useNavigate();
-  const {showAlert} = useAlert();
+  const [errors, setErrors] = useState('')
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
  
 
@@ -48,7 +48,7 @@ function Login() {
       await doLogin(formData)
       navigate("/");
     } catch (err) {
-      showAlert('Invalid credentials');
+      setErrors({...errors, unauthorized: 'Invalid credentials'});
     }
   }
 
@@ -62,6 +62,8 @@ function Login() {
 
   return (
     <div className='login-page'>
+      {errors ? <SpeechError errors={errors} direction='up' y='3' x='50'/> : null }
+
 
 
       <div className='login-container '>

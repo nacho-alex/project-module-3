@@ -82,7 +82,8 @@ const handlePage = (page) => {
 
                 {workouts.length > 0 && (
                     workouts.filter((workout) => workout.owner === context.user.id).map((workout) => (
-                        <WorkoutItem key={workout._id} workout={workout}/>
+                        
+                        <WorkoutItem key={workout._id} workout={workout} clickable={true}/>
                     ))
                 )}
             </div>

@@ -17,6 +17,13 @@
     width: 280px;
     height: 280px;
     object-fit: cover;
+    
+}
+
+.create-img{
+    width: 280px;
+    height: 280px;
+    border: 1px solid rgba(142, 142, 142, 0.112);
 }
 
 .workout-main{
@@ -67,7 +74,6 @@
     display: flex;
     flex-direction: column;
     margin-top: 20px;
-    margin-bottom: 200px;
     border: 1px solid rgba(0, 0, 0, 0.208);
     margin-top: 20px;
     box-shadow: 5px 5px 3px 0px rgba(0, 0, 0, 0.131);
@@ -126,7 +132,8 @@
     margin-top: 20px;
     box-shadow: 5px 5px 3px 0px rgba(0, 0, 0, 0.137);
     border: 1px solid rgba(0, 0, 0, 0.113);
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.797);
+    backdrop-filter: blur(20px);
     position: relative;
 }
 textarea {

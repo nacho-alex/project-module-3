@@ -1,4 +1,35 @@
 .page-layout{
-    margin-top: 60px;
-
+    margin-top: 65px;
+    min-height: 92vh;
+    padding-bottom: 150px;
+    margin-bottom: 0;
+    z-index: 0;
 }
+.pageFather{
+    position: relative;
+    overflow: hidden;
+    background-color: #eeeeee71;
+    z-index: 1;
+}
+  
+  
+  .end-of-page-animation {
+    position: absolute;
+    bottom: -1900px;
+    left: 0;
+    width: 100%;
+    height: 20px; /* Altura inicial */
+    transform: scale(0.5);
+    background: radial-gradient(circle, #83cb61 20%, rgba(255, 255, 255, 0) 70%); /* Degradado circular de color #9f3535 a transparente */
+    opacity: 0;
+    transition: all 0.6s; /* Animación de altura */
+    z-index: -1; /* Asegura que esté por encima del contenido */
+   
+  }
+  
+  .end-of-page-animation.visible {
+    height: 2000px; /* Altura máxima */
+    opacity: 1;
+    transform: scale(1.5);
+  }
+  

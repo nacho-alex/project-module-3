@@ -1,3 +1,11 @@
+.create-page{
+    position: relative;
+}
+
+.create-page .exercises-div{
+    min-height: 390px;
+}
+
 .link-create{
     position: fixed;
     top: 120px;
@@ -5,6 +13,7 @@
     text-decoration: none;
     display: flex;
 }
+
 
 .create-link-text {
     

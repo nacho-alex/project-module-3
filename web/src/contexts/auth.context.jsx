@@ -29,7 +29,7 @@ export function AuthContextProvider({ children }) {
       await login(data);
       fetchProfile();
     } catch {
-      console.log('error')
+      throw new Error(); 
     }  
     
     

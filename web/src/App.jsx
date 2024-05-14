@@ -8,7 +8,7 @@ import CreateWorkout from "./pages/workout/workout-create/workout-create";
 import PrivateRoute from "./guards/private-route";
 import { AlertProvider } from "./contexts/alert.context";
 import Workoutdetail from "./pages/workout/workout-detail/workout-detail";
-import SearchExercises from "./components/Exercises/Search/SearchExercises";
+import ExercisesPage from "./pages/exercises/ExercisesPage";
 import EditWorkout from "./pages/workout/workout-edit/workout-edit";
 import SearchFood from "./components/food/search-food/search-food";
 import CreateRecipe from "./pages/recipes/recipe-create/recipe-create";
@@ -30,7 +30,7 @@ function App() {
           <Route path="/list-workout" element={<PrivateRoute><PageLayout><ListWorkout/></PageLayout></PrivateRoute>}/>
           <Route path="/workout/:id" element={<PrivateRoute><PageLayout ><Workoutdetail/></PageLayout></PrivateRoute>}/>
           <Route path="/edit-workout/:id" element={<PrivateRoute><PageLayout><EditWorkout/></PageLayout></PrivateRoute>}/>
-          <Route path="/search-exercises" element={<PrivateRoute><PageLayout><SearchExercises/></PageLayout></PrivateRoute> } />
+          <Route path="/search-exercises" element={<PrivateRoute><PageLayout><ExercisesPage/></PageLayout></PrivateRoute> } />
           <Route path="/list-recipe" element={<PrivateRoute><ListRecipe/></PrivateRoute>}/>
           <Route path="/create-recipe" element={<PrivateRoute><CreateRecipe/></PrivateRoute>} />
           <Route path="/search-food" element={<PrivateRoute><SearchFood/></PrivateRoute>} /> 

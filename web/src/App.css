@@ -15,16 +15,16 @@ p {
 }
 
 .speech {
-    position: relative;
+    position: fixed;
     background: rgba(255, 54, 54, 0.692);
     box-shadow: 20px 20px 5px -6px rgba(0,0,0,0.24);
     color: white;
     padding: 15px 50px;
-    position: absolute;
     z-index: 998;
     top: 20px;
     transform: translateX(-50%);
     left: 50%;
+    backdrop-filter: blur(50px);
 }
 .speech-up:before {
     border: 20px solid rgba(255, 54, 54, 0.692);
@@ -71,7 +71,7 @@ p {
     content: '';
     position: absolute;
     bottom: calc(50% - 25px);
-    right: -50px;
+    right: -48px;
     border: 25px solid transparent;
     border-left-color:  rgba(255, 54, 54, 0.692);
     border-bottom-color:transparent;

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './FiresInput.css'
 
 
@@ -7,6 +7,21 @@ function FiresInput(props) {
     const {handleDifficult, prevState} = props
     const [selected, setSelected] = useState(prevState - 1);
     const [hovered, setHovered] = useState(null);
+    const [changed, setChange] = useState(false)
+
+    useEffect(() => {
+
+    if (!changed) {
+        setSelected(prevState);
+    } else {
+        return
+    }
+        
+
+    }, [prevState]);
+
+
+   
     
 
     const handleHover = (index) => {
@@ -14,8 +29,10 @@ function FiresInput(props) {
     };
 
     const handleClick = (index) => {
+        setChange(true)
         setSelected(index);
-        handleDifficult(index)
+        handleDifficult(index - 1)
+        
     };
 
     const handleLeave = () => {
