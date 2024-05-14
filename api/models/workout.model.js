@@ -8,7 +8,8 @@ const exercisesWOSchema = new Schema(
         equipment: {type: [String]},
         name: {type: String},
         target: {type: String},
-        secundaryMuscles: {type: [String]},
+        gifUrl: {type: String},
+        secondaryMuscles: {type: [String]},
         instructions: {type: [String]},
         work: {
             sets: {
@@ -16,12 +17,13 @@ const exercisesWOSchema = new Schema(
                 required: true
             },
             reps: {
-                type: Number
+                type: Number,
+                required: true
             }
         },
-        schedule: {
-            type: [String],
-            enum: ["M","T", "W", "TH", "F", "S", "SU"]
+        day: {
+            type: String,
+            enum: ["mon","tue", "wed", "thu", "fri", "sat", "sun"]
         }
     }
 )
@@ -43,20 +45,19 @@ const workoutSchema = new Schema(
         exercises: {
             type: [exercisesWOSchema],
             required: true,
-            minLength: 1,
+            //minLength: 1,
         },
         time: {
             type: Number,
-        },
-        schedule: {
-            type: [String],
-            enum: ["M","T", "W", "TH", "F", "S", "SU"]
         },
         owner: { 
             type: Schema.Types.ObjectId,
             ref: "User"
         },
         ownername: {
+            type: String
+        },
+        difficult: {
             type: String
         }
     }

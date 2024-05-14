@@ -23,6 +23,16 @@ const exerciseSchema = new Schema(
         }, 
         instructions:{
             type: [String]
+        },
+        work: {
+            reps: {
+                type: Number,
+                default: 0
+            },
+            sets: {
+                type: Number,
+                default: 0
+            }
         }
     }
 );

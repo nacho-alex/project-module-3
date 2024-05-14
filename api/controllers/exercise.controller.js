@@ -24,7 +24,7 @@ module.exports.list = (req, res, next) => {
     if (secondaryMuscles) criterial.secondaryMuscles = secondaryMuscles;
     
     Exercise.find(criterial)
-      .sort({ _id: -1 })
+      .sort({ _id: 1 })
       .skip(page * limit)
       .limit()
       .then((exercises) => res.json(exercises))

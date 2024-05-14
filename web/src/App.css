@@ -1,15 +1,17 @@
 h1, h2 {
-    font-family: "Courgette", cursive;
+    font-family: "Bebas Neue", sans-serif;
     font-weight: 400;
     font-style: normal;
 }
 
 html{
-    font-family: "Merriweather", serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+
+
 p {
-    font-family: "Merriweather", serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .speech {
@@ -93,6 +95,98 @@ p {
 }
 
 .btn-green:hover{
-    background-color: #5d9145;
-   
+    background-color: #5d9145;  
+}
+
+.button{
+    color: white;
+    border: none;
+    padding: 5px 20px;
+    border-radius: 5px;
+    transition: all ease 0.3s;
+}
+
+.red{
+    background-color: rgb(255, 54, 54);
+}
+
+.button:hover{
+    background-color: rgba(0, 0, 0, 0.468);
+}
+
+.page-title{
+    text-align: center;
+    font-size: 46px;
+    color: rgb(89, 89, 89);
+    position: relative;
+    z-index: 19 !important;
+    
+
+}
+
+.h1-div{
+    background-color: rgba(255, 255, 255, 0.826);
+    padding: 40px;
+}
+.page-title::before{
+    content: '';
+    border-left: 5px solid #83cb61;
+    margin-right: 20px;
+}
+.page-title:after{
+    content: '';
+    border-left: 5px solid #83cb61;
+    margin-left: 20px;
+}
+
+.jumbo img{
+    width: 100%;
+    height: 360px;
+    background-color: #83cb61b6;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1 !important;
+    object-fit: cover;
+}
+
+.jumbo{
+    position: relative;
+    height: 360px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    
+}
+
+.jumbo-list img{
+    height: 360px !important;
+    position: absolute;
+    top: -6px;
+    left: 0;
+}
+
+.back-btn{
+    background: white;
+    text-decoration: none;
+    color: black;
+    position: fixed;
+    top: 100px;
+    left: 50px;
+    padding: 5px 20px;
+    border-radius: 25px;
+    font-weight: 700;
+    border: 3px solid black;
+    z-index: 1200;
+}
+
+.back-btn i {
+    margin-right: 10px;
+}
+
+.back-btn:hover{
+    background: #83cb61;
+    color: white;
+    z-index: 1200;
 }

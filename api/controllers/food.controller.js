@@ -13,16 +13,8 @@ module.exports.detail = (req, res, next) => {
 }
 
 module.exports.list = (req, res, next) => {
-    const {name, limit = 20, page = 0 } = req.query;
-
-    const criterial = {};
-
-    if (name) criterial.name = name;
-
-    Food.find(criterial)
-      .sort({ _id: -1 })
-      .skip(page * limit)
-      .limit(limit)
-      .then((food) => res.json(food))
-      .catch(next);
-  };
+    Food.find()
+        .sort({ name: 1 })
+        .then((food) => res.json(food))
+        .catch(next);
+};

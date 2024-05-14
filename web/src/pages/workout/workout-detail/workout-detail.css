@@ -1,0 +1,17 @@
+.detail-page{
+    padding: 30px;
+    background-image: url(../../../assets/1446b5db-6afb-47a6-9949-d61105fbf62d.png);
+
+}
+
+.plane-box{
+    margin: auto;
+    max-width: 90%;
+    width: 1200px;
+    padding: 30px;
+    border: none;
+    margin-top: 20px;
+    box-shadow: 5px 5px 3px 0px rgba(0, 0, 0, 0.131);
+    background-color: white;
+    position: relative;
+}

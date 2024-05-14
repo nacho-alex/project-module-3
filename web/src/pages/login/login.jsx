@@ -8,7 +8,7 @@ import AuthContext from '../../contexts/auth.context';
 import { useNavigate } from 'react-router-dom';
 import { useAlert } from '../../contexts/alert.context';
 import { useEffect } from 'react';
-import SpeechError from '../../components/speechError';
+import SpeechError from '../../components/UI/speechError';
 
 
 import img1 from '../../assets/imgSU1.jpg'
@@ -55,7 +55,7 @@ function Login() {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentImageIndex((prevIndex) => (prevIndex + 1) % imagesArr.length);
-    }, 8000);
+    }, 5000);
 
     return () => clearInterval(interval);
   }, []);

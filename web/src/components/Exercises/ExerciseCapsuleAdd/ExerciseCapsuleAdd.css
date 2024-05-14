@@ -1,0 +1,100 @@
+.exercise-capsule{
+    border: 2px solid #83cb61;
+    border-radius: 5px;
+    padding: 15px 15px;
+    display: flex;
+    
+    
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+.capsule-main{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.buttons-capsule {
+    display: flex;
+}
+.exercise-capsule input {
+    width: 80px;
+    margin-right: 10px;
+}
+
+.exercise-capsule h1{
+    font-size: 20px;
+    margin-bottom: 0;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.exercise-capsule i{
+    font-size: 20px;
+}
+
+
+.ex-title{
+    display: flex;
+    align-items: center;
+}
+
+.work-div input{
+    padding-left: 10px;
+}
+
+.exercise-capsule button{
+    background: none;
+    border: none;
+    color: #818181;
+    margin-right: 10px;
+}
+
+.exercise-capsule button:hover{
+    color: #83cb61;
+}
+
+
+
+.button-trash:hover{
+    color: rgb(255, 54, 54)!important;;
+}
+
+.work-div{
+    display: flex;
+    align-items: center;
+}
+
+.work-div p{
+    margin-bottom: 0;
+    font-weight: 700;
+    margin-right: 10px;
+}
+
+.info-ex{
+    display: flex;
+    align-items: center;
+}
+
+.info-ex p{
+    margin-bottom: 0;
+    
+}
+
+.info-ex strong{
+    margin-right: 10px;
+}
+
+.info-ex p::after {
+    content: '';
+    margin-left: 20px;
+    border-right: 1px solid rgba(0, 0, 0, 0.396);
+    margin-right: 20px;
+}
+
+.sets-div{
+    display: flex;
+    margin-right: 15px;
+}

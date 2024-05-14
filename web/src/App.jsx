@@ -1,29 +1,45 @@
 import { Route, Routes } from "react-router-dom";
-import './App.css'
-import Login from './pages/login/login'
-import Register from './pages/register/register'
+import './App.css';
+import Login from './pages/login/login';
+import Register from './pages/register/register';
 import Home from "./pages/home/home";
-import ListWorkout from "./pages/workout/workouts-list";
-import CreateWorkout from "./pages/workout/workout-create";
+import ListWorkout from "./pages/workout/workout-list/workouts-list";
+import CreateWorkout from "./pages/workout/workout-create/workout-create";
 import PrivateRoute from "./guards/private-route";
 import { AlertProvider } from "./contexts/alert.context";
-import Navbar from "./components/UI/navbar";
-import Workoutdetail from "./pages/workout/workout-detail";
+import Workoutdetail from "./pages/workout/workout-detail/workout-detail";
+import SearchExercises from "./components/Exercises/Search/SearchExercises";
+import EditWorkout from "./pages/workout/workout-edit/workout-edit";
+import SearchFood from "./components/food/search-food/search-food";
+import CreateRecipe from "./pages/recipes/recipe-create/recipe-create";
+import ListRecipe from "./pages/recipes/recipe-list/recipe-list"
+import Page404 from "./pages/page404/page404";
+import Footer from "./components/UI/footer/footer";
+import PageLayout from "./layouts/PageLayout";
+
 
 function App() {
   return (
     <>
     <AlertProvider>
         <Routes>
-        <Route path="/login" element={<Login/>} />
-        <Route path="/register" element={<Register/>} />
-        <Route path="/" element={ <PrivateRoute><Home/></PrivateRoute>} />
-        <Route path="/create-workout" element={ <PrivateRoute><CreateWorkout/></PrivateRoute>} />
-        <Route path="/list-workout" element={<PrivateRoute><ListWorkout/></PrivateRoute>}/>
-        <Route path="/workout/:id" element={<PrivateRoute><Workoutdetail/></PrivateRoute>}/>
+          <Route path="/login" element={<Login/>} />
+          <Route path="/register" element={<Register/>} />
+          <Route path="/" element={ <PrivateRoute><PageLayout><Home/></PageLayout></PrivateRoute>} />
+          <Route path="/create-workout" element={ <PrivateRoute><PageLayout><CreateWorkout/></PageLayout></PrivateRoute>} />
+          <Route path="/list-workout" element={<PrivateRoute><PageLayout><ListWorkout/></PageLayout></PrivateRoute>}/>
+          <Route path="/workout/:id" element={<PrivateRoute><PageLayout ><Workoutdetail/></PageLayout></PrivateRoute>}/>
+          <Route path="/edit-workout/:id" element={<PrivateRoute><PageLayout><EditWorkout/></PageLayout></PrivateRoute>}/>
+          <Route path="/search-exercises" element={<PrivateRoute><PageLayout><SearchExercises/></PageLayout></PrivateRoute> } />
+          <Route path="/list-recipe" element={<PrivateRoute><ListRecipe/></PrivateRoute>}/>
+          <Route path="/create-recipe" element={<PrivateRoute><CreateRecipe/></PrivateRoute>} />
+          <Route path="/search-food" element={<PrivateRoute><SearchFood/></PrivateRoute>} /> 
 
+          <Route path="/*" element={<Page404/>} />
         </Routes>
     </AlertProvider>
+
+    <Footer></Footer>
 
     </>
   )

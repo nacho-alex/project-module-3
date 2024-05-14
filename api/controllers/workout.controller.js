@@ -1,5 +1,5 @@
-const Workout = require("../models/workout.model")
-const mongoose = require('mongoose')
+const Workout = require("../models/workout.model");
+const mongoose = require('mongoose');
 
 module.exports.create = (req, res, next) => {
     Workout.create(req.body)
@@ -12,6 +12,7 @@ module.exports.create = (req, res, next) => {
       } else {
         next(err);
       }
+      console.log(err)
     });
 }
 

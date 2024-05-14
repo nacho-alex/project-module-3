@@ -1,0 +1,93 @@
+.wo-list-page{
+    background-color: rgb(255, 255, 255);
+    margin: 0;
+    padding-bottom: 50px;
+    z-index: -1;
+    
+}
+
+.workouts-filter-div{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin-top: -48px;
+}
+
+.workouts-filter-div button{
+    border: none;
+    padding: 8px 25px;
+    font-size: 18px;
+    margin: 10px;
+    margin-top: 0;
+    z-index: 998;
+}
+
+
+
+.selected-filter{
+    border-bottom: none !important;
+    background-color: white;
+    color: #588940;
+    font-weight: 700;
+
+}
+
+.link-create{
+    position: fixed;
+    top: 120px;
+    right: 50px;
+    text-decoration: none;
+    display: flex;
+    z-index: 1100;
+    
+}
+
+.create-link-text {
+    
+    white-space: nowrap;
+    padding: 3px 0px 4px 0px;
+    border-radius: 50px;
+    width: 10px;
+    overflow: hidden;
+    opacity: 0;
+    transition: all 0.3s ease;
+    text-align: center;
+    margin-right: 0;
+    align-self: center;
+    color: #83cb61;
+    border: #83cb61 solid 3px;
+}
+
+.link-create:hover .create-link-text {
+    width: 200px; 
+    margin-left: 10px; 
+    padding: 3px 20px 4px 20px;
+    opacity: 1;
+    font-weight: 700;
+    border: #83cb61 solid 3px;
+    background-color: none;
+
+
+}
+
+.link-create:hover  i{
+    color: #83cb61;
+    background-color: white;
+    border: #83cb61 solid 3px;
+}
+
+.link-create i{
+    font-size: 28px;
+    background-color: #83cb61;
+    border-radius: 25px;
+    padding: 0;
+    width: 45px;
+    height: 45px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    border: 4px solid white;
+    box-sizing: content-box;
+}

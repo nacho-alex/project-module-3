@@ -5,7 +5,7 @@ const http = axios.create({
 });
 
 http.interceptors.request.use(function (config) {
-  config.headers.authorization = localStorage.getItem("token");
+  config.headers.authorization = `BEARER ${localStorage.getItem("token")}`;
   return config;
 });
 
@@ -78,7 +78,7 @@ export function getWorkouts() {
 }
 
 export function postPlan(data) {
-  return http.patch(`/profile`, data)
+  return http.patch("/profile", data)
       .catch(error => {
         if (error) {
           const errorMessage = error.response.data.message || "Error occurred"; 
@@ -89,6 +89,43 @@ export function postPlan(data) {
       });
 }
 
+export function updateWorkout(params, data) {
+  return http.patch(`/workouts/${params.id}`, data)
+      .catch(error => {
+        if (error) {
+          const errorMessage = error.response.data.message || "Error occurred"; 
+          throw new Error(errorMessage); 
+        } else {
+          throw error; 
+        }
+      });
+}
+
+
 export function getWorkout(params) {
   return http.get(`/workouts/${params.id}`)
+}
+
+export function delWorkout(id) {
+  return http.delete(`/workouts/${id}`)
+}
+
+export function getFoods() {
+  return http.get("/foods");
+}
+
+export function createRecipe(data) {
+  return http.post("/recipes", data)
+      // .catch(error => {
+      //   if (error) {
+      //     const errorMessage = error.response.data.message || "Error occurred"; 
+      //     throw new Error(errorMessage); 
+      //   } else {
+      //     throw error; 
+      //   }
+      // });
+}
+
+export function getRecipes() {
+  return http.get("/recipes");
 }

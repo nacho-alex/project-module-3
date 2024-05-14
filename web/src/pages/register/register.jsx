@@ -7,7 +7,7 @@ import exampleImg from '../../assets/3e79edd8850e4f1d73052f548f2f399d.jpg'
 import gainIMG from '../../assets/gain.png'
 import loseIMG from '../../assets/loseDES.png'
 import { useNavigate } from 'react-router-dom';
-import SpeechError from '../../components/speechError';
+import SpeechError from '../../components/UI/speechError';
 
 
 

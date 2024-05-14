@@ -7,24 +7,17 @@ const Exercise = require('../models/exercise.model')
 const CalendarEntry = require('../models/calendarEntry.model')
 const dayjs = require("dayjs")
 
+
+
 createExercises()
 
 function createExercises() {
-        Workout.create({planning: "hola"})
-            .then(() => console.log("created"))
+    exercises.forEach((ex, index) => {
+        Exercise.create(ex)
+            .then(() => console.log(`Exercise created ${index}/${exercises.length}`))
             .catch((error) => console.error(error))
+    })
 }
-
-
-// createExercises()
-
-// function createExercises() {
-//     exercises.forEach((ex, index) => {
-//         Exercise.create(ex)
-//             .then(() => console.log(`Exercise created ${index}/${exercises.length}`))
-//             .catch((error) => console.error(error))
-//     })
-// }
 
 // createFoods()
 

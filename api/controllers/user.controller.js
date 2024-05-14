@@ -1,5 +1,5 @@
-const User = require("../models/user.model")
-const mongoose = require('mongoose')
+const User = require("../models/user.model");
+const mongoose = require('mongoose');
 const jwt = require("jsonwebtoken");
 
 module.exports.create = (req, res, next) => {
@@ -73,7 +73,7 @@ module.exports.login = (req, res, next) => {
               const accessToken = jwt.sign(
                 {
                   sub: user.id,
-                  exp: Date.now() / 1000 + 3600,
+                  exp: Date.now() / 1000 + 5000,
                 },
                 process.env.JWT_SECRET
               );

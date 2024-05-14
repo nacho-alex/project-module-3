@@ -1,0 +1,152 @@
+.edit-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: 30px;
+    margin: auto;
+    margin-top: 30px;
+    max-width: 90%;
+    width: 1200px;
+    border: 1px solid rgba(0, 0, 0, 0.208);
+    box-shadow: 5px 5px 3px 0px rgba(0, 0, 0, 0.131);
+    background-color: white;
+
+}
+
+.edit-container img{
+    width: 280px;
+    height: 280px;
+    object-fit: cover;
+}
+
+.workout-main{
+    display: flex;
+    flex-direction: column;
+    margin-left: 50px;
+    width: 100%;
+}
+
+.workout-p strong{
+    font-weight: 700;
+}
+
+.input-box{
+    margin-bottom: 20px;
+    width: 100% !important;
+}
+
+.input-box-diff{
+    margin-bottom: 10px;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100% !important;
+    padding-right: 60px ;
+}
+
+.input-box input{
+    padding: 10px 30px;
+    width: 100% !important;
+    border: 1px rgb(153, 153, 153) solid;
+}
+
+.input-box textarea{
+    height: 150px;
+    padding: 10px 30px;
+    width: 100%;
+    border: 1px rgb(153, 153, 153) solid;
+
+}
+
+.exercises-div{
+    max-width: 90%;
+    width: 1200px;
+    margin: auto;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    margin-bottom: 200px;
+    border: 1px solid rgba(0, 0, 0, 0.208);
+    margin-top: 20px;
+    box-shadow: 5px 5px 3px 0px rgba(0, 0, 0, 0.131);
+    background-color: white;
+    
+}
+
+.exercises-div h4{
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+
+.exercises-container{
+    margin-top: 20px;
+    
+}
+
+.add-ex-btn{
+    background-color: #83cb61;
+    padding: 5px 20px;
+    border: none;
+    color: white;
+    font-weight: 700;
+    margin-top: 20px;
+    margin: 20px 10px 20px 10px;
+}
+
+.add-ex-btn i{
+    margin-right: 10px;
+    margin-bottom: 0;
+}
+
+.create-btn{
+    background-color: #83cb61;
+    padding: 5px 20px !important;
+    height: fit-content;
+    border: none;
+    color: white;
+    font-weight: 700;
+    justify-self: center;
+}
+.h4-and-btn{
+    display: flex;
+    justify-content: space-between;
+}
+
+
+
+
+.plane-box{
+    margin: auto;
+    max-width: 90%;
+    width: 1200px;
+    padding: 30px;
+    border: none;
+    margin-top: 20px;
+    box-shadow: 5px 5px 3px 0px rgba(0, 0, 0, 0.137);
+    border: 1px solid rgba(0, 0, 0, 0.113);
+    background-color: white;
+    position: relative;
+}
+textarea {
+    width: 100%;
+    height: 250px;
+    padding: 12px 20px;
+    box-sizing: border-box;
+    border-radius: 4px;
+    background-color: #13131354;
+    font-size: 16px;
+    color: white;
+    outline: 3px solid #8f8e8e96;
+  }
+
+  .edit-wo-btns{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .red{
+    background-color: rgb(255, 54, 54);
+  }

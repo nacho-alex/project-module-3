@@ -1,5 +1,5 @@
 .workout-detail-container{
-    background-color: #83cb613c;;
+
     border-radius: 15px;
     padding: 20px 70px 40px 20px;
     margin: 20px;
@@ -24,9 +24,24 @@
 }
 
 .workout-detail-container h1{
-    font-family: Arial, Helvetica, sans-serif;
+    margin-left: 0;
+    font-size: 22px;
+    margin-bottom: 20px;
 }
 
 .workout-detail-box p{
-    max-width: 900px;
+    max-width: 700px;
+    font-weight: 700;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 14px !important;
+}
+
+.workout-detail-box span{
+    font-weight: 400;
+}
+
+.instruction{
+    background-color: #e5fbdb;
+    margin-bottom: 10px;
+    padding: 10px 10px;
 }

@@ -1,0 +1,25 @@
+.fire-btns{
+    background: none;
+    border: none;
+    outline: none;
+    font-size: 26px;
+    color: #818181;
+    margin: 0 5px 0 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    width: fit-content;
+}
+
+
+.fire-btns i {
+    margin: 0;
+}
+.fire-btns-red{
+    color: rgb(255, 54, 54);
+}
+
+.fires-div{
+    display: flex;
+    flex-direction: row;
+}

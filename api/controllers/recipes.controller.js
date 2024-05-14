@@ -1,4 +1,5 @@
-const Recipe = require("../models/food.model")
+const Recipe = require("../models/recipe.model");
+const mongoose = require('mongoose');
 
 module.exports.create = (req, res, next) => {
     Recipe.create(req.body)

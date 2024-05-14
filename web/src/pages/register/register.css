@@ -324,8 +324,8 @@
 .selected-btn-goal-text{
     color: #f5bf2d !important;
 }
+
 input[type="range"] {
-    -webkit-appearance: none;
     width: 100%; 
     height: 2px; 
     background: #81818183; 

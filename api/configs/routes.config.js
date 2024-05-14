@@ -9,7 +9,7 @@ const workout = require("../controllers/workout.controller");
 const planning = require("../controllers/planning.controller");
 const calendarEntry = require("../controllers/calendarEntry.controller");
 
-// CRUD USER
+
 router.post("/login", user.login);
 router.post("/users", user.create);
 
@@ -33,13 +33,24 @@ router.post("/workouts", auth.checkAuth, workout.create);
 router.get("/workouts", auth.checkAuth, workout.list);
 router.get("/workouts/:id", auth.checkAuth, workout.detail);
 router.patch("/workouts/:id", auth.checkAuth, workout.update);
-router.delete("workouts/:id", auth.checkAuth, workout.delete);
+router.delete("/workouts/:id", auth.checkAuth, workout.delete);
 
 router.post("/plannings", auth.checkAuth, planning.create);
-router.delete("plannings/:id", auth.checkAuth, planning.delete);
+router.delete("/plannings/:id", auth.checkAuth, planning.delete);
 
 router.post("/calendar-entries", auth.checkAuth, calendarEntry.create);
 router.get("/calendar-entries/:id", auth.checkAuth, calendarEntry.detail);
 router.patch("/calendar-entries/:id", auth.checkAuth, calendarEntry.edit);
+
+//Error handlers
+
+router.use((req, res, next) => {
+    res.status(404).json({ message: "Route not found" });
+  });
+  
+  router.use((err, req, res, next) => {
+    console.error(err);
+    res.status(500).json({ message: "Internal Server Error" });
+  });
 
 module.exports = router;

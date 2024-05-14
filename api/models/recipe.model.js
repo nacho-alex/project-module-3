@@ -2,18 +2,20 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const ingredientSchema = new Schema({
-    food: {
-        type: Schema.Types.ObjectId,
-        ref: "Food",
-        required: true
-    },
-    quantity: {
-        type: Number,
-        required: true
-    },
-    unit: {
-        type: String,
-        required: true
+    // food: {
+    //     type: Schema.Types.ObjectId,
+    //     ref: "Food",
+    //     required: true
+    // },
+    amount: {
+        quantity: {
+            type: Number,
+            required: true
+        },
+        unit: {
+            type: String,
+            required: true
+        }
     }
 });
 
