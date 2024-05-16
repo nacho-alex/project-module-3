@@ -12,7 +12,8 @@ import ExercisesPage from "./pages/exercises/ExercisesPage";
 import EditWorkout from "./pages/workout/workout-edit/workout-edit";
 import SearchFood from "./components/food/search-food/search-food";
 import CreateRecipe from "./pages/recipes/recipe-create/recipe-create";
-import ListRecipe from "./pages/recipes/recipe-list/recipe-list"
+import ListRecipe from "./pages/recipes/recipe-list/recipe-list";
+// import RecipeDetail from "./pages/recipes/recipe-detail/recipe-detail";
 import Page404 from "./pages/page404/page404";
 import Footer from "./components/UI/footer/footer";
 import PageLayout from "./layouts/PageLayout";
@@ -34,6 +35,7 @@ function App() {
           <Route path="/list-recipe" element={<PrivateRoute><ListRecipe/></PrivateRoute>}/>
           <Route path="/create-recipe" element={<PrivateRoute><CreateRecipe/></PrivateRoute>} />
           <Route path="/search-food" element={<PrivateRoute><SearchFood/></PrivateRoute>} /> 
+          {/* <Route path="/recipe/:id" element={<PrivateRoute><PageLayout ><RecipeDetail/></PageLayout></PrivateRoute>}/> */}
 
           <Route path="/*" element={<Page404/>} />
         </Routes>

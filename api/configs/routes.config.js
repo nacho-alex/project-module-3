@@ -38,7 +38,7 @@ router.delete("/workouts/:id", auth.checkAuth, workout.delete);
 router.post("/plannings", auth.checkAuth, planning.create);
 router.delete("/plannings/:id", auth.checkAuth, planning.delete);
 
-router.post("/calendar-entries", auth.checkAuth, calendarEntry.create);
+router.post("/calendar-entries", auth.checkAuth, calendarEntry.manage);
 router.get("/calendar-entries/:id", auth.checkAuth, calendarEntry.detail);
 router.patch("/calendar-entries/:id", auth.checkAuth, calendarEntry.edit);
 

@@ -5,7 +5,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: rgba(255, 255, 255, 0.765);
+    background-color:var(--white-transparent-1);
     backdrop-filter: blur(40px);
     z-index: 1100;
     box-shadow: 0px 5px 3px 0px rgba(0, 0, 0, 0.062);
@@ -17,7 +17,7 @@
     display: flex;
 }
 .navbar-logo{
-        color: #83cb61;
+        color: var(--primary-color);
         z-index: 1000;
          width: 35px;
          height: 35px;
@@ -49,7 +49,7 @@
 }
 
 .active i{
-    color:#83cb61;
+    color:var(--primary-color);
 }
 
 .navbar-links {
@@ -63,8 +63,8 @@
 }
 
 .navbar-link-text {
-    background-color: #dbdbdbc0;
-    color: #303030;
+    background-color: var(--light-gray-1);
+    color: var(--dark-gray-1);
     padding: 3px 0px 4px 0px;
     border-radius: 50px;
     width: 0;
@@ -82,7 +82,7 @@
 }
 
 .navbar-links li:hover div i{
-    color: #83cb61;
+    color: var(--primary-color);
 }
 
 
@@ -104,18 +104,18 @@
 
 .navbar a{
     text-decoration: none;
-    color:#818181;
+    color:var(--primary-color)!important;
 }
 
 .navbar a:hover{
-    color: #83cb61;
+    color: var(--primary-color);
 }
 .navbar-profile-image{
     width: 30px;
     height: 30px;
-    border: 2px solid #83cb61a1;
+    border: 2px solid var(--primary-darker);
     border-radius: 50%;
-    background-color: #83cb61;
+    background-color: var(--primary-color);
     display: flex;
     justify-content: center;
     align-items: center;

@@ -1,6 +1,6 @@
 
 .footer {
-    background-color: #3c3c3c;
+    background-color: #2a2a2a;
     min-height: 300px;
     z-index: 2999;
     display: flex;
@@ -33,7 +33,7 @@
     font-size: 14px;
 }
 .footer-social{
-    color: white;
+    color: var(--full-white-1);
     border-left: 1px solid rgba(255, 255, 255, 0.477);
     margin-left: 50px;
     padding-left: 50px;
@@ -47,7 +47,7 @@
 
 .footer-social p{
     font-size: 14px;
-    color: #717171;
+    color: var(--medium-gray-1);
     margin: 3px 20px 0 20px;
 }
 .footer-social i {

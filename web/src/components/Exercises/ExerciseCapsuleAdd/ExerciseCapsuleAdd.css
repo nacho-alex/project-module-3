@@ -1,17 +1,17 @@
 .exercise-capsule{
-    border: 2px solid #83cb61;
+    border: 3px solid var(--primary-color);
     border-radius: 5px;
     padding: 15px 15px;
     display: flex;
     
-    background-color: rgba(255, 255, 255, 0.346);
+    background-color: var(--white-transparent-03);
     flex-direction: column;
     margin-bottom: 10px;
     transition: background-color ease 0.4s;
 }
 
 .exercise-capsule:hover {
-    background-color: rgba(255, 255, 255, 0.79);
+    background-color: var(--white-transparent-1);
 }
 
 .capsule-main{
@@ -54,18 +54,16 @@
 .exercise-capsule button{
     background: none;
     border: none;
-    color: #818181;
+    color: var(--medium-gray-1);
     margin-right: 10px;
 }
 
 .exercise-capsule button:hover{
-    color: #83cb61;
+    color: var(--primary-color);
 }
 
-
-
 .button-trash:hover{
-    color: rgb(255, 54, 54)!important;;
+    color: var(--primary-red)!important;;
 }
 
 .work-div{
@@ -97,7 +95,7 @@
 .info-ex p::after {
     content: '';
     margin-left: 20px;
-    border-right: 1px solid rgba(0, 0, 0, 0.396);
+    border-right: 1px solid var(--light-gray-1);
     margin-right: 20px;
 }
 

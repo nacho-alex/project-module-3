@@ -1,14 +1,26 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import AuthContext from "../../../contexts/auth.context";
 import logo from '../../../assets/fittrackerGreenBG.svg'
-
 import './navbar.css';
 
 const renderNavLinkActive = ({ isActive }) => isActive ? '' : 'active';
 
+
+
 function Navbar() {
-  const { user, doLogout } = useContext(AuthContext);
+  const { user, doLogout } = useContext(AuthContext)
+  const [theme, setTheme] = useState('light')
+  ;
+
+
+  function toggleDarkMode() {
+    const root = document.documentElement;
+    const currentTheme = root.getAttribute('data-theme');
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', newTheme);
+  }
+
   return (
     <nav className="navbar">
         <Link className="navbar-brand" to="/"> <img className='navbar-logo' src={logo}></img> FitTracker</Link>
@@ -27,7 +39,7 @@ function Navbar() {
         </ul>
         
         <ul className="navbar-profile-links">
-                
+                <button onClick={toggleDarkMode}>Toggle Dark Mode</button>
                 <li> <div className={`navbar-profile-image`}><img style={{ transform: `scale(${user.avtScale})` }} src={user.avatar} alt="" /></div> <Link to={`/profile`}>{user.username}</Link></li>
                 <li><button className="button red" onClick={doLogout}>Logout</button></li>
           </ul>

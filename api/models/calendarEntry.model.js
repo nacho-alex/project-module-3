@@ -2,40 +2,36 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const dayjs = require("dayjs")
 
+const workSchema = new Schema(
+    {
+        reps: {
+            type: Number,
+        },
+        kg: {
+            type: Number
+        }
+    }  
+);
+
 const exerciseCESchema = new Schema(
     {
         exercise: {
-            type: Schema.Types.ObjectId,
-            ref: "Exercise",
-            required: true
+            type: Object,
         },
-        reps: {
-            type: [Number],
-            default: 0
-        },
-        weight: {
-            type: [Number],
-            default: 0
-        },
-        done: {
-            type: Boolean,
-            default: false
+        work: {
+            type: [workSchema]
         }
     }  
 );
 
 const calendarEntrySchema = new Schema(
     {
-        workout: {
-            type: Schema.Types.ObjectId,
-            ref: "Workout"
-        },
-        exercises: {
+        
+        finishedEx: {
             type: [exerciseCESchema]
         },
         date: {
             type: String,
-            default: dayjs().format('dddd, D, MMMM, YYYY')
         },
         owner: {
             type: Schema.Types.ObjectId,

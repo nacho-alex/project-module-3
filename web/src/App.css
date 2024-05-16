@@ -1,24 +1,94 @@
-h1, h2 {
+:root {
+    --primary-color: #83cb61;
+    --primary-satured: #6fc547;
+    --primary-darker: #5c9e3e;
+    --text-color1: white;
+    --white-transparent-1: rgba(255, 255, 255, 0.827);
+    --white-transparent-03: rgba(255, 255, 255, 0.346);
+    --full-black-1: black;
+    --black-transparent-05: rgba(0, 0, 0, 0.504);
+    --black-transparent-08: rgba(0, 0, 0, 0.746);
+    --black-transparent-02: rgba(0, 0, 0, 0.246);
+    --dark-gray-1: #424242;
+    --medium-gray-3: rgb(177, 177, 177);
+    --medium-gray-2: #575757;
+    --medium-gray-1: #818181;
+    --light-gray-1:rgb(214, 214, 214) ;
+    --light-gray-2:rgb(225, 225, 225) ;
+    --white-transparent-3:  rgba(255, 255, 255, 0.732);
+    --quasi-white: rgb(237, 237, 237);
+    --full-white-1: white;
+    --primary-red: rgb(255, 54, 54);
+    --smoked-white-light: #f3f3f3;
+    --blue-1: rgb(35, 145, 255);
+    --input-hover-1: rgba(222, 222, 222, 0.615);
+  }
+
+  *{
+    transition-duration: .3s;
+   }
+
+  [data-theme='dark'] {
+    --text-color1: rgb(0, 0, 0);
+    --white-transparent-1: rgba(248, 6, 6, 0.827);
+    --white-transparent-03: rgba(42, 42, 42, 0.346);
+    --full-black-1: rgb(255, 255, 255);
+    --black-transparent-05: rgba(255, 255, 255, 0.504);
+    --black-transparent-08: rgba(255, 255, 255, 0.746);
+    --black-transparent-02: rgba(255, 255, 255, 0.246);
+    --dark-gray-1: #eaeaea;
+    --medium-gray-3: rgb(63, 63, 63);
+    --medium-gray-2: #d1d1d1;
+    --medium-gray-1: #494949;
+    --light-gray-1:rgb(9, 3, 3) ;
+    --light-gray-2:rgb(57, 57, 57) ;
+    --white-transparent-1:  rgba(27, 27, 27, 0.732);
+    --quasi-white: rgb(27, 27, 27);
+    --full-white-1: rgb(24, 24, 24);
+    --input-hover-1: rgb(150, 146, 146);
+    --smoked-white-light: #222222;
+}
+
+h1, h2, h3, h4 {
     font-family: "Bebas Neue", sans-serif;
     font-weight: 400;
     font-style: normal;
+    color: var(--dark-gray-1);
 }
 
 html{
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+}
+
+
+strong, span, i{
+    color: var(--dark-gray-1);
+}
+
+a {
+    color:var(--dark-gray-3) ;
+}
+
+i {
+  
+}
+
+body {
 }
 
 
 
 p {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--full-black-1);
 }
 
 .speech {
     position: fixed;
-    background: rgba(255, 54, 54, 0.692);
+    background: var(--primary-red);
     box-shadow: 20px 20px 5px -6px rgba(0,0,0,0.24);
-    color: white;
+    color: var(--text-color1);
     padding: 15px 50px;
     z-index: 998;
     top: 20px;
@@ -27,7 +97,7 @@ p {
     backdrop-filter: blur(50px);
 }
 .speech-up:before {
-    border: 20px solid rgba(255, 54, 54, 0.692);
+    border: 20px solid var(--primary-red);
     content: '';
     border-left-color: transparent;
     border-bottom-color: transparent;
@@ -46,7 +116,7 @@ p {
 .speech-left:before {
     border: 25px solid transparent;
     content: '';
-    border-right-color: rgba(255, 54, 54, 0.692);
+    border-right-color: var(--primary-red);
     position: absolute;
     bottom: calc(50% - 25px); 
     left: -50px;
@@ -58,10 +128,10 @@ p {
     position: absolute;
     top: -40px;
     left: calc(50% - 25px);
-    border: 20px solid rgba(255, 54, 54, 0.692);
+    border: 20px solid var(--primary-red);
     content: '';
     border-left-color: transparent;
-    border-bottom-color: rgba(255, 54, 54, 0.692);
+    border-bottom-color:var(--primary-red);
     border-right-color: transparent;
     border-top-color: transparent;
     z-index: 999;
@@ -73,19 +143,19 @@ p {
     bottom: calc(50% - 25px);
     right: -48px;
     border: 25px solid transparent;
-    border-left-color:  rgba(255, 54, 54, 0.692);
+    border-left-color: var(--primary-red);
     border-bottom-color:transparent;
     border-right-color: transparent;
     border-top-color: transparent;
-    border-left-color: rgba(255, 54, 54, 0.692);
+    border-left-color:var(--primary-red);
     z-index: 999;
     
 }
 
 
 .btn-green{
-    background-color: #83cb61;
-    color: white;
+    background-color: var(--primary-color);
+    color: var(--text-color1);
     font-weight: 400;
     width: fit-content;
     border-radius: 0;
@@ -95,11 +165,11 @@ p {
 }
 
 .btn-green:hover{
-    background-color: #5d9145;  
+    background-color: var(--primary-darker);  
 }
 
 .button{
-    color: white;
+    color: var(--text-color1);
     border: none;
     padding: 5px 20px;
     border-radius: 5px;
@@ -107,17 +177,17 @@ p {
 }
 
 .red{
-    background-color: rgb(255, 54, 54);
+    background-color:var(--primary-red);
 }
 
 .button:hover{
-    background-color: rgba(0, 0, 0, 0.468);
+    background-color: var(--medium-gray-1);
 }
 
 .page-title{
     text-align: center;
     font-size: 46px;
-    color: rgb(89, 89, 89);
+    color: var(--dark-gray-1);
     position: relative;
     z-index: 19 !important;
     
@@ -125,24 +195,25 @@ p {
 }
 
 .h1-div{
-    background-color: rgba(255, 255, 255, 0.826);
+    background-color: var(--white-transparent-1);
     padding: 40px;
+    backdrop-filter: blur(10px);
 }
 .page-title::before{
     content: '';
-    border-left: 5px solid #83cb61;
+    border-left: 5px solid var(--primary-color);
     margin-right: 20px;
 }
 .page-title:after{
     content: '';
-    border-left: 5px solid #83cb61;
+    border-left: 5px solid var(--primary-color);
     margin-left: 20px;
 }
 
 .jumbo img{
     width: 100%;
     height: 360px;
-    background-color: #83cb61b6;
+    background-color: var(--white-transparent-1);
     position: absolute;
     top: 0;
     left: 0;
@@ -168,16 +239,16 @@ p {
 }
 
 .back-btn{
-    background: white;
+    background: var(--full-white-1);
     text-decoration: none;
-    color: black;
+    color: var(--full-black-1);
     position: fixed;
     top: 100px;
     left: 50px;
     padding: 5px 20px;
     border-radius: 25px;
     font-weight: 700;
-    border: 3px solid black;
+    border: 3px solid var(--full-black-1);
     z-index: 1200;
 }
 
@@ -186,7 +257,7 @@ p {
 }
 
 .back-btn:hover{
-    background: #83cb61;
-    color: white;
+    background: var(--primary-color);
+    color: var(--text-color1);
     z-index: 1200;
 }

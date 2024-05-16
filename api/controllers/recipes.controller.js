@@ -30,7 +30,7 @@ module.exports.list = (req, res, next) => {
       .catch(next);
   };
 
-module.exports.detail = (req, res) => {
+module.exports.detail = (req, res, next) => {
     Recipe.findById(req.params.id)
         .then((rec) => {
             if (rec) {

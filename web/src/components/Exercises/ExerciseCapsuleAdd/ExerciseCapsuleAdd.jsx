@@ -47,7 +47,25 @@ const handleChange = (event) => {
 // };
 
   return (
-    <div className='exercise-capsule'>
+    <div className='exercise-capsule' style={{
+      border: `4px solid ${
+        
+        Array.isArray(exercise.bodyPart) && exercise.bodyPart.some(eq => eq.includes('back')) ? '#4AA2D9' :
+          exercise.bodyPart.includes('back') ? '#4AA2D9' :
+          Array.isArray(exercise.bodyPart) && exercise.bodyPart.some(eq => eq.includes('arms')) ? '#99D9F2' :
+          exercise.bodyPart.includes('arms') ? '#99D9F2' :
+          Array.isArray(exercise.bodyPart) && exercise.bodyPart.some(eq => eq.includes('legs')) ? '#D9CE32' :
+          exercise.bodyPart.includes('legs') ? '#D9CE32' :
+          Array.isArray(exercise.bodyPart) && exercise.bodyPart.some(eq => eq.includes('chest')) ? '#F2A950' :
+          exercise.bodyPart.includes('chest') ? '#F2A950' :
+          Array.isArray(exercise.bodyPart) && exercise.bodyPart.some(eq => eq.includes('shoulders')) ? '#F24B4B' :
+          exercise.bodyPart.includes('shoulders') ? '#F24B4B' :
+          Array.isArray(exercise.bodyPart) && exercise.bodyPart.some(eq => eq.includes('cardio')) ? '#84BF04' :
+          exercise.bodyPart.includes('cardio') ? '#84BF04' :
+          '#84BF04' 
+      }`
+  }}>
+
       <div className="capsule-main">
           <div className='ex-title'>
             

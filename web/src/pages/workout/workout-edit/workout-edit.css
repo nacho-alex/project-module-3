@@ -9,10 +9,19 @@
     width: 1200px;
     border: 1px solid rgba(0, 0, 0, 0.208);
     box-shadow: 5px 5px 3px 0px rgba(0, 0, 0, 0.131);
-    background-color: white;
+    background-color: var(--full-white-1);
+}
+
+.plane-box-black{
+    background-color:var(--black-transparent-08)!important;
+    color: var(--full-white-1)!important;
+
 
 }
 
+.plane-box-black h2 {
+    color: var(--full-white-1)!important;
+}
 .edit-container img{
     width: 280px;
     height: 280px;
@@ -23,7 +32,7 @@
 .create-img{
     width: 280px;
     height: 280px;
-    border: 1px solid rgba(142, 142, 142, 0.112);
+    border: 1px solid var(--smoked-white-light);
 }
 
 .workout-main{
@@ -42,6 +51,10 @@
     width: 100% !important;
 }
 
+.input-box h2 {
+    color: var(--smoked-white-light);
+}
+
 .input-box-diff{
     margin-bottom: 10px;
     margin-top: 10px;
@@ -55,14 +68,14 @@
 .input-box input{
     padding: 10px 30px;
     width: 100% !important;
-    border: 1px rgb(153, 153, 153) solid;
+    border: 1px var(--medium-gray-3) solid;
 }
 
 .input-box textarea{
     height: 150px;
     padding: 10px 30px;
     width: 100%;
-    border: 1px rgb(153, 153, 153) solid;
+    border: 1px var(--medium-gray-3) solid;
 
 }
 
@@ -74,10 +87,10 @@
     display: flex;
     flex-direction: column;
     margin-top: 20px;
-    border: 1px solid rgba(0, 0, 0, 0.208);
+    border: 1px solid var(--light-gray-1);
     margin-top: 20px;
-    box-shadow: 5px 5px 3px 0px rgba(0, 0, 0, 0.131);
-    background-color: white;
+    box-shadow: 5px 5px 3px 0px var(--black-transparent-02);
+    background-color: var(--full-white-1);
     
 }
 
@@ -92,10 +105,10 @@
 }
 
 .add-ex-btn{
-    background-color: #83cb61;
+    background-color: var(--primary-color);
     padding: 5px 20px;
     border: none;
-    color: white;
+    color: var(--full-white-1);
     font-weight: 700;
     margin-top: 20px;
     margin: 20px 10px 20px 10px;
@@ -107,11 +120,11 @@
 }
 
 .create-btn{
-    background-color: #83cb61;
+    background-color: var(--primary-color);
     padding: 5px 20px !important;
     height: fit-content;
     border: none;
-    color: white;
+    color: var(--full-white-1);
     font-weight: 700;
     justify-self: center;
 }
@@ -131,8 +144,8 @@
     border: none;
     margin-top: 20px;
     box-shadow: 5px 5px 3px 0px rgba(0, 0, 0, 0.137);
-    border: 1px solid rgba(0, 0, 0, 0.113);
-    background-color: rgba(255, 255, 255, 0.797);
+    border: 1px solid var(--black-transparent-02);
+    background-color: var(--smoked-white-light);
     backdrop-filter: blur(20px);
     position: relative;
 }
@@ -142,10 +155,10 @@ textarea {
     padding: 12px 20px;
     box-sizing: border-box;
     border-radius: 4px;
-    background-color: #13131354;
+    background-color: var(--dark-gray-1);
     font-size: 16px;
-    color: white;
-    outline: 3px solid #8f8e8e96;
+    color: var(--full-white-1);
+    outline: 2px solid var(--medium-gray-3);
   }
 
   .edit-wo-btns{
@@ -155,5 +168,5 @@ textarea {
   }
 
   .red{
-    background-color: rgb(255, 54, 54);
+    background-color: var(--primary-red);
   }

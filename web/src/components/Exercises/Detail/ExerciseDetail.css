@@ -36,8 +36,8 @@
     
 
 .instruction{
-    background-color: #ffffff;
-    border: 2px  solid rgba(225, 225, 225, 0.725);
+    background-color: var(--full-white-1);
+    border: 2px  solid var(--light-gray-1);
     margin-bottom: 30px;
     padding: 20px;
     border-radius: 5px;
@@ -46,15 +46,15 @@
 }
 
 .instruction i {
-    color: #83cb61;
+    color: var(--primary-color);
 }
 
 .instruction-num {
     font-family: "Bebas Neue", sans-serif;
     font-size: 22px;
-    background-color: #ffffff;
-    border: 1px solid #83cb61;
-    color: #83cb61;
+    background-color:var(--full-white-1);
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
     width: 35px;
     height: 35px;
     border-radius: 25px;
@@ -84,7 +84,7 @@
 .wo-detail-big strong{
     width: 100px;
     font-weight: 700;
-    color: #424242;
+    color: var(--dark-gray-1);
     text-align: left;
     min-width: 40px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;

@@ -6,7 +6,7 @@
 }
 .input-box-flt select{
     margin-right: 10px;
-    border: 2px solid #83cb61;
+    border: 2px solid var(--primary-color);
     padding: 5px 20px;
     margin-bottom: 20px;
 }
@@ -15,7 +15,7 @@
     font-size: 14px;
     font-weight: 700;
     margin-bottom: 5px;
-    color: #818181;
+    color: var(--medium-gray-2);
 }
 
 .search-bar{
@@ -27,13 +27,15 @@
     font-size: 14px;
     font-weight: 700;
     margin: 20px 20px;
-    color: #818181;
+    color: var(--medium-gray-2);
 }
 
 input:hover{
-    background-color: #f3f3f3;
+    background-color: var(--input-hover-1);
+    color: var(--full-black-1);
 }
 
 select:hover{
-    background-color: #f3f3f3;
+    background-color: var(--input-hover-1);
+    color: var(--full-black-1);
 }

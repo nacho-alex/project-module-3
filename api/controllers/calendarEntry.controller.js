@@ -2,23 +2,36 @@ const CalendarEntry = require("../models/calendarEntry.model")
 const dayjs = require("dayjs")
 const User = require("../models/user.model")
 
-module.exports.create = (req, res, next) => {
-    CalendarEntry.find({"owner": req.user.id, "date": dayjs().format('dddd, D, MMMM, YYYY')})
+module.exports.manage = (req, res, next) => {
+    CalendarEntry.find({"owner": req.body.owner, "date": req.body.date})
         .then((entry) => {
-            if (!entry) {
-                return User.findById(req.user.id)
-                    .populate({
-                        path: 'planning',
-                        populate: {
-                                path: 'exercises.exercise',
-                                model: 'Exercise'
-                            }
-                        })
-                    .then((user) => {
-                        return CalendarEntry.create({exercises: user.planning.exercises, date: dayjs().format('dddd, D, MMMM, YYYY'), owner: req.user.id})
-                    })
+            
+            if (entry.length === 0) {
+            return CalendarEntry.create(req.body)
+                .then((CrEntry)  => {
+                    
+                    res.json(CrEntry)
+                })
+                .catch((err) => {
+                    res.status(400).json({message: 'fallo al crear entry' })
+                    console.log(err)
+                })
+            } else {
+                CalendarEntry.findByIdAndUpdate(entry[0]._id, { $push: { finishedEx: { $each: req.body.finishedEx } } }, {
+                    runValidators: true,
+                    new: true,
+                })
+                .then((upEntry) => {
+                    res.json(upEntry);
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                    res.status(400).json({ message: 'Fallo al actualizar entry' });
+                });
             }
-        })
+        
+        }
+    )
 }
 
 

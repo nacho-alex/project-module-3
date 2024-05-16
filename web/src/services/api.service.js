@@ -43,10 +43,15 @@ export function createUser(data) {
   }
 
 export function login(data) {
-  return http.post("/login", data).then((response) => {
+  return http.post("/login", data)
+  .then((response) => {
     localStorage.setItem("token", response.data.accessToken);
     return response;
-  });
+  })
+    .catch((err) => {
+      console.log(err)
+    })
+  
 }
 
 export function getProfile() {
@@ -106,6 +111,11 @@ export function getWorkout(params) {
   return http.get(`/workouts/${params.id}`)
 }
 
+export function getPlanning(params) {
+  console.log(params)
+  return http.get(`/workouts/${params}`)
+}
+
 export function delWorkout(id) {
   return http.delete(`/workouts/${id}`)
 }
@@ -128,4 +138,11 @@ export function createRecipe(data) {
 
 export function getRecipes() {
   return http.get("/recipes");
+}
+
+
+
+export function updateEntry(data) {
+  
+  return http.post("/calendar-entries", data);
 }

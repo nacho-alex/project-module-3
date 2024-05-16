@@ -37,7 +37,7 @@ function WorkoutItem(props) {
                 <img src={workout.image}></img>
             </div>
             <div className="workout-text">
-                <p className='workout-p m-0'><i class="fa-solid fa-user"></i> {workout.ownername}</p>
+                <p className='workout-p m-0'><i className="fa-solid fa-user"></i> {workout.ownername}</p>
                 <h1>{workout.title}</h1>
 
                 {workout.description?.length > 400 && !hideBtns && (

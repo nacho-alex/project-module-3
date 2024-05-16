@@ -32,6 +32,7 @@ module.exports.list = (req, res, next) => {
   };
 
 module.exports.detail = (req, res, next) => {
+
     Workout.findById(req.params.id)
         .then((work) => {
             if (work) {

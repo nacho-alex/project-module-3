@@ -34,10 +34,10 @@
     text-align: center;
     margin-right: 0;
     align-self: center;
-    color: #83cb61;
-    border: #83cb61 solid 3px;
+    color: var(--primary-color);
+    border: var(--primary-color) solid 3px;
     text-decoration: none;
-    background-color: white;
+    background-color: var(--full-white-1);
 }
 
 .link-drop:hover .drop-link-text {
@@ -47,18 +47,18 @@
     opacity: 1;
     font-weight: 700;
     font-size: 14px;
-    border: #83cb61 solid 2px;
+    border: var(--primary-color) solid 2px;
 
  
 }
 
 .link-drop:hover  i{
-    color: #83cb61;
+    color: var(--primary-color);
 
 }
 
 .link-drop, .selected-trash:hover  i{
-    color:  rgb(255, 54, 54)!important;
+    color: var(--primary-red)!important;
 }
 
 .link-drop i{
@@ -69,16 +69,16 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    color: #818181;
+    color: var(--medium-gray-1);
 }
 
 .selected-workout{
     display: flex;
     align-items: center;
-    border: #83cb61 2px solid;
+    border: var(--primary-color) 2px solid;
     border-radius: 25px;
     padding: 3px 10px 3px 10px;
-    background-color: white;
+    background-color: var(--full-white-1);
     margin-right: 10px;
     white-space: nowrap;
     font-size: 14px;
@@ -88,12 +88,11 @@
     display: flex;
     align-items: center;
     border-radius: 25px;
-
-    color:  rgb(255, 54, 54);
+    color: var(--primary-red);
 }
 
 .selected-trash i:hover{
-    color:  rgb(255, 54, 54)!important;
+    color: var(--primary-red)!important;
 }
 
 .link-drop:hover .trash-link-text {
@@ -102,7 +101,7 @@
     padding: 3px 10px 3px 10px;
     opacity: 1;
     font-weight: 700;
-    border: rgb(255, 54, 54) solid 2px;
+    border: var(--primary-red) solid 2px;
  
 }
 
@@ -118,34 +117,34 @@
     margin-right: 0;
     align-self: center;
     text-decoration: none;
-    background-color: white;
+    background-color: var(--full-white-1);
 }
 
 .selected-workout:hover{
     display: flex;
     align-items: center;
-    border:  rgb(255, 54, 54) 2px solid;
+    border: var(--primary-red) 2px solid;
     border-radius: 25px;
     padding: 3px 10px 4px 10px;
-    background-color: white;
+    background-color:var(--full-white-1);
     margin-right: 10px;
-    color:  rgb(255, 54, 54);
+    color: var(--primary-red);
 }
 
 .selected-workout:hover i, .selected-workout:hover span{
-    color:  rgb(255, 54, 54);
+    color: var(--primary-red);
 }
 
 .selected-workout span{
     width: fit-content; 
     opacity: 1;
     font-weight: 700;
-    color: #83cb61;
+    color: var(--primary-color);
 
 }
 
 .selected-workout i{
     font-size: 20px;
-    color: #83cb61;
+    color: var(--primary-color);
     margin-right: 10px;
 }

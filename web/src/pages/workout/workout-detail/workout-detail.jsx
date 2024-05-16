@@ -56,7 +56,7 @@ function Workoutdetail() {
           
           {workout && <WorkoutItem key={workout._id} workout={workout} hideBtns={true} />}
 
-          <div className='plane-box' style={{ backgroundColor: 'rgba(46, 46, 46, 0.894)', color: 'white' }}>
+          <div className='plane-box plane-box-black'>
             <h2>description</h2>
             <div>{workout.description}</div>
           </div>
