@@ -38,7 +38,7 @@ module.exports.manage = (req, res, next) => {
 module.exports.detail = (req, res, next) => {
     CalendarEntry.find({"owner": req.user.id, "date": dayjs().format('dddd, D, MMMM, YYYY')})
         .then((entry) => {
-            res.json(entry)
+            res.json(entry[0])
         })
 }
 

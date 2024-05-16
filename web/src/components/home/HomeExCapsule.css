@@ -10,6 +10,12 @@
     justify-content: center;
 }
 
+.completed{
+    border: 4px solid var(--primary-color);
+    background-color: var(--full-white-1);
+    transition: background-color ease 0.4s;
+}
+
 .home-capsule-main{
     display: flex;
     flex-direction: row;
@@ -94,4 +100,13 @@
 .title-icon h1{
     line-height: 0;
     margin-left: 20px;
+}
+
+.completed-button{
+    font-size: 26px !important;
+    color: var(--primary-color);
+}
+
+.completed-button-div{
+    display: flex;
 }

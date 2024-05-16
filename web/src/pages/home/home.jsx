@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import AuthContext from '../../contexts/auth.context';
-import { getPlanning } from '../../services/api.service';
+import { getPlanning, getEntry } from '../../services/api.service';
 import HomeExCapsule from '../../components/home/HomeExCapsule';
 import './home.css'
 import { updateEntry } from '../../services/api.service';
@@ -32,6 +32,7 @@ function Home() {
 
     const initialValue = {finishedEx: [], owner: context.user.id, date: dayjs().format('dddd, D, MMMM, YYYY')}
     const [entryState, setEntry] = useState(initialValue)
+    const [fullEntryState, setFullEntry] = useState([])
 
     const imgArr = [img1, img2, img3, img4, img7];
 
@@ -53,15 +54,32 @@ function Home() {
       async function handleSubmit(data) {
           try{
              const response = await updateEntry(data)
-             if (response) {setEntry(initialValue)}
+             if (response) {
+              setEntry(initialValue)
+              setFullEntry(response.data)
+              console.log(response.data)
+            }
           }catch (err){
             
           }
       }
 
+      async function getEntryData(data) {
+        try{
+           const response = await getEntry(data)
+           if (response) {
+            setFullEntry(response.data)
+            console.log(response.data)
+          }
+        }catch (err){
+          
+        }
+    }
 
     useEffect(() => {
 
+      getEntryData()
+      
         setObjetive(calculateCalories())
         setRandom(Math.floor(Math.random() * 5));
 
@@ -121,22 +139,22 @@ function Home() {
                 </div>
                   </div>
               <div className="objetive-text">
-              <p className='name-p'><i class="fa-solid fa-address-card"></i>{context.user?.username}</p>
+              <p className='name-p'><i className="fa-solid fa-address-card"></i>{context.user?.username}</p>
                   <h2>{actualDay}</h2>
                   <div className="objetive-calories">
                     
                     <div className="objetive-item">
-                      <i class="fa-brands fa-font-awesome" style={{color: '#F2A950'}}></i>
+                      <i className="fa-brands fa-font-awesome" style={{color: '#F2A950'}}></i>
                       <p>Objetive <span>{objetive}</span></p>
                     </div>
                     
                     <div className="objetive-item">
-                      <i class="fa-brands fa-font-awesome"style={{color: '#4AA2D9'}}></i>
+                      <i className="fa-brands fa-font-awesome"style={{color: '#4AA2D9'}}></i>
                       <p>Food:  <span>{objetive}</span></p>
                     </div>
 
                     <div className="objetive-item">
-                      <i class="fa-brands fa-font-awesome" style={{color: '#84BF04'}}></i>
+                      <i className="fa-brands fa-font-awesome" style={{color: '#84BF04'}}></i>
                       <p>Exercise: <span>{objetive}</span></p>
                     </div>
                   </div>
@@ -152,16 +170,26 @@ function Home() {
                     <h1 className='today-h1'>Today training</h1>
 
                 <WeekDay actualDay={actualDayView} onSelectDay={handleSetDay}></WeekDay>
-                  {planning.exercises?.filter(ex => ex.day === actualDayView).map((ex, index) => (
-                    <HomeExCapsule key={index}  exercise={ex} onSendEx={handleAddToEntry}/>
-                  )) }
+
+                  
+                    {fullEntryState.finishedEx && fullEntryState?.finishedEx.map((ex, index) => (
+                      <HomeExCapsule completed={true} key={index}  exercise={ex.exercise} onSendEx={handleAddToEntry}/>
+                    )) } 
+
+                                  
+                {planning.exercises
+                  ?.filter(ex => 
+                    ex.day === actualDayView && 
+                    (!fullEntryState || !fullEntryState.finishedEx.some(fEx => fEx.exercise._id === ex._id))
+                  )
+                  .map((ex, index) => (
+                    <HomeExCapsule key={index} exercise={ex} onSendEx={handleAddToEntry}/>
+                  ))
+                }
+                  
+                  
+                  
                 </div>
-            
-             
-
-
-            
-            
         </div>
     )
 }

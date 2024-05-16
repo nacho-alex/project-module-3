@@ -143,6 +143,10 @@ export function getRecipes() {
 
 
 export function updateEntry(data) {
-  
   return http.post("/calendar-entries", data);
+}
+
+export function getEntry(data) {
+  
+  return http.get(`/calendar-entries`, data);
 }

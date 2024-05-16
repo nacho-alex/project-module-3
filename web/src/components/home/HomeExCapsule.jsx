@@ -3,7 +3,7 @@ import './HomeExCapsule.css';
 import ExerciseDetail from '../Exercises/Detail/ExerciseDetail';
 
 function HomeExCapsule(props) {
-    const { exercise, onSendEx } = props;
+    const {exercise, onSendEx, completed } = props;
     const [sets, setSets] = useState(exercise.work.sets);
     const [exerciseData, setExerciseData] = useState(Array.from({ length: sets }, () => ({ reps: exercise.work.reps, kg: 0, isChecked: false})));
     const [expandedExercises, setExpandedExercises] = useState([]);
@@ -30,7 +30,7 @@ function HomeExCapsule(props) {
     };
 
     const toggleDetailExpansion = (exerciseId) => {
-        if (expandedExercises.includes(exerciseId)) {
+        if (expandedDetails.includes(exerciseId)) {
         setDetailExercises(expandedDetails.filter(id => id !== exerciseId));
         } else {
         setDetailExercises([...expandedDetails, exerciseId]);
@@ -54,13 +54,14 @@ function HomeExCapsule(props) {
             isChecked: isChecked
         };
         setExerciseData(newExerciseData);
-        handleSubmit(newExerciseData);
+        handleSubmit(newExerciseData)
     };
 
 
     const handleSubmit = (data) => {
         const isReady = data.some(ex => ex.isChecked === false)
         
+        console.log(data)
         if (!isReady) {
             const finishedEx = {exercise: exercise, work: data}
             onSendEx(finishedEx)
@@ -68,48 +69,60 @@ function HomeExCapsule(props) {
 
     };
     return (
-        <div className='home-capsule-container'>
+        <div className={`home-capsule-container ${completed && ('completed')}`}>
 
             <div className="home-capsule-main">
-            <div className='title-icon'>
-              {Array.isArray(exercise.equipment) && exercise.equipment.some(eq => eq.includes('body')) && (
-                <i className="fa-solid fa-child-reaching"></i>
-              )}
-              {Array.isArray(exercise.equipment) && exercise.equipment.some(eq => eq.includes('machine')) && (
-                <i className="fa-solid fa-gears"></i>
-              )}
-              {Array.isArray(exercise.equipment) && !exercise.equipment.some(eq => eq.includes('machine')) && !exercise.equipment.some(eq => eq.includes('body')) && (
-                <i className="fa-solid fa-dumbbell"></i>
-              )}
-              {!Array.isArray(exercise.equipment)  &&  exercise.equipment.includes('body') && (
-                <i className="fa-solid fa-child-reaching"></i>
-              )}
-              {!Array.isArray(exercise.equipment) && exercise.equipment.includes('machine') && (
-                <i className="fa-solid fa-gears"></i>
-              )}
-              {!Array.isArray(exercise.equipment) && !exercise.equipment.includes('machine') && !exercise.equipment.includes('body') && (
-                <i className="fa-solid fa-dumbbell"></i>
-              )}
-               <h1>{exercise.name}</h1>
-            </div>
-               
 
-                <div>
-                    <button type="button" onClick={() => toggleExerciseExpansion(exercise._id)}>
-                    {expandedExercises.includes(exercise._id) ? <i className="fa-solid fa-angle-up"></i> : <i className="fa-solid fa-angle-down"></i>} <i className="fa-solid fa-eye"></i>
-                    </button>
-                    <button type="button" onClick={() => toggleDetailExpansion(exercise._id)}>
-                        {expandedDetails.includes(exercise._id) ? <i className="fa-solid fa-angle-up"></i> : <i className="fa-solid fa-angle-down"></i>} <i class="fa-solid fa-circle-info"></i>
-                    </button>
-                </div>
                 
+                <div className='title-icon'>
+                    {Array.isArray(exercise.equipment) && exercise.equipment.some(eq => eq.includes('body')) && (
+                        <i className="fa-solid fa-child-reaching"></i>
+                    )}
+                    {Array.isArray(exercise.equipment) && exercise.equipment.some(eq => eq.includes('machine')) && (
+                        <i className="fa-solid fa-gears"></i>
+                    )}
+                    {Array.isArray(exercise.equipment) && !exercise.equipment.some(eq => eq.includes('machine')) && !exercise.equipment.some(eq => eq.includes('body')) && (
+                        <i className="fa-solid fa-dumbbell"></i>
+                    )}
+                    {!Array.isArray(exercise.equipment)  &&  exercise.equipment?.includes('body') && (
+                        <i className="fa-solid fa-child-reaching"></i>
+                    )}
+                    {!Array.isArray(exercise.equipment) && exercise.equipment?.includes('machine') && (
+                        <i className="fa-solid fa-gears"></i>
+                    )}
+                    {!Array.isArray(exercise.equipment) && !exercise.equipment?.includes('machine') && !exercise.equipment?.includes('body') && (
+                        <i className="fa-solid fa-dumbbell"></i>
+                    )}
+                    <h1>{exercise.name}</h1>
+                </div>
+               
+            {!completed ? (
+                <div>
+                <button type="button" onClick={() => toggleExerciseExpansion(exercise._id)}>
+                {expandedExercises.includes(exercise._id) ? <i className="fa-solid fa-angle-up"></i> : <i className="fa-solid fa-angle-down"></i>} <i className="fa-solid fa-eye"></i>
+                </button>
+                <button type="button" onClick={() => toggleDetailExpansion(exercise._id)}>
+                    {expandedDetails.includes(exercise._id) ? <i className="fa-solid fa-angle-up"></i> : <i className="fa-solid fa-angle-down"></i>} <i className="fa-solid fa-circle-info"></i>
+                </button>
+            </div>
+            ):(
+                <div className='completed-button-div'>
+                    <button type="button" onClick={() => handleDeleteFromEntry(exercise._id)}>
+                        <i className="fa-solid fa-trash-can red-text button-trash"></i>
+                    </button>
+                    <i className="fa-solid fa-square-check completed-button"></i>
+                </div>
+            )}
+
             </div>
             
                 <>
+                {!completed && (
+                    <>
                     {expandedExercises.includes(exercise._id) && (
                         <div className='home-sets'>
                             {[...Array(sets)].map((_, index) => (
-                                <div key={index} className='d-flex home-capsule-set'>
+                                <div key={exercise.name + index} className='d-flex home-capsule-set'>
                                     <p>set {index + 1}</p>
                                     <div>
                                     <p>reps: <input type="number" value={exerciseData[index]?.reps || exercise.work.reps} onChange={(event) => handleChange(index, 'reps', event)} /></p>
@@ -130,6 +143,9 @@ function HomeExCapsule(props) {
                             </div>
                         </div>
                     )}
+                    </>
+                )}
+                    
                 </>
                     <div className="exercise-details">
                         {expandedDetails.includes(exercise._id) && (
