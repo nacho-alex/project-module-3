@@ -9,6 +9,8 @@ function SearchFood({onAddFood}) {
     const order = useRef("asc");
     const sortBy = useRef("name");
     const query = useRef("");
+    const [page, setPage] = useState(1)
+    const [actualFood, setActualFood] = useState()
 
     useEffect(() => {
         async function fetchFoods() {
@@ -66,36 +68,54 @@ function SearchFood({onAddFood}) {
         setResults(results + 15);
     };
 
+    const handleAddFood = (data) => {
+        setActualFood(data)
+        setPage(2)
+    }
+
     return (
         <>
-            <label>Sort by</label>
-            <select name="sort" onChange={handleSortAndOrder} >
-                <option value="name">Name</option>
-                <option value="calories_kcal">Calories</option>
-                <option value="carbohydrates_g">Carbohydrates</option>
-                <option value="protein_g">Protein</option>
-                <option value="totalFat_g">Total fat</option>           
-            </select>
+            {page === 1 && (
+                    <>
+                    <label>Sort by</label>
+                    <select name="sort" onChange={handleSortAndOrder} >
+                        <option value="name">Name</option>
+                        <option value="calories_kcal">Calories</option>
+                        <option value="carbohydrates_g">Carbohydrates</option>
+                        <option value="protein_g">Protein</option>
+                        <option value="totalFat_g">Total fat</option>           
+                    </select>
 
-            <label>Order</label>
-            <select name="order" onChange={handleSortAndOrder}>
-                <option value="asc">Ascending</option>
-                <option value="des">Descending</option>
-            </select>
+                    <label>Order</label>
+                    <select name="order" onChange={handleSortAndOrder}>
+                        <option value="asc">Ascending</option>
+                        <option value="des">Descending</option>
+                    </select>
 
-            <input type="text" name="name" onChange={handleInputChange} className="form-control" placeholder="Search..." />
-            
-            {!filteredFoods.length ?
-                <p>search food</p>
-                :
-                <>
-                    <p>{filteredFoods.length} results</p>
+                    <input type="text" name="name" onChange={handleInputChange} className="form-control" placeholder="Search..." />
 
-                    {filteredFoods.slice(0, results).map(food => <FoodCapsule key={food._id} food={food} onAddFood={onAddFood} />)}
+                    {!filteredFoods.length ?
+                        <p>search food</p>
+                        :
+                        <>
+                            <p>{filteredFoods.length} results</p>
 
-                    {results < filteredFoods.length && <button onClick={handleResults}>+ Results</button>}
+                            {filteredFoods.slice(0, results).map(food => <FoodCapsule key={food._id} food={food} onAddFood={handleAddFood} />)}
+
+                            {results < filteredFoods.length && <button onClick={handleResults}>+ Results</button>}
+                        </>
+                    }
                 </>
-            }
+            )}
+            {page === 2 && (
+                <>
+                
+                
+                </>
+
+
+            )}
+            
         </>
     );
 }

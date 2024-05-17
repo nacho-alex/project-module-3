@@ -112,7 +112,6 @@ export function getWorkout(params) {
 }
 
 export function getPlanning(params) {
-  console.log(params)
   return http.get(`/workouts/${params}`)
 }
 
@@ -140,13 +139,31 @@ export function getRecipes() {
   return http.get("/recipes");
 }
 
-
+// export function getRecipe(params) {
+//   return http.get(`/recipes/${params.id}`)
+// }
 
 export function updateEntry(data) {
   return http.post("/calendar-entries", data);
 }
 
-export function getEntry(data) {
-  
-  return http.get(`/calendar-entries`, data);
+export function getEntry() {
+  return http.get(`/calendar-entries`);
+}
+
+export function deleteEntry(data) {
+     return http.post('/entries-edit', data)
+ 
+}
+
+export function getCalendarEntry(ownerId, date) {
+  if (date) {
+    return http.get(`/calendar-data/${ownerId}?date=${date}`);
+  } else {
+    return http.get(`/calendar-data/${ownerId}`);
+  }
+}
+
+export function getCalendarDataChart(ownerId, exerciseId) {
+  return http.get(`/calendar-data/${ownerId}?exercise=${exerciseId}`);
 }

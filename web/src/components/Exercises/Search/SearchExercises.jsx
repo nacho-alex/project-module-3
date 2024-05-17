@@ -89,7 +89,7 @@ function SearchExercises({onAddExercise}) {
         </div>
 
         <div className="input-box-flt">
-        <p className="">equipment</p>
+        <p className="filter-name">equipment</p>
             <select name="equipment" onChange={handleSearchExercise}>
                 <option value="">Select</option>
                 <option value="assisted">Assisted</option>

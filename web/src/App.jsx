@@ -41,7 +41,7 @@ function App() {
         </Routes>
     </AlertProvider>
 
-    <Footer></Footer>
+    
 
     </>
   )

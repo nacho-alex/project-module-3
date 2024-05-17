@@ -13,6 +13,17 @@ const workSchema = new Schema(
     }  
 );
 
+const mealSchema = new Schema(
+    {
+        food: {
+            type: [Object],
+        },
+        name: {
+            type: String
+        }
+    }  
+);
+
 const exerciseCESchema = new Schema(
     {
         exercise: {
@@ -36,6 +47,9 @@ const calendarEntrySchema = new Schema(
         owner: {
             type: Schema.Types.ObjectId,
             ref: "User"
+        },
+        meals: {
+            type: [mealSchema]
         }
       },
 );

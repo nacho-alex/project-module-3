@@ -8,15 +8,6 @@ function FoodCapsule(props) {
     const [expandedFoods, setExpandedFoods] = useState([]);
     //const [foodAmount, setFoodAmount] = useState({quantity: "", unit: ""})
 
-
-    const toggleFoodExpansion = (foodId) => {
-        if (expandedFoods.includes(foodId)) {
-        setExpandedFoods(expandedFoods.filter(id => id !== foodId));
-        } else {
-        setExpandedFoods([...expandedFoods, foodId]);
-        }
-    };
-
     const handleChange = (event) => {
         const { name, value } = event.currentTarget;
         if (onEdit) {
@@ -27,10 +18,6 @@ function FoodCapsule(props) {
     return (
         <div >
             <p>{food.emoji} {food.name}</p>
-            <button type="button" onClick={() => toggleFoodExpansion(food._id)}>
-            {expandedFoods.includes(food._id) ? '-' : '+'} Detalles
-            </button>
-
             {onEdit && 
                 <>
                     <input name='quantity' type="number" placeholder='Quantity...' onChange={handleChange}  value={food.amount.quantity} />

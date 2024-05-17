@@ -142,3 +142,26 @@
     align-items: center;
     
 }
+
+.theme-btn{
+    background: none;
+    border: none;
+    font-size: 28px;
+    margin: 0;
+    padding: 0px;
+    border-radius: 50%;
+    height: 35px;
+    width: 35px;
+    line-height: 0;
+    margin-right: 20px;
+}
+
+.theme-btn i:hover{
+    color: var(--primary-color)!important;
+}
+
+.theme-btn:hover{
+    background-color: var(--dark-gray-1);
+}
+
+

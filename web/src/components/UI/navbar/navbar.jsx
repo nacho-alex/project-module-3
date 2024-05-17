@@ -18,6 +18,7 @@ function Navbar() {
     const root = document.documentElement;
     const currentTheme = root.getAttribute('data-theme');
     const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    setTheme(newTheme)
     root.setAttribute('data-theme', newTheme);
   }
 
@@ -32,14 +33,14 @@ function Navbar() {
           <li><NavLink to={'/list-workout'}> <div className="link"><i className="fa-solid fa-list"></i><span className="navbar-link-text">Workouts</span></div></NavLink></li>
           <li><NavLink to={'/search-exercises'}> <div className="link"><i className="fa-solid fa-dumbbell"></i><span className="navbar-link-text">Exercises</span></div></NavLink></li>
           <li><NavLink to={'/list-recipe'}> <div className="link"><i className="fa-solid fa-bowl-food"></i><span className="navbar-link-text">Recipes</span></div></NavLink></li>
-          <li><NavLink to={'/search-exercises'}> <div className="link"><i className="fa-solid fa-calendar-days"></i><span className="navbar-link-text">Calendar</span></div></NavLink></li>
+          <li><NavLink to={'/calendar'}> <div className="link"><i className="fa-solid fa-calendar-days"></i><span className="navbar-link-text">Calendar</span></div></NavLink></li>
 
           
           
         </ul>
         
         <ul className="navbar-profile-links">
-                <button onClick={toggleDarkMode}>Toggle Dark Mode</button>
+                <button className="theme-btn" onClick={toggleDarkMode}>{theme === 'light' ? ( <i class="fa-solid fa-moon"></i> ):( <i class="fa-solid fa-sun"></i> )}</button>
                 <li> <div className={`navbar-profile-image`}><img style={{ transform: `scale(${user.avtScale})` }} src={user.avatar} alt="" /></div> <Link to={`/profile`}>{user.username}</Link></li>
                 <li><button className="button red" onClick={doLogout}>Logout</button></li>
           </ul>

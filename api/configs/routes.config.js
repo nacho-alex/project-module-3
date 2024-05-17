@@ -40,7 +40,8 @@ router.delete("/plannings/:id", auth.checkAuth, planning.delete);
 
 router.post("/calendar-entries", auth.checkAuth, calendarEntry.manage);
 router.get("/calendar-entries", auth.checkAuth, calendarEntry.detail);
-router.patch("/calendar-entries/:id", auth.checkAuth, calendarEntry.edit);
+// router.get("/calendar-data", auth.checkout, calendarEntry.data);
+router.post("/entries-edit", auth.checkAuth, calendarEntry.delete);
 
 //Error handlers
 

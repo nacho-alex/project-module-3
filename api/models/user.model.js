@@ -77,6 +77,12 @@ const userSchema = new Schema(
         planning: {
             type: Schema.Types.ObjectId,
             ref: "Workout"
+        },
+        dayMeals: {
+            type: [Object],
+        },
+        myMeals: {
+            type: [Object]
         }
     },
     {
