@@ -1,5 +1,6 @@
 .div-filters{
     display: flex;
+    margin-top: 30px;
 }
 .input-box-flt{
     width: fit-content !important;

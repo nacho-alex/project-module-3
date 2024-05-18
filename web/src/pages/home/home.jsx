@@ -43,8 +43,9 @@ function Home() {
 
     const imgArr = [img1, img2, img3, img4, img7];
     const circumference = 2 * Math.PI * 100;
-    const progressLength = ((nutritionData.totalKcal - nutritionData.caloriesBurned) / nutritionData.goalCalories) * circumference;
-
+    const progressLength = Math.min(((nutritionData.totalKcal - nutritionData.caloriesBurned) / nutritionData.goalCalories) * circumference, circumference);
+    const overGoal = (nutritionData.totalKcal - nutritionData.caloriesBurned) > nutritionData.goalCalories;
+    
     const handleAddToEntry = (data) => {
         const formattedData = { finishedEx: data };
         handleSubmit(formattedData);
@@ -282,12 +283,23 @@ function Home() {
 
             <div className="plane-box home ">
                 <div className="objetive-circle">
-                    <div className="circle-container">
+                <div className="circle-container">
                         <h2>{Math.round(nutritionData.goalCalories + nutritionData.caloriesBurned - nutritionData.totalKcal)}</h2>
-                        <h3>REMAINING</h3>
+                        <>
+                        { (nutritionData.totalKcal - nutritionData.caloriesBurned) > nutritionData.goalCalories ? (
+                            <h3>LEFTOVER</h3>
+                        ):(
+                            <h3>REMAINING</h3>
+                        )}
+                        </>
+                        
                         <svg className="circle" width="200" height="200">
                             <circle className="background" cx="100" cy="100" r="90"></circle>
-                            <circle className="progress" cx="100" cy="100" r="90" style={{ strokeDasharray: `${circumference} ${circumference}`, strokeDashoffset: circumference - progressLength }}></circle>
+                            <circle  className="progress" cx="100" cy="100" r="90" style={{
+                            strokeDasharray: `${circumference} ${circumference}`,
+                            strokeDashoffset: circumference - progressLength,
+                            stroke: overGoal ? 'red' : ''
+                        }}></circle>
                         </svg>
                     </div>
                 </div>

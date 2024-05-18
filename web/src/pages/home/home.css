@@ -50,7 +50,6 @@
 .home.plane-box{
     display: flex;
     flex-direction: row;
-    background-color: var(--white-transparent-3);
     justify-content: center;
 }
 

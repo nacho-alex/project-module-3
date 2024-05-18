@@ -111,9 +111,12 @@ function HomeExCapsule(props) {
                     
                     <div className='completed-button-div'>
                         <button type="button" value={showChart} onClick={toggleShowChart}><i class="fa-solid fa-chart-simple"></i></button>
+                       
+                    {onDeleteEntry && (
                         <button type="button" onClick={handleDelete}>
-                            <i className="fa-solid fa-trash-can red-text button-trash"></i>
-                        </button>
+                        <i className="fa-solid fa-trash-can red-text button-trash"></i>
+                    </button>
+                    )}
                         <i className="fa-solid fa-square-check completed-button"></i>
                     </div>
                 )}
