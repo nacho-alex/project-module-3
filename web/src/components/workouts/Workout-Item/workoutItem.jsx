@@ -61,7 +61,7 @@ function WorkoutItem(props) {
                       <strong>Sets:</strong><p className='workout-p'> {workout.exercises?.reduce((total, exercise) => total + exercise.work.sets, 0)}</p>
                     </div>
                     <div className="wo-detail">
-                      <strong>Equipment:</strong><p className='workout-p'>{equipmentString}</p>
+                      <strong>Equipment:</strong><p className='workout-p wrapped-p'>{equipmentString}</p>
                     </div>
                   </div>
                   

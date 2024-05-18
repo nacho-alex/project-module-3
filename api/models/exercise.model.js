@@ -33,6 +33,9 @@ const exerciseSchema = new Schema(
                 type: Number,
                 default: 0
             }
+        },
+        id: {
+            type: String
         }
     }
 );

@@ -25,9 +25,13 @@ module.exports.manage = (req, res, next) => {
                 }
 
                 if (req.body.food && req.body.mealIndex !== undefined) {
-                    updates.$addToSet = {
-                        [`meals.${req.body.mealIndex}.food`]: { $each: req.body.food }
-                    };
+                    for (let i = 0; i <= req.body.mealIndex; i++) {
+                        if (!entry.meals[i]) {
+                            entry.meals[i] = { food: [] };
+                        }
+                    }
+                    entry.meals[req.body.mealIndex].food.push(...req.body.food);
+                    updates.meals = entry.meals;
                 }
 
                 return CalendarEntry.findByIdAndUpdate(entry._id, updates, { new: true })
@@ -91,6 +95,7 @@ module.exports.data = (req, res, next) => {
             })
             .catch(next);
     } else if (req.query.exercise) {
+        console.log(req.query.exercise)
         const exerciseId = req.query.exercise;
         CalendarEntry.find({ "owner": req.user.id, "finishedEx.exercise._id": exerciseId })
             .then(exData => {

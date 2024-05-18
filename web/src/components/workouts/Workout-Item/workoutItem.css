@@ -42,7 +42,6 @@
     flex-direction: column;
     margin-top: 30px;
     height: fit-content;
-    width: 100%;
 }
 
 .seemore{
@@ -51,6 +50,10 @@
 
 .workout-p{
     font-size: 13px;
+}
+
+.wrapped-p{
+    white-space: wrap!important;
 }
 
 .workout-text2{
