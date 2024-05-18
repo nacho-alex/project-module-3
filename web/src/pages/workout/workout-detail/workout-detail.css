@@ -12,18 +12,4 @@
     width: 100%;
 }
 
-.plane-box{
-    margin: auto;
-    max-width: 90%;
-    width: 1200px;
-    padding: 30px;
-    border: none;
-    margin-top: 20px;
-    box-shadow: 5px 5px 3px 0px rgba(0, 0, 0, 0.131);
-    background-color:var(--white-transparent-1);
-    backdrop-filter: blur(20px);
-    position: relative;
-}
-
-
 

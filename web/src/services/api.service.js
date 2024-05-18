@@ -167,3 +167,16 @@ export function getCalendarEntry(ownerId, date) {
 export function getCalendarDataChart(ownerId, exerciseId) {
   return http.get(`/calendar-data/${ownerId}?exercise=${exerciseId}`);
 }
+
+export function submitNewMeal(data) {
+  return http.post('/new-meal', data)
+}
+
+export function submitNewDayMeal(data) {
+  return http.post('/new-daymeal', data)
+}
+
+export function deleteDayMeal() {
+  console.log('hola')
+  return http.get('/del-daymeal')
+}

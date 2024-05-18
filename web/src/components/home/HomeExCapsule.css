@@ -110,3 +110,7 @@
 .completed-button-div{
     display: flex;
 }
+
+.fa-chart-simple{
+    color:#F2A950;
+}

@@ -1,6 +1,7 @@
 
 import { useState } from 'react';
 import FoodDetail from '../food-detail/food-detail';
+import './food-capsule.css'
 
 function FoodCapsule(props) {
 
@@ -17,29 +18,24 @@ function FoodCapsule(props) {
 
     return (
         <div >
-            <p>{food.emoji} {food.name}</p>
-            {onEdit && 
-                <>
-                    <input name='quantity' type="number" placeholder='Quantity...' onChange={handleChange}  value={food.amount.quantity} />
-                    <input name='unit' type="text" placeholder='Unit...' onChange={handleChange}  value={food.amount.unit} />
-                </>
-            }
-
-            {onAddFood &&
-            <button type="button" onClick={() => onAddFood(food)}>
-                add
-            </button>
-            }
-
-            {onRemove &&
-            <button type="button" onClick={() => onRemove(food._id)}>
-                remove
-            </button>
-            }
             
-            {expandedFoods.includes(food._id) && (
-            <FoodDetail food={food} />
-            )}
+           
+
+            <div className='meal-capsule-sch'>
+                <div className='d-flex'>
+                    <i>{food.emoji}</i>
+                    <h3>{food.name}</h3>
+                </div>             
+
+                {onAddFood &&
+                <button className='add-ex-btn' type="button" onClick={() => onAddFood(food)}>
+                    add
+                </button>
+                }
+            </div>
+
+
+          
         </div>
     )
 }

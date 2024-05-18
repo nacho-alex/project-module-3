@@ -4,7 +4,7 @@ import AuthContext from "../../../contexts/auth.context";
 import { getCalendarDataChart } from "../../../services/api.service";
 
 
-function LineChart({exerciseId}) {
+function ChartLine({exerciseId}) {
     
     const context = useContext(AuthContext);
     const [exData, setExData] = useState([]);
@@ -51,4 +51,4 @@ function LineChart({exerciseId}) {
     );
 }
   
-export default LineChart;
+export default ChartLine;

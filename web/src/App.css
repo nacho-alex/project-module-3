@@ -15,7 +15,7 @@
     --medium-gray-1: #818181;
     --light-gray-1:rgb(214, 214, 214) ;
     --light-gray-2:rgb(225, 225, 225) ;
-    --white-transparent-3:  rgba(255, 255, 255, 0.732);
+    --white-transparent-3:  rgba(255, 255, 255, 0.676);
     --quasi-white: rgb(237, 237, 237);
     --full-white-1: white;
     --primary-red: rgb(255, 54, 54);
@@ -64,6 +64,7 @@ html{
 
 strong, span, i{
     color: var(--dark-gray-1);
+    background: none;
 }
 
 a {

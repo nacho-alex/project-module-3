@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './HomeExCapsule.css';
 import ExerciseDetail from '../Exercises/Detail/ExerciseDetail';
-//import LineChart from '../charts/line-chart/line-chart.jsx'
+import ChartLine from '../charts/line-chart/line-chart.jsx'
 
 function HomeExCapsule(props) {
     const { exercise, onSendEx, completed, onDeleteEntry } = props;
@@ -94,19 +94,23 @@ function HomeExCapsule(props) {
                         <i className="fa-solid fa-dumbbell"></i>
                     )}
                     <h1>{exercise.name}</h1>
+                    <button type="button" onClick={() => toggleDetailExpansion(exercise._id)}>
+                            {expandedDetails.includes(exercise._id) ? <i className="fa-solid fa-angle-up"></i> : ''} <i className="fa-solid fa-circle-info"></i>
+                        </button>
                 </div>
-<button type="button" value={showChart} onClick={toggleShowChart}><i className="fa fa-line-chart"></i></button>
+
                 {!completed ? (
                     <div>
+                        <button type="button" value={showChart} onClick={toggleShowChart}><i class="fa-solid fa-chart-simple"></i></button>
                         <button type="button" onClick={() => toggleExerciseExpansion(exercise._id)}>
-                            {expandedExercises.includes(exercise._id) ? <i className="fa-solid fa-angle-up"></i> : <i className="fa-solid fa-angle-down"></i>} <i className="fa-solid fa-eye"></i>
+                            {expandedExercises.includes(exercise._id) ? <i className="fa-solid fa-angle-up"></i> : ''} <i className="fa-solid fa-eye"></i>
                         </button>
-                        <button type="button" onClick={() => toggleDetailExpansion(exercise._id)}>
-                            {expandedDetails.includes(exercise._id) ? <i className="fa-solid fa-angle-up"></i> : <i className="fa-solid fa-angle-down"></i>} <i className="fa-solid fa-circle-info"></i>
-                        </button>
+                        
                     </div>
                 ) : (
+                    
                     <div className='completed-button-div'>
+                        <button type="button" value={showChart} onClick={toggleShowChart}><i class="fa-solid fa-chart-simple"></i></button>
                         <button type="button" onClick={handleDelete}>
                             <i className="fa-solid fa-trash-can red-text button-trash"></i>
                         </button>
@@ -147,11 +151,11 @@ function HomeExCapsule(props) {
                     <ExerciseDetail exercise={exercise}></ExerciseDetail>
                 )}
             </div>
-            {/* <div className="exercise-details">
-                    {showChart && (
-                        <LineChart exerciseId={exercise._id}></LineChart>
-                    )}
-                </div> */}
+            <div className="exercise-details">
+                {showChart && (
+                    <ChartLine exerciseId={exercise._id}></ChartLine>
+                )}
+            </div>
         </div>
     );
 }

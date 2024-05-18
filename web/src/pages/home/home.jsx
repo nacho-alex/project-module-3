@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import AuthContext from '../../contexts/auth.context';
-import { getPlanning, getEntry, updateEntry, deleteEntry } from '../../services/api.service';
+import { getPlanning, getEntry, updateEntry, deleteEntry, submitNewMeal, submitNewDayMeal, deleteDayMeal } from '../../services/api.service'; // Asegúrate de importar submitNewMeal
 import HomeExCapsule from '../../components/home/HomeExCapsule';
 import dayjs from 'dayjs';
 import WeekDay from '../../components/workouts/WeekDay/WeekDay';
@@ -11,7 +11,6 @@ import img3 from '../../assets/imgSU3.jpg';
 import img4 from '../../assets/imgSU4.jpg';
 import img7 from '../../assets/imgSU7.jpg';
 import SearchExercises from '../../components/Exercises/Search/SearchExercises';
-import Meal from '../../components/food/meals/Meal';
 import SearchFood from '../../components/food/search-food/search-food';
 import './home.css';
 
@@ -21,6 +20,7 @@ function Home() {
     const [page, setPage] = useState(1);
     const actualDay = dayjs().format('dddd, D, MMMM, YYYY');
     const [actualDayView, setDayView] = useState(dayjs().format('dddd, D, MMMM, YYYY').toLowerCase().slice(0, 3));
+    const [dayMeals, setDayMeals] = useState(context.user.dayMeals)
 
     const userAgeMilliseconds = Date.now() - new Date(context.user.birthDate).getTime();
     const millisecondsInYear = 1000 * 60 * 60 * 24 * 365.25;
@@ -31,6 +31,7 @@ function Home() {
     const [actualFood, setActualFood] = useState({});
     const [fullEntryState, setFullEntry] = useState(initialValue);
     const [saveIndex, setSaveIndex] = useState(null);
+    const [mealName, setMealName] = useState(''); // Estado para el nombre de la comida
     const [nutritionData, setNutritionData] = useState({
         goalCalories: 0,
         totalKcal: 0,
@@ -42,13 +43,12 @@ function Home() {
 
     const imgArr = [img1, img2, img3, img4, img7];
     const circumference = 2 * Math.PI * 100;
-    const progressLength = ((nutritionData.totalKcal - nutritionData.caloriesBurned)/ 100) * circumference;
+    const progressLength = ((nutritionData.totalKcal - nutritionData.caloriesBurned) / nutritionData.goalCalories) * circumference;
 
     const handleAddToEntry = (data) => {
         const formattedData = { finishedEx: data };
         handleSubmit(formattedData);
     };
-
 
     async function handleSubmit(data) {
         try {
@@ -64,7 +64,7 @@ function Home() {
     useEffect(() => {
         const goalCalories = calculateCaloriesGoal();
         const { totalKcal, totalCarbs, totalProt, totalFats, caloriesBurned } = calculateMacros();
-    
+
         setNutritionData({
             goalCalories,
             totalKcal,
@@ -112,7 +112,6 @@ function Home() {
         let totalReps = 0;
         let caloriesBurned = 0;
 
-        console.log(fullEntryState)
         if (fullEntryState.finishedEx) {
             fullEntryState.finishedEx.forEach(ex => {
                 if (Array.isArray(ex.work)) {
@@ -140,7 +139,7 @@ function Home() {
 
         if (fullEntryState.meals.length > 0) {
             fullEntryState.meals.forEach(me => {
-                me.food.forEach((food, foodIndex) => {
+                me.food.forEach((food) => {
                     const { qty, calories_kcal, carbohydrates_g, protein_g, totalFat_g } = food;
 
                     const calories = qty * calories_kcal;
@@ -160,7 +159,7 @@ function Home() {
     };
 
     const handleDeleteEntry = async (id, type, event) => {
-        event.stopPropagation(); 
+        event.stopPropagation();
         let updatedFinishedEx = fullEntryState.finishedEx;
         let updatedMeals = fullEntryState.meals;
         let updatedPlanning = planning;
@@ -224,16 +223,57 @@ function Home() {
         setActualFood({ ...actualFood, [name]: name === 'qty' ? Number(value) : value });
     };
 
-    const handleAddFoodToMeal = (data) => {
-        setActualFood(data);
-        
-    };
-
-    const handleMealUpdate = () => {
-        const foodData = { mealIndex: saveIndex, food: [{ ...actualFood, qty: Number(actualFood.qty), unit: actualFood.unit }] };
+    const handleAddFoodToMeal = (Food) => {
+        const foodData = { mealIndex: saveIndex, food: [Food] };
         handleSubmit(foodData);
         setPage(1);
     };
+
+    const handleMealUpdate = () => {
+        const foodData = { mealIndex: saveIndex, food: [{ ...actualFood, qty: Number(actualFood.qty) }] };
+        handleSubmit(foodData);
+        setPage(1);
+    };
+
+    const handleSaveMeal = async () => {
+        const newMeal = { food: fullEntryState.meals[saveIndex].food, name: mealName };
+        try {
+            const response = await submitNewMeal(newMeal);
+            if (response) {
+                setMealName(''); 
+                setSaveIndex(0)
+            }
+        } catch (err) {
+            console.error('Error al guardar la comida:', err);
+        }
+    };
+    
+    const handleDeleteDayMeal = async () => {
+      setDayMeals((prevDayMeals) => {
+        const updatedDayMeals = prevDayMeals.slice(0, -1);
+        return updatedDayMeals;
+      });
+      deleteDayMeal()
+    }
+    
+    const handleSaveDayMeal = async () => {
+      const newMeal = { food: [], name: `Extra meal ${context.user.dayMeals.length - context.user.dayMeals.length + 1}` };
+      setDayMeals([...dayMeals, newMeal])
+      try {
+          const response = await submitNewDayMeal();
+          if (response) {
+              setMealName(''); 
+              setSaveIndex(0)
+          }
+      } catch (err) {
+          console.error('Error al guardar la comida:', err);
+      }
+  };
+
+  const handleExpandNewMeal = (index) => {
+    setSaveIndex(index)
+    setPage(5)
+  }
 
     return (
         <div className='home-page'>
@@ -295,67 +335,120 @@ function Home() {
 
             {page === 2 && (
                 <div className='search-overlay fade-in'>
-                    <button className='back-btn' onClick={() => handlePage(1)}><i className="fa-solid fa-arrow-left"></i>Back</button>
                     <div className="plane-box overlay">
+                        <button className='back-btn back-btn-overlay' onClick={() => handlePage(1)}><i className="fa-solid fa-arrow-left"></i>Back</button>
                         <SearchExercises onAddExercise={handleAddExercise} />
                     </div>
                 </div>
             )}
 
+            
+
             <div className="plane-box">
                 <h1 className='today-h1'>Today meals</h1>
-                <button className="add-ex-btn button" onClick={() => handleAddFood(0)}><i className="fa-solid fa-plus"></i> Add</button>
-
-                {context.user.dayMeals.map((meal, index) => (
+                {dayMeals.map((meal, index) => (
                     <div key={index} className="plane-box">
-                        <div className="meal-header">
-                            <h1>{meal.name}</h1>
+                        <div className="meal-header"> 
+                            <div>
+                                <h1>{meal.name}
+                                {index === dayMeals.length - 1 && index  >  2 && (
+                                    <button className="delete-btn" onClick={(event) => handleDeleteDayMeal()}><i className="fa-solid fa-trash-can red-text button-trash" /></button>
+                                )}
+                                </h1>
+                            </div>
                             <button className="add-ex-btn button" onClick={() => handleAddFood(index)}><i className="fa-solid fa-plus"></i> Add</button>
                         </div>
                         {fullEntryState.meals && fullEntryState.meals[index] && fullEntryState.meals[index].food && (
                             fullEntryState.meals[index].food.map((me, i) => (
                                 <div className='meal-capsule' key={i}>
-                                  <div>
-                                    <i>{me.emoji}</i>
-                                    <h3>{me.name}</h3>
                                     <div>
+                                        <i>{me.emoji}</i>
+                                        <h3>{me.name}</h3>
                                     </div>
-                                  </div>
-                                  <div className="qty-div">
-                                       <p>{me.qty} {me.unit}</p>
-                                       <p><strong>PRO: </strong>{Math.round(me.protein_g * me.qty)}</p>
-                                       <p><strong>CAR: </strong> {Math.round(me.carbohydrates_g * me.qty)}</p>
-                                       <p><strong>FAT: </strong>{Math.round(me.totalFat_g * me.qty)}</p>
-                                       <p>{me.calories_kcal * me.qty} KCAL</p>
-                                      </div>
+                                    <div className="qty-div">
+                                        <p>{me.qty} {me.unit}</p>
+                                        <p><strong>PRO: </strong>{Math.round(me.protein_g * me.qty)}</p>
+                                        <p><strong>CAR: </strong> {Math.round(me.carbohydrates_g * me.qty)}</p>
+                                        <p><strong>FAT: </strong>{Math.round(me.totalFat_g * me.qty)}</p>
+                                        <p>{Math.round(me.calories_kcal * me.qty)} KCAL</p>
+                                    </div>
                                     <div>
-                                      
-                                      <div>
-                                      <button className="delete-btn" onClick={(event) => handleDeleteEntry(`${index}-${i}`, 'food', event)}><i className="fa-solid fa-trash-can red-text button-trash"/></button>
+                                        <button className="delete-btn" onClick={(event) => handleDeleteEntry(`${index}-${i}`, 'food', event)}><i className="fa-solid fa-trash-can red-text button-trash" /></button>
                                     </div>
-                                    </div>
-                                   
                                 </div>
-                            ))    
+                            ))
+                        )}
+                        {fullEntryState.meals[index]?.food.length >= 2 && (
+                            <> 
+                                <button  onClick={(event) => handleExpandNewMeal(index)} className='expand-cr-food'><i className='fa-solid fa-plus'></i>Save recipe</button>
+                            </>
                         )}
                     </div>
                 ))}
+
+              {page === 5 && (
+                    <div className='search-overlay fade-in'>
+                        <div className="plane-box overlay">
+
+                          <div>
+                              <button className='back-btn back-btn-overlay' onClick={() => handlePage(1)}><i className="fa-solid fa-arrow-left"></i>Back</button>
+                            
+                            <h1>New meal</h1>
+
+                             {fullEntryState && ( fullEntryState.meals[saveIndex].food.map((fd, i) => (
+                              
+                                <div className='meal-capsule' key={i}>
+                                    <div>
+                                        <i>{fd.emoji}</i>
+                                        <h3>{fd.name}</h3>
+                                    </div>
+                                    <div className="qty-div">
+                                        <p>{fd.qty} {fd.unit}</p>
+                                        <p><strong>PRO: </strong>{Math.round(fd.protein_g * fd.qty)}</p>
+                                        <p><strong>CAR: </strong> {Math.round(fd.carbohydrates_g * fd.qty)}</p>
+                                        <p><strong>FAT: </strong>{Math.round(fd.totalFat_g * fd.qty)}</p>
+                                        <p>{Math.round(fd.calories_kcal * fd.qty)} KCAL</p>
+                                    </div>
+                                </div>
+
+                             )))}
+                          </div>
+                            
+
+                            <div className='save-meal-inp'>
+
+                                  <input
+                                    type="text"
+                                    placeholder="Meal name"
+                                    value={mealName}
+                                    onChange={(e) => setMealName(e.target.value)}
+                                    className="meal-name-input"
+                                  />
+                                   <button type='button' onClick={() => handleSaveMeal()} className='button add-ex-btn'>
+                                    <i className="fa-solid fa-save" /> Save meal
+                                </button>
+                            </div>
+                           
+                        </div>
+                    </div>
+               )}
+                        
+
+                       
+                                <button  className='new-daily' type='button' onClick={() => handleSaveDayMeal()}>
+                                        <i className="fa-solid fa-plus" /> New daily Meal
+                                </button>
+ 
+                            
+                       
             </div>
 
             {page === 3 && (
                 <div className='search-overlay'>
-                    <button className='back-btn' onClick={() => handlePage(1)}><i className="fa-solid fa-arrow-left"></i>Back</button>
-                    <div className="plane-box overlay">
+                    <div className="plane-box overlay food-box">
+                        <button className='back-btn back-btn-overlay' onClick={() => handlePage(1)}><i className="fa-solid fa-arrow-left"></i>Back</button>
                         <SearchFood onAddFood={handleAddFoodToMeal} />
                     </div>
-                </div>
-            )}
-
-            {page === 4 && (
-                <div className='search-overlay fade-in'>
-                    <button className='back-btn' onClick={() => handlePage(1)}><i className="fa-solid fa-arrow-left"></i>Back</button>
-                   
-                    
                 </div>
             )}
         </div>

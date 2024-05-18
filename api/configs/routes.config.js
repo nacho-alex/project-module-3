@@ -22,6 +22,11 @@ router.get("/exercises/:id", auth.checkAuth, exercise.detail);
 
 router.get("/foods", auth.checkAuth, food.list);
 router.get("/foods/:id", auth.checkAuth, food.list);
+router.post("/new-meal", auth.checkAuth, user.newMeal);
+router.post("/new-daymeal", auth.checkAuth, user.dayMeal);
+router.get("/del-daymeal", auth.checkAuth, user.dayMealDelete);
+
+
 
 router.post("/recipes", auth.checkAuth, recipe.create);
 router.get("/recipes", auth.checkAuth, recipe.list);
@@ -40,7 +45,7 @@ router.delete("/plannings/:id", auth.checkAuth, planning.delete);
 
 router.post("/calendar-entries", auth.checkAuth, calendarEntry.manage);
 router.get("/calendar-entries", auth.checkAuth, calendarEntry.detail);
-// router.get("/calendar-data", auth.checkout, calendarEntry.data);
+router.get("/calendar-data/:id", auth.checkAuth, calendarEntry.data);
 router.post("/entries-edit", auth.checkAuth, calendarEntry.delete);
 
 //Error handlers

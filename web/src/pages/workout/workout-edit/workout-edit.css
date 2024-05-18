@@ -145,7 +145,7 @@
     margin-top: 20px;
     box-shadow: 5px 5px 3px 0px rgba(0, 0, 0, 0.137);
     border: 1px solid var(--black-transparent-02);
-    background-color: var(--smoked-white-light);
+    background-color: var(--white-transparent-1);
     backdrop-filter: blur(20px);
     position: relative;
 }

@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { getFoods } from "../../../services/api.service";
 import FoodCapsule from "../food-capsule/food-capsule";
+import FoodDetail from "../food-detail/food-detail";
+import './search-food.css'
 
 function SearchFood({onAddFood}) {
     const [foods, setFoods] = useState([]);
@@ -10,7 +12,7 @@ function SearchFood({onAddFood}) {
     const sortBy = useRef("name");
     const query = useRef("");
     const [page, setPage] = useState(1)
-    const [actualFood, setActualFood] = useState()
+    const [actualFood, setActualFood] = useState({qty: 0, unit: 'gr'})
 
     useEffect(() => {
         async function fetchFoods() {
@@ -73,11 +75,22 @@ function SearchFood({onAddFood}) {
         setPage(2)
     }
 
+    const handleInputChangeDet = (e) => {
+        const { name, value } = e.target;
+        setActualFood({ ...actualFood, [name]: name === 'qty' ? Number(value) : value });
+    };
+
+    const handleSendFood = () => {
+        onAddFood(actualFood)
+    }
+
     return (
         <>
             {page === 1 && (
                     <>
-                    <label>Sort by</label>
+                    <div className="div-filters">
+                    <div className="input-box-flt">
+                    <p className="filter-name">Sort by</p>
                     <select name="sort" onChange={handleSortAndOrder} >
                         <option value="name">Name</option>
                         <option value="calories_kcal">Calories</option>
@@ -85,22 +98,27 @@ function SearchFood({onAddFood}) {
                         <option value="protein_g">Protein</option>
                         <option value="totalFat_g">Total fat</option>           
                     </select>
-
-                    <label>Order</label>
+                    </div>
+                    <div className="input-box-flt">
+                    <p className="filter-name">Order</p>
                     <select name="order" onChange={handleSortAndOrder}>
                         <option value="asc">Ascending</option>
                         <option value="des">Descending</option>
                     </select>
+                    </div>
+                    </div>
 
-                    <input type="text" name="name" onChange={handleInputChange} className="form-control" placeholder="Search..." />
+                    <input  type="text" name="name" onChange={handleInputChange} className="search-bar" placeholder="Search..." />
 
                     {!filteredFoods.length ?
-                        <p>search food</p>
+                        <p className="write-smt">search food</p>
                         :
                         <>
-                            <p>{filteredFoods.length} results</p>
+                            <p className="write-smt">{filteredFoods.length} results</p>
 
-                            {filteredFoods.slice(0, results).map(food => <FoodCapsule key={food._id} food={food} onAddFood={handleAddFood} />)}
+                            {filteredFoods.slice(0, results).map(food =>
+                                 <FoodCapsule key={food._id} food={food} onAddFood={handleAddFood} />
+                                 )}
 
                             {results < filteredFoods.length && <button onClick={handleResults}>+ Results</button>}
                         </>
@@ -109,6 +127,32 @@ function SearchFood({onAddFood}) {
             )}
             {page === 2 && (
                 <>
+                <div className="detail-div">
+                    <FoodDetail food={actualFood} />
+                    <div className="food-inputs">
+                        <h3>Quantity:</h3>
+                        <div className="inp-box-flt">
+                            <input
+                                onChange={(e) => handleInputChangeDet(e)}
+                                name="qty"
+                                type="number"
+                                value={actualFood.qty || ''}
+                            />
+                        </div>
+                        <div className="inp-box-flt">
+                            <select
+                                onChange={(e) => handleInputChangeDet(e)}
+                                name="unit"
+                                value={actualFood.unit || ''}
+                            >   <option>Unit..</option>
+                                <option value="gr">Gr</option>
+                                <option value="ml">Ml</option>
+                            </select>
+                        </div>
+                        <button className="add-ex-btn button" onClick={handleSendFood}><i className="fa-solid fa-plus"></i> Add</button>
+                    </div>
+                </div>
+              
                 
                 
                 </>

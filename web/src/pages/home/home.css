@@ -50,7 +50,7 @@
 .home.plane-box{
     display: flex;
     flex-direction: row;
-    background-color: var(--white-transparent-1);
+    background-color: var(--white-transparent-3);
     justify-content: center;
 }
 
@@ -209,6 +209,7 @@
       min-height: 700px;  
       overflow-y: auto; 
       max-height: 70%; 
+      background-color: var(--full-white-1);
   }
 
   @keyframes fadeIn {
@@ -295,4 +296,102 @@
     margin-right: 5px;
   }
 
+  .food-box{
+    width: 45%!important;
+    min-width: 60px!important;
+  }
 
+  .back-btn-overlay{
+    position: relative;
+    top: 0;
+    right: 0;
+    width: 100px;
+    padding: 5px 10px!important;
+    margin-left: 0;
+    left: 0;
+    margin-bottom: 30px;
+  }
+
+  .delete-fd{
+    background: none;
+  }
+
+  .delete-fd i{
+    background: none;
+    font-size: 20px!important;
+  }
+
+  .meal-name-input{
+    border: none;
+    border-bottom: 1px solid var(--full-black-1);
+    margin-right: 10px;
+  }
+
+  .new-daily{
+    background: none!important;
+    width: 100%;
+    margin-top: 30px;
+    font-size: 28px;
+    color: var(--medium-gray-2);
+    border: none;
+  }
+
+  .new-daily:hover, .new-daily:hover i{
+    color: var(--primary-color);
+  }
+
+  .new-daily i{
+    margin-right: 20px;
+  }
+
+  .delete-btn{
+    background: none;
+  }
+
+  .meal-header h1 button{
+    border: none;
+    background: none;
+    margin-left: 20px;
+
+  }
+
+  .meal-header h1 button i{ 
+   font-size: 22px;
+   transform: translateY(-3px);
+  
+  }
+
+  .save-meal-inp{
+    width: 100%;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    height: 40px;
+    margin-top: 40px;
+  }
+
+  .save-meal-inp input{
+    padding: 0 10px;;
+  }
+
+  .food-overlay-sv{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height:fit-content;
+  }
+
+  .expand-cr-food{
+    background: none;
+    border: none;
+    font-size: 20px;
+    margin-top: 20px;
+  }
+
+  .expand-cr-food:hover, .expand-cr-food:hover i{
+    color: var(--primary-color);
+  }
+
+  .expand-cr-food i {
+    margin-right: 10px;
+  }

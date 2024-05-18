@@ -17,6 +17,7 @@ import ListRecipe from "./pages/recipes/recipe-list/recipe-list";
 import Page404 from "./pages/page404/page404";
 import Footer from "./components/UI/footer/footer";
 import PageLayout from "./layouts/PageLayout";
+import CalendarPage from "./pages/calendar/calendar";
 
 
 function App() {
@@ -34,7 +35,8 @@ function App() {
           <Route path="/search-exercises" element={<PrivateRoute><PageLayout><ExercisesPage/></PageLayout></PrivateRoute> } />
           <Route path="/list-recipe" element={<PrivateRoute><ListRecipe/></PrivateRoute>}/>
           <Route path="/create-recipe" element={<PrivateRoute><CreateRecipe/></PrivateRoute>} />
-          <Route path="/search-food" element={<PrivateRoute><SearchFood/></PrivateRoute>} /> 
+          <Route path="/search-food" element={<PrivateRoute><SearchFood/></PrivateRoute>} />
+          <Route path="/calendar" element={<PrivateRoute><PageLayout ><CalendarPage/></PageLayout></PrivateRoute>}/> 
           {/* <Route path="/recipe/:id" element={<PrivateRoute><PageLayout ><RecipeDetail/></PageLayout></PrivateRoute>}/> */}
 
           <Route path="/*" element={<Page404/>} />

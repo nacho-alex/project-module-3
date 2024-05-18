@@ -90,3 +90,45 @@ module.exports.login = (req, res, next) => {
     .catch(next);
 };
 
+
+module.exports.newMeal = (req, res, next) => {
+  
+  User.findByIdAndUpdate(
+    req.user.id,
+    { $push: { myMeals: req.body } }, 
+    { runValidators: true, new: true }
+  )
+    .then((updatedUser) => {
+      res.status(200).json(updatedUser);
+      console.log(updatedUser)})
+    .catch(next);
+};
+
+
+module.exports.dayMeal = (req, res, next) => {
+  
+  User.findByIdAndUpdate(
+    req.user.id,
+    { $push: { dayMeals: req.body } }, 
+    { runValidators: true, new: true }
+  )
+    .then((updatedUser) => {
+      res.status(200).json(updatedUser);
+      console.log(updatedUser)})
+    .catch(next);
+};
+
+
+module.exports.dayMealDelete = (req, res, next) => {
+  console.log('hola')
+  User.findByIdAndUpdate(
+    req.user.id,
+    { $pop: { dayMeals: 1 } }, 
+    { new: true }
+  )
+    .then((updatedUser) => {
+      res.status(200).json(updatedUser);
+      console.log(updatedUser);
+    })
+    .catch(next);
+};
