@@ -3,6 +3,7 @@ import './App.css';
 import Login from './pages/login/login';
 import Register from './pages/register/register';
 import Home from "./pages/home/home";
+import Profile from "./pages/profile/profile.jsx"
 import ListWorkout from "./pages/workout/workout-list/workouts-list";
 import CreateWorkout from "./pages/workout/workout-create/workout-create";
 import PrivateRoute from "./guards/private-route";
@@ -37,6 +38,7 @@ function App() {
           <Route path="/create-recipe" element={<PrivateRoute><CreateRecipe/></PrivateRoute>} />
           <Route path="/search-food" element={<PrivateRoute><SearchFood/></PrivateRoute>} />
           <Route path="/calendar" element={<PrivateRoute><PageLayout ><CalendarPage/></PageLayout></PrivateRoute>}/> 
+          <Route path="/profile" element={<PrivateRoute><PageLayout ><Profile/></PageLayout></PrivateRoute>}/>
           {/* <Route path="/recipe/:id" element={<PrivateRoute><PageLayout ><RecipeDetail/></PageLayout></PrivateRoute>}/> */}
 
           <Route path="/*" element={<Page404/>} />

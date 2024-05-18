@@ -1,0 +1,16 @@
+.page-food{
+    width: fit-content;
+    max-width: 80%;
+    min-width: 400px;
+    margin: auto;
+    margin-top: 120px;
+    background-color: var(--white-transparent-3);
+}
+
+.page-food h1{
+    color: var(--full-black);
+}
+
+.recipe-page .plane-box{
+    min-height: 500px;
+}

@@ -4,15 +4,28 @@ import AuthContext from '../../../contexts/auth.context'
 import { postPlan, getRecipes } from '../../../services/api.service'
 import { Link } from 'react-router-dom'
 import RecipeItem from '../../../components/recipes/recipe-item/recipe-item'
+import SearchFood from '../../../components/food/search-food/search-food'
+import PageLayout from '../../../layouts/PageLayout'
+import img1 from '../../../assets/imgSU5.jpg'
+import img2 from '../../../assets/imgSU6.jpg'
+import './recipe-list.css'
+
+
+
+const imgArr = [img1, img2];
 
 function ListRecipe() {
-const [page, setPage] = useState(1)
+const [page, setPage] = useState(5)
 const [recipes, setRecipes] = useState([])
 const context = useContext(AuthContext)
+const [randomNum, setRandom] = useState(0);
+
 
 
 
 useEffect(() => {
+          setRandom(Math.floor(Math.random() * 2));
+
     async function fetch() {
         try {
           const recipesData = await getRecipes();
@@ -44,43 +57,19 @@ async function handleSelectedPlan(id) {
 }
 
   return (
-    <>
-        <h1>Recipes</h1>
-        <Link to='/create-recipe'>Create recipe</Link>
-        <div>
-            <button onClick={() => handlePage(1)} >All recipes</button>
-            <button onClick={() => handlePage(2)} >My recipes</button>
-        </div>
-
-        {page === 1 && (
-            <>
-                <h1>holi</h1>
-
-                {recipes.length > 0 && (
-                    recipes.map((recipe) => (
-                        <RecipeItem key={recipe._id} recipe={recipe} onSelectWorkout={handleSelectedPlan}/>
-                    ))
-                )}
-               
-            </>
-        )}
-
-        {page === 2 && (
-
-        <>
-            <h1>Hello</h1>
-
-            {recipes.length > 0 && (
-                recipes.filter((recipe) => recipe.owner === context.user.id).map((recipe) => (
-                    <RecipeItem key={recipe._id} recipe={recipe} onSelectRecipe={handleSelectedPlan}/>
-                ))
-            )}
-
-        </>
-        )}
-
-
-    </>
+    <div className='recipe-page'>
+    <PageLayout>
+            <img className='infinite-bg' src={imgArr[randomNum]} alt="Background" />
+                    <div className="h1-div page-food">
+                        <h1 className='page-title '>Foods</h1>
+                    </div>
+            <div className="plane-box overlay food-box" style={{backgroundColor: 'var(--full-white-1)'}}>
+                <button className='back-btn back-btn-overlay' onClick={() => handlePage(1)}><i className="fa-solid fa-arrow-left"></i>Back</button>
+                <SearchFood />
+            </div>
+          
+    </PageLayout>       
+    </div>
   )
 }
 

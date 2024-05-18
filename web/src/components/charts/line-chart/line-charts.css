@@ -1,0 +1,51 @@
+.chart-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 30px;
+    width: 100%;
+    padding: 20px 40px 20px 0;
+}
+
+.chart-info{
+    width: 20px;
+    height: 20px;
+    border-bottom: 5px solid black;
+    margin-left: 10px;
+    margin-top: -3px;
+}
+
+.chart-info-group p{
+    display: flex;
+ 
+}
+
+.chart-info-group{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+       margin: 10px;
+}
+
+.loader {
+    border: 5px solid #f3f3f3; /* Light grey */
+    border-top: 5px solid var(--primary-color); /* Blue */
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+    animation: spin 1.5s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  .loader-container{
+    height: 280px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }

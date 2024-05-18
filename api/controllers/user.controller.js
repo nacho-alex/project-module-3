@@ -132,3 +132,28 @@ module.exports.dayMealDelete = (req, res, next) => {
     })
     .catch(next);
 };
+
+module.exports.mymeals = (req, res, next) => {
+    User.findById(req.user.id)
+      .then((user) => {
+        const myMeals = user.myMeals
+        res.json(myMeals) 
+      })
+}
+
+module.exports.deleteMeal =  (req, res, next) => {
+  const userId = req.user.id; 
+  const mealName = req.params.name;
+
+    
+    User.findOneAndUpdate(
+          { _id: userId },
+          { $pull: { myMeals: { name: mealName } } },
+          { new: true } 
+      )
+      .then((updatedUser) => {
+        res.json(updatedUser);
+      })
+      .catch(next)
+
+};

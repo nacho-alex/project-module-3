@@ -222,7 +222,7 @@
   }
   
   .fade-in {
-    animation: fadeIn 0.2s ease-in-out forwards; /* Animación de opacidad */
+    animation: fadeIn 0.1s ease-in-out forwards; /* Animación de opacidad */
   }
 
 

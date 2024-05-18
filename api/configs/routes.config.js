@@ -25,6 +25,9 @@ router.get("/foods/:id", auth.checkAuth, food.list);
 router.post("/new-meal", auth.checkAuth, user.newMeal);
 router.post("/new-daymeal", auth.checkAuth, user.dayMeal);
 router.get("/del-daymeal", auth.checkAuth, user.dayMealDelete);
+router.get('/mymeals', auth.checkAuth, user.mymeals)
+router.delete('/meals/:name', auth.checkAuth, user.deleteMeal);
+
 
 
 
@@ -47,6 +50,7 @@ router.post("/calendar-entries", auth.checkAuth, calendarEntry.manage);
 router.get("/calendar-entries", auth.checkAuth, calendarEntry.detail);
 router.get("/calendar-data/:id", auth.checkAuth, calendarEntry.data);
 router.post("/entries-edit", auth.checkAuth, calendarEntry.delete);
+router.get("/calendar-data/radar/:id", auth.checkAuth, calendarEntry.dataRadar)
 
 //Error handlers
 

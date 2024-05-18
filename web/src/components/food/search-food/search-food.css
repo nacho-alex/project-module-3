@@ -29,3 +29,30 @@
     margin-bottom: -5px;
     margin-right: 30px;
 }
+
+.filters-food-btns{
+    width: 100%;
+    display: flex;
+}
+
+.filters-food-btns button{
+    background-color: var(--smoked-white-light);
+    border: none;
+    padding: 5px 20px;
+    width: 100%;
+}
+
+.search-div{
+    border-top: 1px solid var(--light-gray-1);
+    padding-top: 20px;
+}
+
+.btn-selected{
+    background-color:var(--primary-color)!important;
+    color: white;
+    font-weight: 600;
+}
+
+.showmeals{
+    margin-top: 40px;
+}

@@ -129,7 +129,7 @@ function Home() {
             const duration = (totalReps * 2) / 3600;
 
             caloriesBurned = userWeight * MET * duration;
-            caloriesBurned = Math.round(caloriesBurned);
+            caloriesBurned = Math.round(caloriesBurned * 3);
         }
 
         let totalKcal = 0;
@@ -237,6 +237,7 @@ function Home() {
 
     const handleSaveMeal = async () => {
         const newMeal = { food: fullEntryState.meals[saveIndex].food, name: mealName };
+        setPage(1)
         try {
             const response = await submitNewMeal(newMeal);
             if (response) {
@@ -304,7 +305,7 @@ function Home() {
                         </div>
                         <div className="objetive-item">
                             <i className="fa-brands fa-font-awesome" style={{ color: '#84BF04' }}></i>
-                            <p>Exercise: <span>{nutritionData.caloriesBurned.toFixed()}</span></p>
+                            <p>Exercise: <span>-{nutritionData.caloriesBurned.toFixed()}</span></p>
                         </div>
                     </div>
                     <p className='plan-p'><strong>Selected Workout:</strong> {planning.title} <Link to={`/workout/${planning._id}`}>
@@ -384,9 +385,16 @@ function Home() {
                             </>
                         )}
                     </div>
-                ))}
-
-              {page === 5 && (
+                ))}  
+                                <button  className='new-daily' type='button' onClick={() => handleSaveDayMeal()}>
+                                        <i className="fa-solid fa-plus" /> New daily Meal
+                                </button>
+ 
+                            
+                       
+            </div>
+            
+            {page === 5 && (
                     <div className='search-overlay fade-in'>
                         <div className="plane-box overlay">
 
@@ -432,17 +440,6 @@ function Home() {
                         </div>
                     </div>
                )}
-                        
-
-                       
-                                <button  className='new-daily' type='button' onClick={() => handleSaveDayMeal()}>
-                                        <i className="fa-solid fa-plus" /> New daily Meal
-                                </button>
- 
-                            
-                       
-            </div>
-
             {page === 3 && (
                 <div className='search-overlay'>
                     <div className="plane-box overlay food-box">

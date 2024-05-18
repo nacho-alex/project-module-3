@@ -1,6 +1,7 @@
 const CalendarEntry = require("../models/calendarEntry.model");
 const dayjs = require("dayjs");
 const User = require("../models/user.model");
+const mongoose = require("mongoose")
 
 module.exports.manage = (req, res, next) => {
     req.body.date = dayjs().format('dddd, D, MMMM, YYYY');
@@ -88,27 +89,35 @@ module.exports.delete = (req, res, next) => {
 
 module.exports.data = (req, res, next) => {
     if (req.query.date) {
-        const formattedDate = req.query.date; 
+        const formattedDate = req.query.date;
         CalendarEntry.find({ "owner": req.user.id, "date": formattedDate })
             .then((entry) => {
                 res.json(entry);
             })
             .catch(next);
     } else if (req.query.exercise) {
-        console.log(req.query.exercise)
         const exerciseId = req.query.exercise;
-        CalendarEntry.find({ "owner": req.user.id, "finishedEx.exercise._id": exerciseId })
-            .then(exData => {
-                const dataFilterEx = exData
-                    .map(entry => {
-                    entry.finishedEx = entry.finishedEx.filter(ex => ex.exercise._id.toString() === exerciseId);
+
+        // Asegúrate de que exerciseId es un ObjectId
+        const exerciseObjectId = new mongoose.Types.ObjectId(exerciseId);
+
+        CalendarEntry.find({
+            owner: new mongoose.Types.ObjectId(req.user.id), 
+            finishedEx: { $elemMatch: { "exercise._id": exerciseObjectId } }
+        })
+        .then(exData => {
+            console.log(exData);
+
+            const dataFilterEx = exData
+                .map(entry => {
+                    entry.finishedEx = entry.finishedEx.filter(ex => ex.exercise._id.equals(exerciseObjectId));
                     return entry;
-                    })
-                    .filter(entry => entry.finishedEx.length > 0);
+                })
+                .filter(entry => entry.finishedEx.length > 0);
                 
-                res.json(dataFilterEx);
-            })
-            .catch(next);
+            res.json(dataFilterEx);
+        })
+        .catch(next);
     } else {
         CalendarEntry.find({ "owner": req.user.id })
             .then(entries => {
@@ -118,3 +127,21 @@ module.exports.data = (req, res, next) => {
             .catch(next);
     }  
 };
+
+module.exports.dataRadar = (req, res, next) => {
+    CalendarEntry.find({ "owner": req.user.id })
+        .then(entries => {  
+            const bodyPartEntries = entries.reduce((acc, entry) => {
+                    entry.finishedEx.forEach(ex => {
+                            ex.exercise.bodyPart.forEach(bodyPart => {
+                                acc.push(bodyPart);
+                            });   
+                    });
+                return acc;
+            }, []);
+
+            console.log("Body Part Entries:", bodyPartEntries);
+            res.json(bodyPartEntries); 
+        })
+        .catch(next);
+}

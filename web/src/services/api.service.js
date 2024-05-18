@@ -168,6 +168,10 @@ export function getCalendarDataChart(ownerId, exerciseId) {
   return http.get(`/calendar-data/${ownerId}?exercise=${exerciseId}`);
 }
 
+export function getCalendarRadarChart(ownerId) {
+  return http.get(`/calendar-data/radar/${ownerId}`)
+}
+
 export function submitNewMeal(data) {
   return http.post('/new-meal', data)
 }
@@ -177,6 +181,14 @@ export function submitNewDayMeal(data) {
 }
 
 export function deleteDayMeal() {
-  console.log('hola')
   return http.get('/del-daymeal')
+}
+
+export function getMyMeals() {
+  return http.get('/mymeals')
+}
+
+export function deleteMeal(name) {
+  
+  return http.delete(`/meals/${name}`)
 }

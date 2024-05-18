@@ -26,16 +26,16 @@ function PageLayout({ children }) {
   }, []);
 
   return (
+    <>
     <div className="pageFather">
       <div className='page-layout'>
           <div>{children}</div>
-          <Footer></Footer>
+       
       </div>
       <div className={`end-of-page-animation ${isEndOfPage ? 'visible' : ''}`}></div>
-    
-    
     </div>
-    
+    <Footer></Footer>
+    </>
   );
 }
 

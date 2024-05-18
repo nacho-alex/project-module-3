@@ -1,18 +1,26 @@
 import { useEffect, useRef, useState } from "react";
-import { getFoods } from "../../../services/api.service";
+import { getFoods, getMyMeals, deleteMeal } from "../../../services/api.service"; // Importa la función deleteMeal
 import FoodCapsule from "../food-capsule/food-capsule";
 import FoodDetail from "../food-detail/food-detail";
-import './search-food.css'
+import './search-food.css';
 
-function SearchFood({onAddFood}) {
+function SearchFood({ onAddFood }) {
     const [foods, setFoods] = useState([]);
     const [filteredFoods, setFilteredFoods] = useState([]);
     const [results, setResults] = useState(15);
     const order = useRef("asc");
     const sortBy = useRef("name");
     const query = useRef("");
-    const [page, setPage] = useState(1)
-    const [actualFood, setActualFood] = useState({qty: 0, unit: 'gr'})
+    const [page, setPage] = useState(1);
+    const [actualFood, setActualFood] = useState({ qty: 0, unit: 'gr' });
+
+    const [expandData, setExpandData] = useState('search');
+    const [myMeals, setMyMeals] = useState([]);
+    const [selectedMealIndex, setSelectedMealIndex] = useState(null); // Estado para el índice de la comida seleccionada
+
+    const handleShowData = (page) => {
+        setExpandData(page);
+    };
 
     useEffect(() => {
         async function fetchFoods() {
@@ -26,6 +34,12 @@ function SearchFood({onAddFood}) {
 
         fetchFoods();
     }, []);
+
+    useEffect(() => {
+        if (expandData === 'mymeals') {
+            handleShowMeals('mymeals');
+        }
+    }, [expandData]);
 
     const searchFood = () => {
         const filteredAndSortedFoods = foods
@@ -42,6 +56,8 @@ function SearchFood({onAddFood}) {
                         return order.current === "asc" ? a.totalFat_g - b.totalFat_g : b.totalFat_g - a.totalFat_g;
                     case "name":
                         return order.current === "asc" ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name);
+                    default:
+                        return 0;
                 }
             });
 
@@ -71,9 +87,9 @@ function SearchFood({onAddFood}) {
     };
 
     const handleAddFood = (data) => {
-        setActualFood(data)
-        setPage(2)
-    }
+        setActualFood(data);
+        setPage(2);
+    };
 
     const handleInputChangeDet = (e) => {
         const { name, value } = e.target;
@@ -81,85 +97,147 @@ function SearchFood({onAddFood}) {
     };
 
     const handleSendFood = () => {
-        onAddFood(actualFood)
+        onAddFood(actualFood);
+    };
+
+    async function handleShowMeals(page) {
+        setExpandData(page);
+        try {
+            const response = await getMyMeals();
+            setMyMeals(response.data);
+        } catch (error) {
+            console.log(error);
+        }
     }
+
+    const handleExpandMeal = (index) => {
+        setSelectedMealIndex(selectedMealIndex === index ? null : index); // Toggle selección
+    };
+
+    const handleDeleteMeal = async (mealName) => {
+        
+        try {
+            await deleteMeal(mealName);
+            setMyMeals(myMeals.filter((meal) => meal.name !== mealName));
+        } catch (error) {
+            console.error('Error deleting meal:', error);
+        }
+    };
 
     return (
         <>
-            {page === 1 && (
-                    <>
-                    <div className="div-filters">
-                    <div className="input-box-flt">
-                    <p className="filter-name">Sort by</p>
-                    <select name="sort" onChange={handleSortAndOrder} >
-                        <option value="name">Name</option>
-                        <option value="calories_kcal">Calories</option>
-                        <option value="carbohydrates_g">Carbohydrates</option>
-                        <option value="protein_g">Protein</option>
-                        <option value="totalFat_g">Total fat</option>           
-                    </select>
-                    </div>
-                    <div className="input-box-flt">
-                    <p className="filter-name">Order</p>
-                    <select name="order" onChange={handleSortAndOrder}>
-                        <option value="asc">Ascending</option>
-                        <option value="des">Descending</option>
-                    </select>
-                    </div>
-                    </div>
+            <div className="filters-food-btns">
+                <button className={`${expandData === 'search' ? 'btn-selected' : ''}`} onClick={() => handleShowData('search')}>Search</button>
+                <button className={`${expandData === 'history' ? 'btn-selected' : ''}`} onClick={() => handleShowData('history')}>History</button>
+                <button className={`${expandData === 'mymeals' ? 'btn-selected' : ''}`} onClick={() => handleShowMeals('mymeals')}>My meals</button>
+            </div>
 
-                    <input  type="text" name="name" onChange={handleInputChange} className="search-bar" placeholder="Search..." />
-
-                    {!filteredFoods.length ?
-                        <p className="write-smt">search food</p>
-                        :
+            {expandData === 'search' && (
+                <div className="search-div">
+                    {page === 1 && (
                         <>
-                            <p className="write-smt">{filteredFoods.length} results</p>
+                            <div className="div-filters">
+                                <div className="input-box-flt">
+                                    <p className="filter-name">Sort by</p>
+                                    <select name="sort" onChange={handleSortAndOrder}>
+                                        <option value="name">Name</option>
+                                        <option value="calories_kcal">Calories</option>
+                                        <option value="carbohydrates_g">Carbohydrates</option>
+                                        <option value="protein_g">Protein</option>
+                                        <option value="totalFat_g">Total fat</option>
+                                    </select>
+                                </div>
+                                <div className="input-box-flt">
+                                    <p className="filter-name">Order</p>
+                                    <select name="order" onChange={handleSortAndOrder}>
+                                        <option value="asc">Ascending</option>
+                                        <option value="des">Descending</option>
+                                    </select>
+                                </div>
+                            </div>
 
-                            {filteredFoods.slice(0, results).map(food =>
-                                 <FoodCapsule key={food._id} food={food} onAddFood={handleAddFood} />
-                                 )}
+                            <input type="text" name="name" onChange={handleInputChange} className="search-bar" placeholder="Search..." />
 
-                            {results < filteredFoods.length && <button onClick={handleResults}>+ Results</button>}
+                            {!filteredFoods.length ?
+                                <p className="write-smt">search food</p>
+                                :
+                                <>
+                                    <p className="write-smt">{filteredFoods.length} results</p>
+
+                                    {filteredFoods.slice(0, results).map(food =>
+                                        <FoodCapsule key={food._id} food={food} onAddFood={handleAddFood} />
+                                    )}
+
+                                    {results < filteredFoods.length && <button onClick={handleResults}>+ Results</button>}
+                                </>
+                            }
                         </>
-                    }
-                </>
-            )}
-            {page === 2 && (
-                <>
-                <div className="detail-div">
-                    <FoodDetail food={actualFood} />
-                    <div className="food-inputs">
-                        <h3>Quantity:</h3>
-                        <div className="inp-box-flt">
-                            <input
-                                onChange={(e) => handleInputChangeDet(e)}
-                                name="qty"
-                                type="number"
-                                value={actualFood.qty || ''}
-                            />
-                        </div>
-                        <div className="inp-box-flt">
-                            <select
-                                onChange={(e) => handleInputChangeDet(e)}
-                                name="unit"
-                                value={actualFood.unit || ''}
-                            >   <option>Unit..</option>
-                                <option value="gr">Gr</option>
-                                <option value="ml">Ml</option>
-                            </select>
-                        </div>
-                        <button className="add-ex-btn button" onClick={handleSendFood}><i className="fa-solid fa-plus"></i> Add</button>
-                    </div>
+                    )}
+                    {page === 2 && (
+                        <>
+                            <div className="detail-div">
+                                <FoodDetail food={actualFood} />
+                                <div className="food-inputs">
+                                    <h3>Quantity:</h3>
+                                    <div className="inp-box-flt">
+                                        <input
+                                            onChange={(e) => handleInputChangeDet(e)}
+                                            name="qty"
+                                            type="number"
+                                            value={actualFood.qty || ''}
+                                        />
+                                    </div>
+                                    <div className="inp-box-flt">
+                                        <select
+                                            onChange={(e) => handleInputChangeDet(e)}
+                                            name="unit"
+                                            value={actualFood.unit || ''}
+                                        >
+                                            <option>Unit..</option>
+                                            <option value="gr">Gr</option>
+                                            <option value="ml">Ml</option>
+                                        </select>
+                                    </div>
+                                    <button className="add-ex-btn button" onClick={handleSendFood}><i className="fa-solid fa-plus"></i> Add</button>
+                                </div>
+                            </div>
+                        </>
+                    )}
                 </div>
-              
-                
-                
-                </>
-
-
             )}
-            
+            {expandData === 'mymeals' && (
+                <div className="showmeals">
+                    {myMeals.map((me, i) => (
+                        <div key={i}>
+                            <div className='meal-capsule' onClick={() => handleExpandMeal(i)}>
+                                <h3>{me.name}</h3>
+                                <button className="delete-btn" onClick={(event) => {
+                                    event.stopPropagation(); // Evita que se expanda el meal al hacer clic en el botón
+                                    handleDeleteMeal(me.name);
+                                }}>
+                                    <i className="fa-solid fa-trash-can red-text button-trash" />
+                                </button>
+                            </div>
+                            {selectedMealIndex === i && (
+                                <div className="expanded-meal">
+                                    {me.food.map((fd, j) => (
+                                        <div key={j} className="meal-capsule">
+                                            <div>
+                                                <i>{fd.emoji}</i>
+                                                <h3>{fd.name}</h3>
+                                            </div>
+                                            <div className="qty-div">
+                                                <p>{fd.qty} {fd.unit ? fd.unit : 'Gr'}</p>
+                                                <p>{Math.round(fd.calories_kcal * fd.qty)} KCAL</p>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
+                    ))}
+                </div>
+            )}
         </>
     );
 }
