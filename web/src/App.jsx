@@ -19,6 +19,7 @@ import Page404 from "./pages/page404/page404";
 import Footer from "./components/UI/footer/footer";
 import PageLayout from "./layouts/PageLayout";
 import CalendarPage from "./pages/calendar/calendar";
+import EditProfile from "./components/profile/edit-profile.jsx";
 
 
 function App() {
@@ -39,8 +40,8 @@ function App() {
           <Route path="/search-food" element={<PrivateRoute><SearchFood/></PrivateRoute>} />
           <Route path="/calendar" element={<PrivateRoute><PageLayout ><CalendarPage/></PageLayout></PrivateRoute>}/> 
           <Route path="/profile" element={<PrivateRoute><PageLayout ><Profile/></PageLayout></PrivateRoute>}/>
-          {/* <Route path="/recipe/:id" element={<PrivateRoute><PageLayout ><RecipeDetail/></PageLayout></PrivateRoute>}/> */}
-
+          <Route path="/edit-profile" element={<PrivateRoute><PageLayout ><EditProfile/></PageLayout></PrivateRoute>}/>
+          
           <Route path="/*" element={<PrivateRoute><PageLayout ><Page404/></PageLayout></PrivateRoute>} />
         </Routes>
     </AlertProvider>

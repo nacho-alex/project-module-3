@@ -40,6 +40,11 @@ export function createUser(data) {
           throw error; 
         }
       });
+}
+
+  export function updateUser(data) {
+    return http.patch("/profile", data)
+      .catch(error => console.log(error));
   }
 
 export function login(data) {
@@ -60,6 +65,12 @@ export function getProfile() {
 
 export function logout() {
   localStorage.removeItem("token");
+}
+
+export function deleteUser(id) {
+  return http.delete(`/profile/${id}`)
+      .then(() => localStorage.removeItem("token"))
+      .catch(err => console.log(err))
 }
 
 export function createWorkout(data) {
@@ -164,12 +175,12 @@ export function getCalendarEntry(ownerId, date) {
   }
 }
 
-export function getCalendarDataChart(ownerId, exerciseId) {
+export function getCalendarLineChart(ownerId, exerciseId) {
   return http.get(`/calendar-data/${ownerId}?exercise=${exerciseId}`);
 }
 
-export function getCalendarRadarChart(ownerId) {
-  return http.get(`/calendar-data/radar/${ownerId}`)
+export function getCalendarDataChart(ownerId, chartInfo) {
+  return http.get(`/calendar-data/chart/${ownerId}?info=${chartInfo}`);
 }
 
 export function submitNewMeal(data) {
