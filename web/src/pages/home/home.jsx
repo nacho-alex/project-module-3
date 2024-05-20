@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import AuthContext from '../../contexts/auth.context';
-import { getPlanning, getEntry, updateEntry, deleteEntry, submitNewMeal, submitNewDayMeal, deleteDayMeal } from '../../services/api.service'; // Asegúrate de importar submitNewMeal
+import { getPlanning, getEntry, updateEntry, deleteEntry, submitNewMeal, submitNewDayMeal, deleteDayMeal } from '../../services/api.service';
 import HomeExCapsule from '../../components/home/HomeExCapsule';
 import dayjs from 'dayjs';
 import WeekDay from '../../components/workouts/WeekDay/WeekDay';
@@ -33,7 +33,7 @@ function Home() {
     const [actualFood, setActualFood] = useState({});
     const [fullEntryState, setFullEntry] = useState(initialValue);
     const [saveIndex, setSaveIndex] = useState(null);
-    const [mealName, setMealName] = useState(''); // Estado para el nombre de la comida
+    const [mealName, setMealName] = useState(''); 
     const [nutritionData, setNutritionData] = useState({
         goalCalories: 0,
         totalKcal: 0,
@@ -44,10 +44,17 @@ function Home() {
     });
 
     const imgArr = [img1, img2, img3, img4, img7];
-    const circumference = 2 * Math.PI * 100;
-    const progressLength = Math.min(((nutritionData.totalKcal - nutritionData.caloriesBurned) / nutritionData.goalCalories) * circumference, circumference);
-    const overGoal = (nutritionData.totalKcal - nutritionData.caloriesBurned) > nutritionData.goalCalories;
     
+    const circumference = 2 * Math.PI * 90; // Assuming a radius of 90 for your circle
+    const defaultProgressLength = 0; // Default value for progressLength if it is undefined or not a number
+    
+    const isValidNumber = (value) => typeof value === 'number' && !isNaN(value);
+    const progressLength = Math.min(((nutritionData.totalKcal - nutritionData.caloriesBurned) / nutritionData.goalCalories) * circumference, circumference);
+    const calculatedProgressLength = isValidNumber(progressLength) ? progressLength : defaultProgressLength;
+    const validCircumference = isValidNumber(circumference) ? circumference : 0;
+    const strokeDashoffset = validCircumference - calculatedProgressLength;
+    const overGoal = (nutritionData.totalKcal - nutritionData.caloriesBurned) > nutritionData.goalCalories;
+
     const handleAddToEntry = (data) => {
         const formattedData = { finishedEx: data };
         handleSubmit(formattedData);
@@ -298,11 +305,11 @@ function Home() {
                         
                         <svg className="circle" width="200" height="200">
                             <circle className="background" cx="100" cy="100" r="90"></circle>
-                            <circle  className="progress" cx="100" cy="100" r="90" style={{
-                            strokeDasharray: `${circumference} ${circumference}`,
-                            strokeDashoffset: circumference - progressLength,
-                            stroke: overGoal ? 'red' : ''
-                        }}></circle>
+                            <circle className="progress" cx="100" cy="100" r="90" style={{
+                                strokeDasharray: `${validCircumference} ${validCircumference}`,
+                                strokeDashoffset: isValidNumber(strokeDashoffset) ? strokeDashoffset : 0,
+                                stroke: overGoal ? 'red' : ''
+                            }}></circle>
                         </svg>
                     </div>
                 </div>
@@ -338,8 +345,8 @@ function Home() {
                     <div className='nutrition-bar-div'>
                         <strong>Proteins:</strong>
                         <span>{Math.round(nutritionData.totalProt)}</span>
-                        <div class="loading-bar">
-                        <div class="loading-fill" style={{
+                        <div className="loading-bar">
+                        <div className="loading-fill" style={{
                             width: `${nutritionData.totalProt / (context.user.weight * 2 / 100)}%`,
                             backgroundColor: "#F2A950"
                         }}></div>
@@ -349,8 +356,8 @@ function Home() {
                     <div className='nutrition-bar-div'>
                         <strong>Carbs:</strong>
                         <span>{Math.round(nutritionData.totalCarbs)}</span>
-                        <div class="loading-bar">
-                        <div class="loading-fill" style={{
+                        <div className="loading-bar">
+                        <div className="loading-fill" style={{
                         width: `${(nutritionData.totalCarbs / (context.user.goal === 'gain' ? context.user.weight * 5 : context.user.weight * 3)) * 100}%`,
                         backgroundColor: "#4AA2D9"
                         }}></div>
@@ -360,8 +367,8 @@ function Home() {
                     <div className='nutrition-bar-div'>
                         <strong>Fats:</strong>
                         <span>{Math.round(nutritionData.totalFats)}</span>
-                        <div class="loading-bar">
-                        <div class="loading-fill" style={{
+                        <div className="loading-bar">
+                        <div className="loading-fill" style={{
                         width: `${(nutritionData.totalFats / (context.user.weight * 0.75)) * 100}%`,
                         backgroundColor: "#84BF04"
                         }}></div>

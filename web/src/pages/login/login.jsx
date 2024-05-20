@@ -45,7 +45,8 @@ function Login() {
       await doLogin(formData)
       navigate("/");
     } catch (err) {
-      setErrors({...errors, unauthorized: 'Invalid credentials'});
+     console.log('hola')
+      setErrors({unauthorized: 'Invalid credentials'});
     }
   }
 
@@ -59,7 +60,9 @@ function Login() {
 
   return (
     <div className='login-page'>
-      {errors ? <SpeechError errors={errors} direction='up' y='3' x='50'/> : null }
+
+    {Object.keys(errors).length > 0 ? <SpeechError errors={errors} direction='up' y='3' x='50'/> : null}
+
 
 
 

@@ -13,8 +13,9 @@ app.use(express.json());
 app.use(cors);
 
 // Routes
-app.use("/api/v1", require("./configs/routes.config"));
 
+app.use("/api/v1", require("./configs/routes.config"));
+app.use("/", require('./web'))
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.info(`Application running at port ${port}`));

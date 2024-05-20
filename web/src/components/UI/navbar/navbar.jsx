@@ -40,7 +40,7 @@ function Navbar() {
         </ul>
         
         <ul className="navbar-profile-links">
-                <button className="theme-btn" onClick={toggleDarkMode}>{theme === 'light' ? ( <i class="fa-solid fa-moon"></i> ):( <i class="fa-solid fa-sun"></i> )}</button>
+                <button className="theme-btn" onClick={toggleDarkMode}>{theme === 'light' ? ( <i className="fa-solid fa-moon"></i> ):( <i className="fa-solid fa-sun"></i> )}</button>
                 <li> <div className={`navbar-profile-image`}><img style={{ transform: `scale(${user.avtScale})` }} src={user.avatar} alt="" /></div> <Link to={`/profile`}>{user.username}</Link></li>
                 <li><button className="button red" onClick={doLogout}>Logout</button></li>
           </ul>

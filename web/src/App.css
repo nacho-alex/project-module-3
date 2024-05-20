@@ -59,19 +59,14 @@ html{
 
 }
 
-
-strong, span, i{
-    color: var(--dark-gray-1);
-    background: none;
+strong, span, p {
+    color: var(--medium-gray-2);
 }
 
 a {
     color:var(--dark-gray-3) ;
 }
 
-i {
-  
-}
 
 body {
 }
@@ -80,14 +75,13 @@ body {
 
 p {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: var(--full-black-1);
 }
 
 .speech {
     position: fixed;
-    background: var(--primary-red);
+    background:  rgba(255, 54, 54, 0.79);
     box-shadow: 20px 20px 5px -6px rgba(0,0,0,0.24);
-    color: var(--text-color1);
+    color: var(--full-white-1);
     padding: 15px 50px;
     z-index: 998;
     top: 20px;
@@ -96,7 +90,7 @@ p {
     backdrop-filter: blur(50px);
 }
 .speech-up:before {
-    border: 20px solid var(--primary-red);
+    border: 20px solid rgba(255, 54, 54, 0.79);
     content: '';
     border-left-color: transparent;
     border-bottom-color: transparent;
@@ -115,7 +109,7 @@ p {
 .speech-left:before {
     border: 25px solid transparent;
     content: '';
-    border-right-color: var(--primary-red);
+    border-right-color: rgba(255, 54, 54, 0.79);
     position: absolute;
     bottom: calc(50% - 25px); 
     left: -50px;
@@ -127,10 +121,10 @@ p {
     position: absolute;
     top: -40px;
     left: calc(50% - 25px);
-    border: 20px solid var(--primary-red);
+    border: 20px solid rgba(255, 54, 54, 0.79);
     content: '';
     border-left-color: transparent;
-    border-bottom-color:var(--primary-red);
+    border-bottom-color:rgba(255, 54, 54, 0.79);
     border-right-color: transparent;
     border-top-color: transparent;
     z-index: 999;
@@ -142,11 +136,11 @@ p {
     bottom: calc(50% - 25px);
     right: -48px;
     border: 25px solid transparent;
-    border-left-color: var(--primary-red);
+    border-left-color: rgba(255, 54, 54, 0.79);
     border-bottom-color:transparent;
     border-right-color: transparent;
     border-top-color: transparent;
-    border-left-color:var(--primary-red);
+    border-left-color:rgba(255, 54, 54, 0.79);
     z-index: 999;
     
 }
@@ -176,7 +170,7 @@ p {
 }
 
 .red{
-    background-color:var(--primary-red);
+    background-color:rgba(255, 54, 54, 0.79);
 }
 
 .button:hover{

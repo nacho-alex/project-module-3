@@ -12,13 +12,16 @@ import img3 from '../../assets/imgSU3.jpg';
 import img4 from '../../assets/imgSU4.jpg';
 import img7 from '../../assets/imgSU7.jpg';
 
+import img404 from '../../assets/exe404.png'
+
 function CalendarPage() {
     const context = useContext(AuthContext);
     const [value, setValue] = useState(new Date());
     const [entry, setEntry] = useState([]);
     const [entryDates, setEntryDates] = useState([]);
     const [randomNum, setRandom] = useState(0);
-    const [planning, setPlanning] = useState({});
+    const [dayMeals, setDayMeals] = useState(context.user.dayMeals)
+
     const [nutritionData, setNutritionData] = useState({
         goalCalories: 0,
         totalKcal: 0,
@@ -27,21 +30,27 @@ function CalendarPage() {
         totalFats: 0,
         caloriesBurned: 0
     });
-    const circumference = 2 * Math.PI * 100;
+    
+    const circumference = 2 * Math.PI * 90; // Assuming a radius of 90 for your circle
+    const defaultProgressLength = 0; // Default value for progressLength if it is undefined or not a number
+    
+    const isValidNumber = (value) => typeof value === 'number' && !isNaN(value);
     const progressLength = Math.min(((nutritionData.totalKcal - nutritionData.caloriesBurned) / nutritionData.goalCalories) * circumference, circumference);
+    const calculatedProgressLength = isValidNumber(progressLength) ? progressLength : defaultProgressLength;
+    const validCircumference = isValidNumber(circumference) ? circumference : 0;
+    const strokeDashoffset = validCircumference - calculatedProgressLength;
     const overGoal = (nutritionData.totalKcal - nutritionData.caloriesBurned) > nutritionData.goalCalories;
     const imgArr = [img1, img2, img3, img4, img7];
 
 
     const userAgeMilliseconds = Date.now() - new Date(context.user.birthDate).getTime();
     const millisecondsInYear = 1000 * 60 * 60 * 24 * 365.25;
-    const [dayMeals, setDayMeals] = useState(context.user.dayMeals)
     const userAge = Math.floor(userAgeMilliseconds / millisecondsInYear);
 
 
     useEffect(() => {
         setRandom(Math.floor(Math.random() * 5));
-    }, {})
+    }, [])
 
     useEffect(() => {
         const goalCalories = calculateCaloriesGoal();
@@ -151,7 +160,7 @@ function CalendarPage() {
         if (view === 'month') {
             const formattedDate = dayjs(date).format('YYYY-MM-DD');
             if (entryDates.includes(formattedDate)) {
-                return <i class="fa-solid fa-circle"></i>;
+                return <i className="fa-solid fa-circle"></i>;
             }
         }
         return null;
@@ -184,11 +193,11 @@ function CalendarPage() {
                         
                         <svg className="circle" width="200" height="200">
                             <circle className="background" cx="100" cy="100" r="90"></circle>
-                            <circle  className="progress" cx="100" cy="100" r="90" style={{
-                            strokeDasharray: `${circumference} ${circumference}`,
-                            strokeDashoffset: circumference - progressLength,
-                            stroke: overGoal ? 'red' : ''
-                        }}></circle>
+                            <circle className="progress" cx="100" cy="100" r="90" style={{
+                                strokeDasharray: `${validCircumference} ${validCircumference}`,
+                                strokeDashoffset: isValidNumber(strokeDashoffset) ? strokeDashoffset : 0,
+                                stroke: overGoal ? 'red' : ''
+                            }}></circle>
                         </svg>
                     </div>
                 </div>
@@ -209,8 +218,6 @@ function CalendarPage() {
                             <p>Exercise: <span>-{nutritionData.caloriesBurned.toFixed()}</span></p>
                         </div>
                     </div>
-                    <p className='plan-p'><strong>Selected Workout:</strong> {planning.title} <Link to={`/workout/${planning._id}`}>
-                        <i className="fa-solid fa-eye"></i></Link></p>
                 </div>
             </div>
 
@@ -218,8 +225,8 @@ function CalendarPage() {
                     <div className='nutrition-bar-div'>
                         <strong>Proteins:</strong>
                         <span>{Math.round(nutritionData.totalProt)}</span>
-                        <div class="loading-bar">
-                        <div class="loading-fill" style={{
+                        <div className="loading-bar">
+                        <div className="loading-fill" style={{
                             width: `${nutritionData.totalProt / (context.user.weight * 2 / 100)}%`,
                             backgroundColor: "#F2A950"
                         }}></div>
@@ -229,8 +236,8 @@ function CalendarPage() {
                     <div className='nutrition-bar-div'>
                         <strong>Carbs:</strong>
                         <span>{Math.round(nutritionData.totalCarbs)}</span>
-                        <div class="loading-bar">
-                        <div class="loading-fill" style={{
+                        <div className="loading-bar">
+                        <div className="loading-fill" style={{
                         width: `${(nutritionData.totalCarbs / (context.user.goal === 'gain' ? context.user.weight * 5 : context.user.weight * 3)) * 100}%`,
                         backgroundColor: "#4AA2D9"
                         }}></div>
@@ -240,8 +247,8 @@ function CalendarPage() {
                     <div className='nutrition-bar-div'>
                         <strong>Fats:</strong>
                         <span>{Math.round(nutritionData.totalFats)}</span>
-                        <div class="loading-bar">
-                        <div class="loading-fill" style={{
+                        <div className="loading-bar">
+                        <div className="loading-fill" style={{
                         width: `${(nutritionData.totalFats / (context.user.weight * 0.75)) * 100}%`,
                         backgroundColor: "#84BF04"
                         }}></div>

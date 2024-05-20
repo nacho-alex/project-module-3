@@ -102,7 +102,7 @@ function HomeExCapsule(props) {
                 {!completed ? (
                     <div>
                        
-                         <button type="button" value={showChart} onClick={toggleShowChart}><i class="fa-solid fa-chart-simple"></i></button>
+                         <button type="button" value={showChart} onClick={toggleShowChart}><i className="fa-solid fa-chart-simple"></i></button>
                         <button type="button" onClick={() => toggleExerciseExpansion(exercise._id)}>
                             {expandedExercises.includes(exercise._id) ? <i className="fa-solid fa-angle-up"></i> : ''} <i className="fa-solid fa-eye"></i>
                         </button>
@@ -111,7 +111,7 @@ function HomeExCapsule(props) {
                 ) : (
                     
                     <div className='completed-button-div'>
-                        <button type="button" value={showChart} onClick={toggleShowChart}><i class="fa-solid fa-chart-simple"></i></button>
+                        <button type="button" value={showChart} onClick={toggleShowChart}><i className="fa-solid fa-chart-simple"></i></button>
                        
                     {onDeleteEntry && (
                         <button type="button" onClick={handleDelete}>

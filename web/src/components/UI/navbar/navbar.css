@@ -48,6 +48,10 @@
     align-items: center;
 }
 
+.link i{
+    color: var(--medium-gray-3);
+}
+
 .active i{
     color:var(--primary-color);
 }
@@ -154,6 +158,10 @@
     width: 35px;
     line-height: 0;
     margin-right: 20px;
+}
+
+.theme-btn i{
+    color: var(--light-gray-1);
 }
 
 .theme-btn i:hover{

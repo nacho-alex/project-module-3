@@ -13,7 +13,7 @@ function ChartLine({ exerciseId }) {
         const fetchCalendarData = async (exerciseId) => {
             setLoading(true); 
             try {
-                const entryData = await getCalendarDataChart(context.user.id, exerciseId);
+                const entryData = await getCalendarLineChart(context.user.id, exerciseId);
                 const dataMap = entryData.data.map(element => {
                     return {
                         date: element.date,
@@ -37,7 +37,7 @@ function ChartLine({ exerciseId }) {
             {loading ? (
             <div className="loader-container">
                 <div style={{ width: '100%' }}>
-                    <div class="loader"></div>
+                    <div className="loader"></div>
                 </div>
             </div>
             ) : exData.length > 1 ? (

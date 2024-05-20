@@ -306,7 +306,7 @@
 }
 
 .goal-button:hover{
-    background-color: var(--primary-darker);
+    background-color: var(--primary-color);
 }
 
 .goal-buttons{
