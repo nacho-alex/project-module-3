@@ -214,9 +214,55 @@ function CalendarPage() {
                 </div>
             </div>
 
+            <div className='plane-box'>
+                    <div className='nutrition-bar-div'>
+                        <strong>Proteins:</strong>
+                        <span>{Math.round(nutritionData.totalProt)}</span>
+                        <div class="loading-bar">
+                        <div class="loading-fill" style={{
+                            width: `${nutritionData.totalProt / (context.user.weight * 2 / 100)}%`,
+                            backgroundColor: "#F2A950"
+                        }}></div>
+                        </div>
+                        <span>{context.user.weight * 2}</span>
+                    </div>
+                    <div className='nutrition-bar-div'>
+                        <strong>Carbs:</strong>
+                        <span>{Math.round(nutritionData.totalCarbs)}</span>
+                        <div class="loading-bar">
+                        <div class="loading-fill" style={{
+                        width: `${(nutritionData.totalCarbs / (context.user.goal === 'gain' ? context.user.weight * 5 : context.user.weight * 3)) * 100}%`,
+                        backgroundColor: "#4AA2D9"
+                        }}></div>
+                        </div>
+                        <span>{context.user.goal === 'gain' ? (context.user.weight * 5): (context.user.weight * 3)}</span>
+                    </div>
+                    <div className='nutrition-bar-div'>
+                        <strong>Fats:</strong>
+                        <span>{Math.round(nutritionData.totalFats)}</span>
+                        <div class="loading-bar">
+                        <div class="loading-fill" style={{
+                        width: `${(nutritionData.totalFats / (context.user.weight * 0.75)) * 100}%`,
+                        backgroundColor: "#84BF04"
+                        }}></div>
+                        </div>
+                        <span>{Math.round(context.user.weight * 0.75)}</span>
+                    </div>
+            
+                </div>
+
                     
             <div className='plane-box training-container'>
                 <h1 className='today-h1'>Training</h1>
+
+                {entry.finishedEx?.length === 0 && (
+                    <div className="notfound-div">
+                        <h3>No exercises for this day</h3>
+                        <img src={img404}></img>
+                    </div>
+                    
+                )}
+                
                 {entry.finishedEx?.map((finishedEx, finExIndex) => (
                     <div key={finExIndex}>
                         <HomeExCapsule completed={true} key={finExIndex} exercise={finishedEx.exercise} />

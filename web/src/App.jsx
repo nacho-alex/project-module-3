@@ -41,7 +41,7 @@ function App() {
           <Route path="/profile" element={<PrivateRoute><PageLayout ><Profile/></PageLayout></PrivateRoute>}/>
           {/* <Route path="/recipe/:id" element={<PrivateRoute><PageLayout ><RecipeDetail/></PageLayout></PrivateRoute>}/> */}
 
-          <Route path="/*" element={<Page404/>} />
+          <Route path="/*" element={<PrivateRoute><PageLayout ><Page404/></PageLayout></PrivateRoute>} />
         </Routes>
     </AlertProvider>
 

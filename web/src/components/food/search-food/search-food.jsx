@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from "react";
-import { getFoods, getMyMeals, deleteMeal } from "../../../services/api.service"; // Importa la función deleteMeal
+import { getFoods, getMyMeals, deleteMeal, getHistory} from "../../../services/api.service"; // Importa la función deleteMeal
 import FoodCapsule from "../food-capsule/food-capsule";
 import FoodDetail from "../food-detail/food-detail";
 import './search-food.css';
+import img404 from '../../../assets/druit404.png'
 
 function SearchFood({ onAddFood }) {
     const [foods, setFoods] = useState([]);
@@ -17,9 +18,25 @@ function SearchFood({ onAddFood }) {
     const [expandData, setExpandData] = useState('search');
     const [myMeals, setMyMeals] = useState([]);
     const [selectedMealIndex, setSelectedMealIndex] = useState(null); // Estado para el índice de la comida seleccionada
+    const [history, setHistory] = useState([])
 
     const handleShowData = (page) => {
         setExpandData(page);
+
+        if (page === 'history') {
+            HandleGetHistory()
+        }
+    };
+
+    const HandleGetHistory = async () => {
+        try {
+            const response = await getHistory()
+            setHistory(response.data)
+            console.log(response.data)
+        } catch (error) {
+            console.error('Error fetching history:', error);
+            throw error; 
+        }
     };
 
     useEffect(() => {
@@ -158,19 +175,23 @@ function SearchFood({ onAddFood }) {
 
                             <input type="text" name="name" onChange={handleInputChange} className="search-bar" placeholder="Search..." />
 
-                            {!filteredFoods.length ?
-                                <p className="write-smt">search food</p>
-                                :
-                                <>
-                                    <p className="write-smt">{filteredFoods.length} results</p>
+                            {filteredFoods.length === 0 ? (
+                            <div className="notfound-div">
+                                <h4>Sorry, we cant find that food</h4>
+                                <img src={img404} alt="Not Found" />
+                            </div>
+                            ) : (
+                            <>
+                                <p className="write-smt">{filteredFoods.length} results</p>
+                                {filteredFoods.slice(0, results).map(food => (
+                                <FoodCapsule key={food._id} food={food} onAddFood={handleAddFood} />
+                                ))}
+                                {results < filteredFoods.length && (
+                                <button onClick={handleResults}>+ Results</button>
+                                )}
+                            </>
+                            )}
 
-                                    {filteredFoods.slice(0, results).map(food =>
-                                        <FoodCapsule key={food._id} food={food} onAddFood={handleAddFood} />
-                                    )}
-
-                                    {results < filteredFoods.length && <button onClick={handleResults}>+ Results</button>}
-                                </>
-                            }
                         </>
                     )}
                     {page === 2 && (
@@ -237,6 +258,17 @@ function SearchFood({ onAddFood }) {
                         </div>
                     ))}
                 </div>
+            )}
+            {expandData === 'history' && (
+                <>
+                {history.length !== 0 && (
+                    <>
+                     {history.map(food => (
+                        <FoodCapsule key={food._id} food={food} onAddFood={handleAddFood} />
+                        ))}
+                    </>
+                )}
+                </>
             )}
         </>
     );

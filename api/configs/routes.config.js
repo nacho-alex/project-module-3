@@ -15,7 +15,7 @@ router.post("/users", user.create);
 
 router.get("/profile", auth.checkAuth, user.profile);
 router.patch("/profile", auth.checkAuth, user.update);
-router.delete("profile", auth.checkAuth, user.delete);
+router.delete("/profile/:id", auth.checkAuth, user.delete);
 
 router.get("/exercises", auth.checkAuth, exercise.list);
 router.get("/exercises/:id", auth.checkAuth, exercise.detail);
@@ -27,9 +27,7 @@ router.post("/new-daymeal", auth.checkAuth, user.dayMeal);
 router.get("/del-daymeal", auth.checkAuth, user.dayMealDelete);
 router.get('/mymeals', auth.checkAuth, user.mymeals)
 router.delete('/meals/:name', auth.checkAuth, user.deleteMeal);
-
-
-
+router.get("/foods-history", auth.checkAuth, calendarEntry.foodHistory)
 
 router.post("/recipes", auth.checkAuth, recipe.create);
 router.get("/recipes", auth.checkAuth, recipe.list);
@@ -50,7 +48,7 @@ router.post("/calendar-entries", auth.checkAuth, calendarEntry.manage);
 router.get("/calendar-entries", auth.checkAuth, calendarEntry.detail);
 router.get("/calendar-data/:id", auth.checkAuth, calendarEntry.data);
 router.post("/entries-edit", auth.checkAuth, calendarEntry.delete);
-router.get("/calendar-data/radar/:id", auth.checkAuth, calendarEntry.dataRadar)
+router.get("/calendar-data/chart/:id", auth.checkAuth, calendarEntry.dataChart);
 
 //Error handlers
 

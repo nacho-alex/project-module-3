@@ -2,6 +2,8 @@ const CalendarEntry = require("../models/calendarEntry.model");
 const dayjs = require("dayjs");
 const User = require("../models/user.model");
 const mongoose = require("mongoose")
+const moment = require('moment');
+
 
 module.exports.manage = (req, res, next) => {
     req.body.date = dayjs().format('dddd, D, MMMM, YYYY');
@@ -98,7 +100,7 @@ module.exports.data = (req, res, next) => {
     } else if (req.query.exercise) {
         const exerciseId = req.query.exercise;
 
-        // Asegúrate de que exerciseId es un ObjectId
+        
         const exerciseObjectId = new mongoose.Types.ObjectId(exerciseId);
 
         CalendarEntry.find({
@@ -106,7 +108,6 @@ module.exports.data = (req, res, next) => {
             finishedEx: { $elemMatch: { "exercise._id": exerciseObjectId } }
         })
         .then(exData => {
-            console.log(exData);
 
             const dataFilterEx = exData
                 .map(entry => {
@@ -128,20 +129,95 @@ module.exports.data = (req, res, next) => {
     }  
 };
 
-module.exports.dataRadar = (req, res, next) => {
-    CalendarEntry.find({ "owner": req.user.id })
-        .then(entries => {  
-            const bodyPartEntries = entries.reduce((acc, entry) => {
-                    entry.finishedEx.forEach(ex => {
-                            ex.exercise.bodyPart.forEach(bodyPart => {
-                                acc.push(bodyPart);
-                            });   
-                    });
-                return acc;
-            }, []);
+module.exports.dataChart = (req, res, next) => {
+    if (req.query.info === "body") {
+        CalendarEntry.find({ "owner": req.user.id })
+            .then(entries => {  
+                const bodyPartEntries = entries.reduce((acc, entry) => {
+                        entry.finishedEx.forEach(ex => {
+                                ex.exercise.bodyPart.forEach(bodyPart => {
+                                    acc.push(bodyPart);
+                                });   
+                        });
+                    return acc;
+                }, []);
 
-            console.log("Body Part Entries:", bodyPartEntries);
-            res.json(bodyPartEntries); 
+                res.json(bodyPartEntries); 
+            })
+            .catch(next);
+    } else if (req.query.info === "muscle") {
+        CalendarEntry.find({ "owner": req.user.id })
+        .then(entries => {
+            const muscleEntries = entries.reduce((acc, entry) => {
+                entry.finishedEx.forEach(ex => {
+                acc.push(ex.exercise.target);
+                        
+            });
+                
+            return acc;
+            }, []);
+    
+            res.json(muscleEntries);
         })
         .catch(next);
+    } else if (req.query.info === "macro") {
+        CalendarEntry.find({"owner": req.user.id})
+            .then(entries => {
+                const macroEntries = entries.reduce((acc, entry) => {
+                    entry.meals.forEach(meal => {
+                        meal.food.forEach(foodItem => {
+                            acc.push(foodItem);
+                        });
+                    });
+                return acc;
+                }, []);
+                
+                const newMacroEntries = macroEntries.map(entry => {
+                    const { _id, name, emoji, __v, qty, unit, ...rest } = entry;
+                    return rest;
+                });
+
+                const totalMacros = newMacroEntries.reduce((acc, obj) => {
+                    for (let key in obj) {
+                      if (acc[key] === undefined) {
+                        acc[key] = 0;
+                      }
+                      acc[key] += obj[key];
+                    }
+                    return acc;
+                  }, {});
+                  
+                  res.json(totalMacros);
+
+            })
+            .catch(next);
+    }
 }
+
+
+module.exports.foodHistory = (req, res, next) => {
+    CalendarEntry.find(
+        { owner: req.user.id },
+        { "meals.food": 1, date: 1 } 
+    )
+    .then((foods) => {
+        foods.sort((a, b) => {
+            const dateA = moment(a.date, "dddd, DD, MMM, YYYY").toDate();
+            const dateB = moment(b.date, "dddd, DD, MMM, YYYY").toDate();
+            return dateA + dateB; 
+        });
+
+        const foodItems = foods.reduce((acc, entry) => {
+            entry.meals.forEach(meal => {
+                acc.push(...meal.food);
+            });
+            return acc;
+        }, []);
+
+        const uniqueFoodItems = Array.from(new Set(foodItems.map(item => JSON.stringify(item))))
+            .map(item => JSON.parse(item));
+
+        res.json(uniqueFoodItems.slice(0, 20));
+    })
+    .catch(next);
+};

@@ -11,6 +11,8 @@ import FiresInput from "../../../components/workouts/FiresInput/FiresInput";
 import SpeechError from "../../../components/UI/speechError";
 import exampleImg from '../../../assets/gain.png'
 import jumboImg from '../../../assets/imgSU2.jpg'
+import img404 from '../../../assets/exe404.png'
+
 
 
 function CreateWorkout() {
@@ -210,6 +212,13 @@ function CreateWorkout() {
                                         />
                                 )}
                         </div>
+
+                        {formData.exercises?.filter(ex => ex.day === actualDay).length === 0 &&  (
+                            <div className="notfound-div">
+                            <h3>No exercises are planned for this day</h3>
+                            <img src={img404} alt="Not Found" />
+                            </div>
+                        )}
 
                             
                         <div className="edit-wo-btns">

@@ -192,3 +192,7 @@ export function deleteMeal(name) {
   
   return http.delete(`/meals/${name}`)
 }
+
+export function getHistory() {
+  return http.get("/foods-history")
+}

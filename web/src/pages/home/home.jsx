@@ -14,6 +14,8 @@ import SearchExercises from '../../components/Exercises/Search/SearchExercises';
 import SearchFood from '../../components/food/search-food/search-food';
 import './home.css';
 
+import img404 from '../../assets/exe404.png'
+
 function Home() {
     const context = useContext(AuthContext);
     const [randomNum, setRandom] = useState(0);
@@ -205,10 +207,11 @@ function Home() {
         const newData = { ...data, day: actualDayView };
         setPlanning(prevPlanning => ({
             ...prevPlanning,
-            exercises: [...prevPlanning.exercises, newData]
+            exercises: [...(prevPlanning.exercises || []), newData]
         }));
         setPage(1);
     };
+    
 
     const handlePage = (data) => {
         setPage(data);
@@ -320,10 +323,53 @@ function Home() {
                             <p>Exercise: <span>-{nutritionData.caloriesBurned.toFixed()}</span></p>
                         </div>
                     </div>
-                    <p className='plan-p'><strong>Selected Workout:</strong> {planning.title} <Link to={`/workout/${planning._id}`}>
+
+                    {planning.title ? (
+                        <p className='plan-p'><strong>Selected Workout:</strong> {planning.title} <Link  to={`/workout/${planning._id}`}>
                         <i className="fa-solid fa-eye"></i></Link></p>
+                    ):(
+                        <p className='plan-p'><strong>You have not selected a workout yet</strong> <Link className='home-link' to={`/list-workout`}>View all
+                        <i className="fa-solid fa-eye"></i></Link></p>
+                    )}
+                    
                 </div>
             </div>
+            <div className='plane-box'>
+                    <div className='nutrition-bar-div'>
+                        <strong>Proteins:</strong>
+                        <span>{Math.round(nutritionData.totalProt)}</span>
+                        <div class="loading-bar">
+                        <div class="loading-fill" style={{
+                            width: `${nutritionData.totalProt / (context.user.weight * 2 / 100)}%`,
+                            backgroundColor: "#F2A950"
+                        }}></div>
+                        </div>
+                        <span>{context.user.weight * 2}</span>
+                    </div>
+                    <div className='nutrition-bar-div'>
+                        <strong>Carbs:</strong>
+                        <span>{Math.round(nutritionData.totalCarbs)}</span>
+                        <div class="loading-bar">
+                        <div class="loading-fill" style={{
+                        width: `${(nutritionData.totalCarbs / (context.user.goal === 'gain' ? context.user.weight * 5 : context.user.weight * 3)) * 100}%`,
+                        backgroundColor: "#4AA2D9"
+                        }}></div>
+                        </div>
+                        <span>{context.user.goal === 'gain' ? (context.user.weight * 5): (context.user.weight * 3)}</span>
+                    </div>
+                    <div className='nutrition-bar-div'>
+                        <strong>Fats:</strong>
+                        <span>{Math.round(nutritionData.totalFats)}</span>
+                        <div class="loading-bar">
+                        <div class="loading-fill" style={{
+                        width: `${(nutritionData.totalFats / (context.user.weight * 0.75)) * 100}%`,
+                        backgroundColor: "#84BF04"
+                        }}></div>
+                        </div>
+                        <span>{Math.round(context.user.weight * 0.75)}</span>
+                    </div>
+            
+                </div>
 
             <div className='plane-box training-container'>
                 <h1 className='today-h1'>Today training</h1>
@@ -333,7 +379,9 @@ function Home() {
                 {fullEntryState.finishedEx?.map((ex, index) => (
                     <HomeExCapsule onDeleteEntry={(data, event) => handleDeleteEntry(data, 'exercise', event)} completed={true} key={index} exercise={ex.exercise} onSendEx={handleAddToEntry} />
                 ))}
-
+                {planning.exercises?.length >= 0 && (
+                
+                <>
                 {planning.exercises
                     ?.filter(ex =>
                         ex.day === actualDayView &&
@@ -342,6 +390,17 @@ function Home() {
                     .map((ex, index) => (
                         <HomeExCapsule key={index} exercise={ex} onSendEx={handleAddToEntry} />
                     ))}
+                </>
+                )}
+                
+                {!planning.exercises?.length > 0 && !fullEntryState.finishedEx?.length > 0 && (
+                    <div className="notfound-div">
+                        <h3>No exercises are planned for this day</h3>
+                        <img src={img404}></img>
+ 
+                    </div>
+                    
+                )}
 
                 <button className="add-ex-btn button" onClick={() => handlePage(2)}><i className="fa-solid fa-plus"></i> add more</button>
             </div>
@@ -359,6 +418,8 @@ function Home() {
 
             <div className="plane-box">
                 <h1 className='today-h1'>Today meals</h1>
+
+              
                 {dayMeals.map((meal, index) => (
                     <div key={index} className="plane-box">
                         <div className="meal-header"> 

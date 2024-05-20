@@ -29,8 +29,8 @@ module.exports.profile = (req, res) => {
 };
 
 module.exports.update = (req, res, next) => {
-  console.log(req.body)
-  User.findByIdAndUpdate(req.body.id, req.body, {
+  
+  User.findByIdAndUpdate(req.user.id, req.body, {
     runValidators: true,
     new: true,
   })
@@ -73,7 +73,7 @@ module.exports.login = (req, res, next) => {
               const accessToken = jwt.sign(
                 {
                   sub: user.id,
-                  exp: Date.now() / 1000 + 5000,
+                  exp: Date.now() / 1000 + 9000,
                 },
                 process.env.JWT_SECRET
               );

@@ -64,7 +64,6 @@ async function handleSelectedPlan(id) {
                         <h1 className='page-title '>Foods</h1>
                     </div>
             <div className="plane-box overlay food-box" style={{backgroundColor: 'var(--full-white-1)'}}>
-                <button className='back-btn back-btn-overlay' onClick={() => handlePage(1)}><i className="fa-solid fa-arrow-left"></i>Back</button>
                 <SearchFood />
             </div>
           

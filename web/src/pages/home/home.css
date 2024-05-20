@@ -58,6 +58,7 @@
     display: flex;
     flex-direction: column;
     height: 100%;
+
 }
 
 .objetive-circle{
@@ -385,6 +386,7 @@
     border: none;
     font-size: 20px;
     margin-top: 20px;
+    color: var(--dark-gray-1);
   }
 
   .expand-cr-food:hover, .expand-cr-food:hover i{
@@ -394,3 +396,65 @@
   .expand-cr-food i {
     margin-right: 10px;
   }
+
+  .home-link{
+    text-decoration: none !important;
+    font-size: 16px!important;
+  }
+
+  .home-link i{
+    margin-left: 10px;
+  }
+
+  .home-link:hover  i, .home-link:hover{
+    color: var(--primary-color)!important;
+  }
+
+  .notfound-div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    margin: 50px 0;
+  }
+
+  .notfound-div h3{
+    text-align: center;
+  }
+
+  .notfound-div img{
+    width: 15%;
+  }
+
+  .loading-bar {
+    width: 100%;
+    margin-right: 20px;
+    height: 10px;
+    background-color: var(--medium-gray-3);
+    border-radius: 5px;
+    overflow: hidden;
+    position: relative;
+    
+  }
+  
+  .loading-fill {
+    height: 100%;
+    transition: width 0.5s ease;
+  }
+
+  .nutrition-bar-div{
+    display: flex;
+    align-items: center;
+  }
+
+  .nutrition-bar-div strong{
+    width: 90px;
+    margin-right: 10px;
+  }
+
+  .nutrition-bar-div span{
+    width: 100px;
+  }
+
+  

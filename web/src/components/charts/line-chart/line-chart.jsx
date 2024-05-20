@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { Legend, CartesianGrid, XAxis, YAxis, Tooltip, LineChart, Line, ResponsiveContainer } from "recharts";
 import AuthContext from "../../../contexts/auth.context";
-import { getCalendarDataChart } from "../../../services/api.service";
+import { getCalendarLineChart } from "../../../services/api.service";
 import './line-charts.css';
 
 function ChartLine({ exerciseId }) {
@@ -11,7 +11,7 @@ function ChartLine({ exerciseId }) {
 
     useEffect(() => {
         const fetchCalendarData = async (exerciseId) => {
-            setLoading(true); // Start loading
+            setLoading(true); 
             try {
                 const entryData = await getCalendarDataChart(context.user.id, exerciseId);
                 const dataMap = entryData.data.map(element => {
@@ -25,7 +25,7 @@ function ChartLine({ exerciseId }) {
             } catch (error) {
                 console.error('Error fetching...:', error);
             } finally {
-                setLoading(false); // End loading
+                setLoading(false); 
             }
         };
 
@@ -49,8 +49,8 @@ function ChartLine({ exerciseId }) {
                             <YAxis />
                             <Tooltip />
                             <Legend />
-                            <Line type="monotone" dataKey="kg" stroke="#8884d8" />
-                            <Line type="monotone" dataKey="reps" stroke="#82ca9d" />
+                            <Line type="monotone" dataKey="kg" stroke="#8884d8" strokeWidth={3} />
+                            <Line type="monotone" dataKey="reps" stroke="#82ca9d" strokeWidth={3} />
                         </LineChart>
                     </ResponsiveContainer>
                 </div>
