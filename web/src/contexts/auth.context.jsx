@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react";
-import { getProfile, login, logout } from "../services/api.service";
+import { deleteUser, getProfile, login, logout, updateUser } from "../services/api.service";
 import { useNavigate } from "react-router-dom";
 
 const AuthContext = createContext();
@@ -27,12 +27,10 @@ export function AuthContextProvider({ children }) {
   async function doLogin(data) {
     try {
       await login(data);
-      fetchProfile();
+      await fetchProfile();
     } catch {
       throw new Error(); 
     }  
-    
-    
   }
 
   function doLogout() {
@@ -41,10 +39,30 @@ export function AuthContextProvider({ children }) {
     navigate("/login");
   }
 
+  async function doUpdate(data) {
+    try {
+      await updateUser(data);
+      await fetchProfile();
+    } catch {
+      throw new Error();
+    }
+  }
+
+  async function doDelete(id) {
+    try {
+      await deleteUser(id);
+      navigate("/login");
+    } catch {
+      throw new Error();
+    }
+  }
+
   const value = {
     user,
     doLogin,
     doLogout,
+    doUpdate,
+    doDelete
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

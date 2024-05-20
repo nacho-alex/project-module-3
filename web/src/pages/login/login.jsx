@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import Logo from '../../assets/fittracker.svg';
 import './login.css';
 import { Link } from 'react-router-dom';
-import axios from 'axios'
 import { useContext } from 'react';
 import AuthContext from '../../contexts/auth.context';
 import { useNavigate } from 'react-router-dom';
@@ -28,7 +27,7 @@ function Login() {
   const [ formData, setFormData ] = useState({username:"", password: ""});
   const { doLogin } = useContext(AuthContext);
   const navigate = useNavigate();
-  const [errors, setErrors] = useState('')
+  const [errors, setErrors] = useState({})
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
  
 
@@ -40,9 +39,7 @@ function Login() {
   }
 
   async function handleSubmit(event) {
-    const newErrors = {};
-
-
+    
     event.preventDefault();
     try {
       await doLogin(formData)
