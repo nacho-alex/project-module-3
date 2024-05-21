@@ -229,40 +229,42 @@ function ChartBar({ info }) {
     return (
         <> 
             {(info === "body" && !noDataBody.current) && (
-                <BarChart width={730} height={250} data={dataBody} >
+            <ResponsiveContainer width="100%" height={300}>
+                <BarChart width="100%" height="100%" data={dataBody} >
                     {/* <CartesianGrid strokeDasharray="3 3" /> */}
                     <XAxis dataKey="bodyPart" />
                     <YAxis />
                     <Tooltip />
                     <Legend />
-                    <Bar dataKey="body work" fill="#8884d8" barSize={40}/>
+                    <Bar stroke="#8884d8" dataKey="body work" fill="#4aa2d9b3" barSize={40}/>
                 </BarChart>
+            </ResponsiveContainer>
             )}
             {noDataBody.current && <p>There is not enough data.</p>}
 
             {(info === "muscle" && !noDataMuscle.current) && (
-                <ResponsiveContainer width={1150} height={400}>
+                <ResponsiveContainer width="100%" height={300}>
                     <BarChart width="100%" height="100%" data={dataMuscle} >
                         {/* <CartesianGrid strokeDasharray="3 3" /> */}
-                        <XAxis dataKey="targetMuscle"  tick={{ fontSize: 14, fill: '#666', angle: -45, textAnchor: 'end' }} />
+                        <XAxis dataKey="targetMuscle"  tick={{ fontSize: 14, angle: -45, textAnchor: 'end' }} />
                         <YAxis />
                         <Tooltip />
                         <Legend  wrapperStyle={{ paddingTop: '40px' }}/>
-                        <Bar dataKey="muscle work %" fill="#8884d8" barSize={20} />
+                        <Bar  dataKey="muscle work %" fill="#4aa2d9b3" barSize={20} />
                     </BarChart>
                 </ResponsiveContainer>
             )}
             {noDataMuscle.current && <p>There is not enough data.</p>}
 
             {(info === "macro" && !noDataMacro.current) && (
-                <ResponsiveContainer width={800} height={400}>
+                <ResponsiveContainer width="100%" height={300}>
                     <BarChart width="100%" height="100%" data={dataMacro} >
                         {/* <CartesianGrid strokeDasharray="3 3" /> */}
                         <XAxis dataKey="name"  tick={{ fontSize: 14, fill: '#666'}} />
                         <YAxis />
                         <Tooltip />
                         <Legend />
-                        <Bar dataKey="macro" fill="#8884d8" barSize={40} />
+                        <Bar dataKey="macro" fill="#4aa2d9b3" barSize={40} />
                     </BarChart>
                 </ResponsiveContainer>
             )}

@@ -225,13 +225,13 @@ let imageIndex = 0
                         <div className="input-group">
                                 <i className="inp-icon fa-solid fa-weight-scale"></i>
                                 <label htmlFor="weightinp"> Weight: </label>
-                                <input id='weightinp' onChange={handleChange} name='weight' type="number" value={formData.weight} placeholder='weight (kg)'/>
+                                <input id='weightinp' onChange={handleChange} name='weight' type="number" min={0} value={formData.weight} placeholder='weight (kg)'/>
                         </div>
 
                         <div className="input-group">
                                 <i className="inp-icon fa-solid fa-ruler-vertical"></i>
                                 <label htmlFor="heightinp"> Height: </label>
-                                <input id='heightinp' onChange={handleChange} name='height' type="number" value={formData.height} placeholder='height (cm)'/>
+                                <input id='heightinp' onChange={handleChange} name='height' type="number" min={0} value={formData.height} placeholder='height (cm)'/>
                         </div>
 
                         <label className='activitylabel' htmlFor="genreinp"> Choose your daily activity level </label>

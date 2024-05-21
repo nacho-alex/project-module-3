@@ -58,7 +58,7 @@ function Workoutdetail() {
 
           <div className='plane-box plane-box-black'>
             <h2>description</h2>
-            <div>{workout.description}</div>
+            <div className='wo-description-bk'>{workout.description}</div>
           </div>
           
           <div className='plane-box'>

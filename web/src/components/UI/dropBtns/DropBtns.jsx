@@ -9,7 +9,7 @@ import { Navigate } from 'react-router-dom'
 
 
 function DropBtns(props) {
-const { workout, onSelectWorkout, onDeleteWorkout, hideBtns} = props
+const { workout, onSelectWorkout, onDeleteWorkout, hideBtns, hideView} = props
 
 const {user} = useContext(AuthContext)
 
@@ -79,7 +79,7 @@ async function handleSelectedPlan() {
         </div>
     </button>
 )}
-{workout.owner !== user._id && (
+{!hideBtns && (
     <>
         <Link to={`/edit-workout/${workout._id}`}>
             <button className='drop-btn' type='button'>
@@ -99,7 +99,7 @@ async function handleSelectedPlan() {
     </>  
 )}
 
-{!hideBtns && (
+
     <button className='drop-btn' type='button'>
     <Link to={`/workout/${workout._id}`}>
         <div className="link-drop">
@@ -108,7 +108,7 @@ async function handleSelectedPlan() {
         </div>
     </Link>
     </button>
-)}
+
 
 </div> 
   )

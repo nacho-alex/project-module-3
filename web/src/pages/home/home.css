@@ -347,6 +347,9 @@
   .delete-btn{
     background: none;
   }
+  .delete-btn i {
+    color: var(--medium-gray-2);
+  }
 
   .meal-header h1 button{
     border: none;

@@ -13,14 +13,14 @@
 }
 
 .plane-box-black{
-    background-color:var(--black-transparent-08)!important;
-    color: var(--full-white-1)!important;
+    
+    background-color: rgba(46, 46, 46, 0.894)!important;
 
 
 }
 
 .plane-box-black h2 {
-    color: var(--full-white-1)!important;
+    color: white!important;
 }
 .edit-container img{
     width: 280px;
@@ -112,6 +112,7 @@
     font-weight: 700;
     margin-top: 20px;
     margin: 20px 10px 20px 10px;
+    color: white;
 }
 
 .add-ex-btn i{

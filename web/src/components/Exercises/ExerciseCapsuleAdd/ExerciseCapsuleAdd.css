@@ -24,6 +24,10 @@
 .buttons-capsule {
     display: flex;
 }
+
+.capsule-main i{
+    color: var(--medium-gray-2);
+}
 .exercise-capsule input {
     width: 80px;
     margin-right: 10px;

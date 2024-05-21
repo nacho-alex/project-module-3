@@ -13,6 +13,7 @@
 
 .fire-btns i {
     margin: 0;
+    color: var(--medium-gray-2);
 }
 .fire-btns-red i{
     color: var(--primary-red) !important;
@@ -21,4 +22,9 @@
 .fires-div{
     display: flex;
     flex-direction: row;
+}
+
+
+.white-text{
+    color: white!important;
 }

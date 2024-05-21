@@ -191,8 +191,34 @@ module.exports.dataChart = (req, res, next) => {
 
             })
             .catch(next);
+    } else if (req.query.info === "calories") {
+        CalendarEntry.find({ "owner": req.user.id })
+        .then(entries => {
+            const caloriesByDate = {};
+    
+            entries.forEach(entry => {
+                const date = entry.date; 
+                if (!caloriesByDate[date]) {
+                    caloriesByDate[date] = 0;
+                }
+    
+                entry.meals.forEach(meal => {
+                    meal.food.forEach(food => {
+                        const totalCalories = food.calories_kcal * food.qty;
+                        caloriesByDate[date] += totalCalories;
+                    });
+                });
+            });
+    
+            const data = Object.values(caloriesByDate).map(total => Math.round(total * 100) / 100);
+    
+            console.log(data);
+            res.json(data);
+        })
+        .catch(next);
     }
 }
+
 
 
 module.exports.foodHistory = (req, res, next) => {

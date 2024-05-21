@@ -65,7 +65,7 @@ const handlePage = (page) => {
 
                     {workouts.length > 0 && (
                         workouts.map((workout) => (
-                            <WorkoutItem key={workout._id} workout={workout} />
+                            <WorkoutItem key={workout._id} hideBtns={true} hideView={true} workout={workout} />
                         ))
                     )}
                 </div>
@@ -83,7 +83,7 @@ const handlePage = (page) => {
                 {workouts.length > 0 && (
                     workouts.filter((workout) => workout.owner === context.user.id).map((workout) => (
                         
-                        <WorkoutItem key={workout._id} workout={workout} clickable={true}/>
+                        <WorkoutItem key={workout._id} hideBtns={false}  hideView={true} workout={workout} clickable={true}/>
                     ))
                 )}
             </div>

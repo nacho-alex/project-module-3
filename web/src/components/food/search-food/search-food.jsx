@@ -108,6 +108,12 @@ function SearchFood({ onAddFood }) {
         setPage(2);
     };
 
+    const handleAddFoodByMeal = (data) => {
+        onAddFood(data)
+        console.log(data)
+        setPage(1)
+    }
+
     const handleInputChangeDet = (e) => {
         const { name, value } = e.target;
         setActualFood({ ...actualFood, [name]: name === 'qty' ? Number(value) : value });
@@ -187,7 +193,7 @@ function SearchFood({ onAddFood }) {
                                 <FoodCapsule key={food._id} food={food} onAddFood={handleAddFood} />
                                 ))}
                                 {results < filteredFoods.length && (
-                                <button onClick={handleResults}>+ Results</button>
+                                <button  className="add-ex-btn button" onClick={handleResults}>+ Results</button>
                                 )}
                             </>
                             )}
@@ -205,6 +211,7 @@ function SearchFood({ onAddFood }) {
                                             onChange={(e) => handleInputChangeDet(e)}
                                             name="qty"
                                             type="number"
+                                            min={0}
                                             value={actualFood.qty || ''}
                                         />
                                     </div>
@@ -230,14 +237,19 @@ function SearchFood({ onAddFood }) {
                 <div className="showmeals">
                     {myMeals.map((me, i) => (
                         <div key={i}>
-                            <div className='meal-capsule' onClick={() => handleExpandMeal(i)}>
-                                <h3>{me.name}</h3>
+                            <div className='meal-capsule' >
+                                <h3 onClick={() => handleExpandMeal(i)} >{me.name}</h3>
+
+                                <div>
+                                <button className="add-ex-btn button add-meal-btn" onClick={(event) => handleAddFoodByMeal(myMeals[i].food)}>Add</button>
                                 <button className="delete-btn" onClick={(event) => {
                                     event.stopPropagation(); // Evita que se expanda el meal al hacer clic en el botón
                                     handleDeleteMeal(me.name);
                                 }}>
                                     <i className="fa-solid fa-trash-can red-text button-trash" />
                                 </button>
+                                </div>
+                                
                             </div>
                             {selectedMealIndex === i && (
                                 <div className="expanded-meal">

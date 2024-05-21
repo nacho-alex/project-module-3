@@ -176,7 +176,11 @@ export function getCalendarEntry(ownerId, date) {
 }
 
 export function getCalendarLineChart(ownerId, exerciseId) {
-  return http.get(`/calendar-data/${ownerId}?exercise=${exerciseId}`);
+  if (exerciseId) {
+    return http.get(`/calendar-data/${ownerId}?exercise=${exerciseId}`);
+  } else {
+    return http.get(`/calendar-data/${ownerId}`);
+  }
 }
 
 export function getCalendarDataChart(ownerId, chartInfo) {

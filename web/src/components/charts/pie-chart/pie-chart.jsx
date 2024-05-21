@@ -227,7 +227,7 @@ function ChartPie({info}) {
       <>
         {(info === "body" && !noDataBody.current) && (
             <PieChart width={730} height={250}>
-                <Pie data={dataBody} dataKey="body work" nameKey="bodyPart" cx="50%" cy="50%" outerRadius={90} fill="#8884d8" label />
+                <Pie data={dataBody} stroke="#8884d8" dataKey="body work" nameKey="bodyPart" cx="50%" cy="50%" outerRadius={90} fill="#F2A950" label />
                 <Tooltip />
                 <Legend wrapperStyle={{ paddingTop: '10px' }} />
             </PieChart>
@@ -236,7 +236,7 @@ function ChartPie({info}) {
 
         {(info === "muscle" && !noDataMuscle.current) && (
             <PieChart width={730} height={350}>
-                <Pie data={dataMuscle} dataKey="muscle work %" nameKey="targetMuscle" cx="50%" cy="50%" outerRadius={90} fill="#8884d8" label />
+                <Pie data={dataMuscle} stroke="#8884d8" dataKey="muscle work %" nameKey="targetMuscle" cx="50%" cy="50%" outerRadius={90} fill="#F2A950" label />
                 <Tooltip />
                 <Legend wrapperStyle={{ paddingTop: '10px' }}/>
             </PieChart>
@@ -245,7 +245,7 @@ function ChartPie({info}) {
 
         {(info === "macro" && !noDataMacro.current) && (
             <PieChart width={730} height={350}>
-                <Pie data={dataMacro} dataKey="macro" nameKey="name" cx="50%" cy="50%" outerRadius={90} fill="#8884d8" label />
+                <Pie data={dataMacro} stroke="#8884d8"  dataKey="macro" nameKey="name" cx="50%" cy="50%" outerRadius={90} fill="#F2A950" label />
                 <Tooltip />
                 <Legend wrapperStyle={{ paddingTop: '10px' }}/>
             </PieChart>

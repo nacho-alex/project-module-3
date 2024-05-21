@@ -1,0 +1,79 @@
+.main-edit-profile{
+    display: flex;
+}
+
+.main-edit-profile input{
+    height: 40px;
+    padding: 0px 20px;
+}
+
+.main-edit-profile .input-group i{
+    position: inherit;
+    margin: 0;
+    left: 0;
+    margin-right: 10px;
+    color: var(--medium-gray-2);
+}
+
+.edit-pro-img .range-input{
+    width: 100%!important;
+    margin-top: 20px;
+}
+
+.main-edit-profile .input-group label{
+    width: 70px!important;
+    color: var(--medium-gray-2);
+}
+
+.edit-pro-inps{
+    display: flex;
+    flex-direction: column;
+    margin-left: 40px;
+    margin-top: 10px;
+}
+
+.profile-page form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.edit-pro-goal{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.edit-pro-goal img{
+    height: 120px;
+    width: 120px;
+}
+
+.edit-pro-goal .goal-buttons div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.submit-edit-pro{
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    border-top: 2px solid var(--medium-gray-3);
+    margin-top: 20px;
+    padding-top: 20px;
+}
+
+.plane-box.edit-box{
+    width: fit-content;
+    padding: 50px 80px 50px 80px;
+}
+
+.edit-box h1{
+    border-bottom: 2px solid var(--medium-gray-3);
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+}

@@ -114,9 +114,9 @@ const handleChange = (event) => {
                       <>
                         <p>Work:</p>
                         <label>Sets:</label>
-                        <input value={exercise.work.sets} name='sets' type="number"  onChange={handleChange}  />
+                        <input value={exercise.work.sets} name='sets' type="number" min={0} onChange={handleChange}  />
                         <label>Reps:</label>
-                        <input value={exercise.work.reps} name='reps' type="number"  onChange={handleChange}  />
+                        <input value={exercise.work.reps} name='reps' type="number" min={0} onChange={handleChange}  />
                       </>
                       }
 

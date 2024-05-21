@@ -9,6 +9,7 @@
     --black-transparent-05: rgba(0, 0, 0, 0.504);
     --black-transparent-08: rgba(0, 0, 0, 0.746);
     --black-transparent-02: rgba(0, 0, 0, 0.246);
+    --black-transparent-01: rgba(0, 0, 0, 0.034);
     --dark-gray-1: #424242;
     --medium-gray-3: rgb(177, 177, 177);
     --medium-gray-2: #575757;
@@ -34,6 +35,7 @@
     --black-transparent-05: rgba(255, 255, 255, 0.504);
     --black-transparent-08: rgba(255, 255, 255, 0.746);
     --black-transparent-02: rgba(255, 255, 255, 0.246);
+    --black-transparent-01: rgba(0, 0, 0, 0.308);
     --dark-gray-1: #eaeaea;
     --medium-gray-3: rgb(63, 63, 63);
     --medium-gray-2: #d1d1d1;
@@ -81,7 +83,7 @@ p {
     position: fixed;
     background:  rgba(255, 54, 54, 0.79);
     box-shadow: 20px 20px 5px -6px rgba(0,0,0,0.24);
-    color: var(--full-white-1);
+    color: white;
     padding: 15px 50px;
     z-index: 998;
     top: 20px;
@@ -102,8 +104,10 @@ p {
     
 }
 
-.speech i {
+
+.speech i, .speech p {
     margin-right: 20px;
+    color: white;
 }
 
 .speech-left:before {
@@ -155,6 +159,10 @@ p {
     padding: 5px 40px;
     border: none;
     margin: 10px;
+}
+
+.btn-red{
+    background-color: var(--primary-red)!important;
 }
 
 .btn-green:hover{

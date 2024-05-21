@@ -109,7 +109,7 @@ function CreateRecipe() {
                             <input type="text" name="image" value={formData.image} placeholder="image URL" onChange={handleChange}/>
                             <input type="text" name="title" value={formData.title} placeholder="title" onChange={handleChange}/>
                             <textarea name="description" value={formData.description} placeholder="description" onChange={handleChange}/>
-                            <input type="number" name="time" value={formData.time} placeholder="time (min)" onChange={handleChange} />
+                            <input type="number" name="time" value={formData.time} placeholder="time (min)" min={0} onChange={handleChange} />
                             <textarea name="steps" value={formData.steps} placeholder="steps" onChange={handleChange}/>
                         </div>
                         <div>

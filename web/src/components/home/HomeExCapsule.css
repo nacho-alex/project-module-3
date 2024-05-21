@@ -97,6 +97,10 @@
     align-items: center;
 }
 
+.title-icon i{
+    color: var(--medium-gray-2);
+}
+
 .title-icon h1{
     line-height: 0;
     margin-left: 20px;

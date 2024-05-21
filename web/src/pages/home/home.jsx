@@ -235,11 +235,12 @@ function Home() {
     };
 
     const handleAddFoodToMeal = (Food) => {
-        const foodData = { mealIndex: saveIndex, food: [Food] };
+        const foodArray = Array.isArray(Food) ? Food : [Food];
+        const foodData = { mealIndex: saveIndex, food: foodArray };
         handleSubmit(foodData);
         setPage(1);
     };
-
+    
     const handleMealUpdate = () => {
         const foodData = { mealIndex: saveIndex, food: [{ ...actualFood, qty: Number(actualFood.qty) }] };
         handleSubmit(foodData);
@@ -269,10 +270,10 @@ function Home() {
     }
     
     const handleSaveDayMeal = async () => {
-      const newMeal = { food: [], name: `Extra meal ${context.user.dayMeals.length - context.user.dayMeals.length + 1}` };
+      const newMeal = { food: [], name: `Extra meal ${context.user.dayMeals.length + 1}` };
       setDayMeals([...dayMeals, newMeal])
       try {
-          const response = await submitNewDayMeal();
+          const response = await submitNewDayMeal(newMeal);
           if (response) {
               setMealName(''); 
               setSaveIndex(0)

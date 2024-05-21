@@ -1,0 +1,290 @@
+.profile-page{
+    margin-top: 120px;
+}
+
+.profile-info-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 40px;
+}
+
+.profile-img{
+    position: relative;
+    overflow: hidden;
+    width: fit-content;
+    height: fit-content;
+    border-radius: 50%;
+}
+
+.avatar-profile-overlay {
+    background-color: var(--black-transparent-05);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.avatar-profile-overlay:hover {
+    opacity: 1;
+}
+
+.avatar-profile-overlay i{
+    color: var(--light-gray-1)!important;
+    font-size: 22px;
+
+}
+
+.profile-img img{
+width: 200px;
+border-radius: 50%;
+height: 200px;
+
+object-fit: cover;
+}
+
+.profile-info{
+    margin-left: 40px;
+}
+
+.profile-info div{
+    display: flex;
+    align-items: center;
+    margin: 0 30px 10px 30px;
+}
+
+.profile-info i{
+    color: var(--medium-gray-2);
+    width: 20px;
+    margin-right: 25px;
+}
+
+.profile-info p{
+    margin-bottom: 0px;
+    font-size: 16px;
+
+}
+
+.profile-info strong{
+    width: 160px;
+    text-transform: capitalize;
+}
+
+.goal-div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center ;
+    margin: 0 20px;
+}
+
+.goal-h4{
+    margin-top: 10px;
+}
+
+.activity-btn-prf{
+    background-color: var(--primary-color);
+    padding: 2px 20px;
+    border-radius: 15px;
+    color: white;
+}
+
+.edit-profile-btn{
+    border: none;
+    background: none;
+    font-size: 18px;
+    margin-left: 10px;
+    margin-top:-3px ;
+}
+
+.edit-profile-btn:hover i{
+    color: var(--primary-color);
+}
+
+.account-btns{
+    display: flex;
+    justify-content: flex-end;
+    border-top: 2px solid var(--light-gray-1);
+    padding-top: 20px;
+    margin-top: 20px;
+}
+
+
+.account-btns button{
+    border: none;
+    padding: 4px 20px;
+    margin-right: 10px;
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.plane-box-profile{
+    width: fit-content;
+    background-color: var(--white-transparent-1);
+}
+
+.delete-acc{
+    width: fit-content!important;
+    height: fit-content!important;
+    min-height: fit-content!important;
+    position: fixed;
+    margin: 0!important;
+    top: 40%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.delete-acc-overlay{
+    justify-content: center!important;
+    align-items: center!important;
+}
+
+.profile-main-info{
+    display: flex;
+}
+
+.profile-aside{
+    padding-top: 30px;
+    min-width: 220px;
+    width: 220px;
+    padding: 10px;
+    margin-right: 20px;
+    margin-top: 50px;
+}
+
+.profile-aside h2{
+    margin-bottom: 50px;
+}
+
+.profile-content{
+    border-left: 1px solid var(--medium-gray-2);
+    width: 100%;
+    padding: 30px;
+}
+
+.profile-aside button{
+    border: none;
+    padding: 5px 20px;
+    margin-bottom: 10px;
+    background: none;
+    font-weight: 400;
+    border-bottom: 1px solid var(--medium-gray-3);
+    width: 100%;
+    text-align: left;
+    padding-bottom: 15px;
+    color: var(--medium-gray-2);
+}
+
+.profile-aside button:hover, .profile-aside button:hover i{
+    color: var(--primary-color);
+}
+
+.profile-aside i{
+    margin-right: 10px;
+    color: var(--medium-gray-2);
+}
+
+.profile-content h2{
+    margin-top: 30px;
+    margin-bottom: 40px;
+}
+
+.profile-select select{
+    margin-right: 10px;
+    border: 2px solid var(--primary-color);
+    padding: 5px 20px;
+    margin-bottom: 20px;
+}
+
+.profile-select label{
+    font-weight: 600;
+    margin-right: 20px;
+}
+
+.charts-header{
+    display: flex;
+    justify-content: space-between;
+}
+
+.chart-div{
+    background-color:var(--black-transparent-01);
+    padding: 20px;
+    margin-bottom: 30px;
+}
+
+.chart-div h5, .chart-div label{
+    color: var(--full-black-1);
+}
+
+
+
+
+.profile-content .workout-item{
+    display: flex;
+    flex-direction: row;
+    padding-right: 20px;
+    margin: auto;
+    width: 100%;
+    height: 250px;
+    border: 1px solid var(--light-gray-1);
+    margin-top: 20px;
+    box-shadow: 5px 5px 3px 0px rgba(0, 0, 0, 0.131);
+    background-color: var(--white-transparent-1);
+    backdrop-filter: blur(20px);
+    position: relative;
+}
+
+.profile-content .workout-image {
+    width: fit-content;
+}
+
+
+
+
+.profile-content .workout-image img{
+    height: 250px !important;
+    width: 250px !important;
+    object-fit: cover;
+}
+
+.profile-content .workout-text h1 {
+    font-size: 22px;
+    margin-top: 20px;
+}
+
+.profile-content .workout-text  p{
+    font-size: 11px;
+}
+
+.workout-text{
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+    height: fit-content;
+    
+}
+
+.hidden{
+    display: none !important;
+}
+
+.profile-content .plane-box{
+    width: 100%;
+}
+
+.profile-page label{
+    color: var(--medium-gray-2);
+}
+
+.profile-page .goal-buttons h2{
+    color: var(--medium-gray-2);
+}
+
+.profile-content h5{
+    color: var(--medium-gray-2);
+}

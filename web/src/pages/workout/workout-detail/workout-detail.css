@@ -14,6 +14,10 @@
 
 
 .workout-text p{
-    width: 100%!important;    
+    width: 100%!important;  
+    margin-bottom: 0;  
 }
 
+.wo-description-bk{
+    color: white;
+}

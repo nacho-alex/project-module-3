@@ -96,7 +96,7 @@ async function createEntriesForMonth(year, month, totalDays, exercises, foods, i
       const data = {
         finishedEx: finishedEx,
         date: `${dayOfWeek}, ${i}, ${monthName}, ${year}`,
-        owner: "663a78c0547ed82f87502add",
+        owner: "664c66799613439be7ceadc7",
         meals: meals
       };
 

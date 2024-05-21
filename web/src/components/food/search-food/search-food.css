@@ -40,6 +40,7 @@
     border: none;
     padding: 5px 20px;
     width: 100%;
+    color: var(--medium-gray-2);
 }
 
 .search-div{
@@ -48,10 +49,16 @@
 
 .btn-selected{
     background-color:var(--primary-color)!important;
-    color: white;
+    color: white !important;
     font-weight: 600;
 }
 
 .showmeals{
     margin-top: 40px;
+}
+
+.add-meal-btn{
+    padding: 5px 10px !important;
+    width: fit-content!important;
+    margin-right: 10px!important;
 }

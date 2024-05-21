@@ -39,6 +39,7 @@ function Meal() {
                                     onChange={(e) => handleInputChange(index, e)}
                                     name="qty"
                                     type="number"
+                                    min={0}
                                 />
                             </div>
                             <div className="inp-box">

@@ -42,7 +42,7 @@ function App() {
           <Route path="/profile" element={<PrivateRoute><PageLayout ><Profile/></PageLayout></PrivateRoute>}/>
           <Route path="/edit-profile" element={<PrivateRoute><PageLayout ><EditProfile/></PageLayout></PrivateRoute>}/>
           
-          <Route path="/*" element={<PrivateRoute><PageLayout ><Page404/></PageLayout></PrivateRoute>} />
+          <Route path="/*" element={<Page404/>} />
         </Routes>
     </AlertProvider>
 

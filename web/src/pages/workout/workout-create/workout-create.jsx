@@ -181,10 +181,10 @@ function CreateWorkout() {
                             
                         </div>
                     </div>
-                    {/* colores */}
-                    <div className='plane-box' style={{ backgroundColor: 'rgba(46, 46, 46, 0.894)', color: 'white' }}> 
+                
+                    <div className='plane-box plane-box-black'> 
                             <div className="input-box">
-                                <h2>Edit Description</h2>
+                                <h2 className="white-text">Description</h2>
                                 <textarea name="description" value={formData.description} placeholder="description" onChange={handleChange}/>
                                 <div id="editor">
                                     

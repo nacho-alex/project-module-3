@@ -8,7 +8,7 @@ import FiresInputView from '../FiresInput/fireInputView';
 import { useNavigate } from 'react-router-dom';
 
 function WorkoutItem(props) {
-  const { workout, hideBtns, clickable} = props;
+  const { workout, hideBtns, clickable, showMini} = props;
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -40,17 +40,20 @@ function WorkoutItem(props) {
                 <p className='workout-p m-0'><i className="fa-solid fa-user"></i> {workout.ownername}</p>
                 <h1>{workout.title}</h1>
 
-                {workout.description?.length > 400 && !hideBtns && (
+                {workout.description?.length > 400 && (
                     <p>{workout.description.slice(0, 400)}... <Link className='seemore' to={`/workout/${workout._id}`}>
                     see more
                 </Link></p> 
                     
                 )}
-                {workout.description?.length < 400 && !hideBtns && (
+                {workout.description?.length < 400 && (
                   <p>{workout.description}</p>
                 )}
 
-                <div className={`workout-text2 ${hideBtns ? 'hide-btns-page' : ''}`}>
+              {!showMini && (
+
+                <>
+                  <div className={`workout-text2 ${hideBtns ? 'hide-btns-page' : ''}`}>
                   <div className={`separator workout-text-div`}>
                     <div className="wo-detail">
                     </div>
@@ -85,6 +88,10 @@ function WorkoutItem(props) {
                   
                   </div>
                 </div>
+                </>
+
+              )}
+                
             </div>
     </div>
   )
