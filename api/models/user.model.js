@@ -79,7 +79,17 @@ const userSchema = new Schema(
             ref: "Workout"
         },
         dayMeals: {
-            type: [Object],
+            type: [
+                {
+                    food: { type: Array, default: [] },
+                    name: { type: String }
+                }
+            ],
+            default: [
+                { food: [], name: "Breakfast" },
+                { food: [], name: "Lunch" },
+                { food: [], name: "Dinner" }
+            ]
         },
         myMeals: {
             type: [Object]
