@@ -50,6 +50,7 @@ export function createUser(data) {
 export function login(data) {
   return http.post("/login", data)
   .then((response) => {
+    console.log(response.data.accessToken)
     localStorage.setItem("token", response.data.accessToken);
     return response;
   })

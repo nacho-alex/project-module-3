@@ -63,6 +63,7 @@ module.exports.delete = (req, res, next) => {
 };
 
 module.exports.login = (req, res, next) => {
+  console.log(req.body)
   User.findOne({ username: req.body.username })
     .then((user) => {
       if (user) {

@@ -30,7 +30,7 @@ const initialState = {
 }
 
 function register() {
-const [pageState, setPage] = useState(3)
+const [pageState, setPage] = useState(1)
 const [formData, setFormData] = useState(initialState);
  const [ logData, setlogData ] = useState({username:"invitado", password: "1234567890"});
  const { doLogin } = useContext(AuthContext);
@@ -79,14 +79,16 @@ const handlePageBack = (e) => {
     if (formData.avatar === undefined) setFormData({...formData, avatar: ''}) 
 };
 
-const handleSubmit = async (event) => {
+async function handleSubmit(event) {
+      
+    event.preventDefault();
     try {
-      await doLogin({ username: 'invitado', password: '1234567890'});
+      await doLogin(formData)
       navigate("/");
     } catch (err) {
-        navigate("/");
+      setErrors({unauthorized: 'Invalid credentials'});
     }
-};
+  }
 
 
 
@@ -126,9 +128,6 @@ let imageIndex = 0
      
     <div className="register-page">
         {errors ? <SpeechError errors={errors} direction='right' y='40' x='40'/> : null }
-        <div className="speech speech-up black-speach" role="alert">
-          <i className="fa-solid fa-circle-exclamation"></i>You don't need to fill in this information for the guest session
-        </div>
         <div className={"login-image-container1"}>
             {pageState >= 2 && ( 
             <div className="login-image-container2">
@@ -144,6 +143,9 @@ let imageIndex = 0
                 <div className={'register-box' + (pageState === 1 ? ' slide-in-right' : '')}>
                 {pageState === 1 && (
                 <>
+                        <div className="speech speech-up black-speach" role="alert">
+                            <i className="fa-solid fa-circle-exclamation"></i>You don't need to fill in this information for the guest session
+                        </div>
                     <h1 className="register-h1">Sign up</h1>
                     <p className='register-p'>The registration form has three simple steps, let's start with your account information.</p>
                     <label className="activitylabel"> Avatar: </label>

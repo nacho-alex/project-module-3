@@ -41,7 +41,6 @@ function App() {
           <Route path="/calendar" element={<PrivateRoute><PageLayout ><CalendarPage/></PageLayout></PrivateRoute>}/> 
           <Route path="/profile" element={<PrivateRoute><PageLayout ><Profile/></PageLayout></PrivateRoute>}/>
           <Route path="/edit-profile" element={<PrivateRoute><PageLayout ><EditProfile/></PageLayout></PrivateRoute>}/>
-          
           <Route path="/*" element={<Page404/>} />
         </Routes>
     </AlertProvider>

@@ -30,9 +30,6 @@
     const [errors, setErrors] = useState({})
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
   
-
-
-
     const handleChange = (event) => {
       const { name, value } = event.currentTarget; 
       setFormData({...formData, [name]: value});
@@ -62,18 +59,12 @@
 
       {Object.keys(errors).length > 0 ? <SpeechError errors={errors} direction='up' y='3' x='50'/> : null}
 
-
-
-
         <div className='login-container '>
-
-          
           <div>
               <img className='logo' src={Logo}></img>
           </div>
           <h2>Log in</h2>
-          <form className='' onSubmit={handleSubmit}>
-                  
+          <form className='' onSubmit={handleSubmit}>                  
                       <div className="input-group">                      
                               <i className="fa-solid fa-user"></i>
                               <input onChange={handleChange} id='usernameinp' name='username' required type="text" value={formData.username} placeholder='Choose an username...'/>
@@ -82,22 +73,17 @@
                               <i className="fa-solid fa-lock"></i>                                                 
                               <input onChange={handleChange} id='passwordinp' name='password' required  minLength="8" maxLength="20" type="password" value={formData.password} placeholder='Choose a secure password '/>                                               
                       </div>
-
-
               <button className='btn-green login-btn' type='submit'>Log in</button>
               <p>Don´t have an account?</p>
               <button className='btn-green journey-btn'><Link to={'/register'}>Start journey!</Link></button>
           </form>
         </div>
         <div className="login-img-container">
-
           <div className="login-img-text">
           <h1>Follow up your routine </h1>
           <h2>Access to a wealth of workouts, exercises, recipes, and foods.</h2>
           <p>monitor your daily calorie expenditure and intake and see your progress with our graphing system. </p>
-
           </div>
-
           <div className="login-img-wrapper" style={{ transform: `translateX(-${currentImageIndex * 100}%)`, height:'100%', width: '100%' }}>
           {imagesArr.map((image, index) => (
             <img key={index} src={image} alt={`Image ${index}`} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
@@ -110,8 +96,6 @@
           </div>
         </div>
       </div>
-      
-  
     )
   }
 
