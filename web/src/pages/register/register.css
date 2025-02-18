@@ -30,7 +30,6 @@
     border: none;
     padding: 0 10px 0 50px;
     font-size: 14px;
-    
 }
 
 .register-container input:focus {
@@ -65,7 +64,7 @@
     font-weight: 700;
     position: absolute;
     right: 100px;
-    bottom: 120px;
+    bottom: 20px;
     font-size: 14px;
 }
 .register-btn-cancel{
@@ -78,8 +77,11 @@
     font-weight: 700;
     position: absolute;
     left: 100px;
-    bottom: 120px;
+    bottom: 20px;
     font-size: 14px;
+}
+.black-speach{
+    background-color: rgba(15, 15, 15, 0.623);
 }
 
 .login-image-container1{

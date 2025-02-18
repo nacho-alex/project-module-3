@@ -45,7 +45,6 @@ function Login() {
       await doLogin(formData)
       navigate("/");
     } catch (err) {
-     console.log('hola')
       setErrors({unauthorized: 'Invalid credentials'});
     }
   }
@@ -73,13 +72,12 @@ function Login() {
             <img className='logo' src={Logo}></img>
         </div>
         <h2>Log in</h2>
-        <form className='d-flex flex-column' onSubmit={handleSubmit}>
+        <form className='' onSubmit={handleSubmit}>
                  
                     <div className="input-group">                      
                             <i className="fa-solid fa-user"></i>
                             <input onChange={handleChange} id='usernameinp' name='username' required type="text" value={formData.username} placeholder='Choose an username...'/>
                     </div>
-
                     <div className="input-group">
                             <i className="fa-solid fa-lock"></i>                                                 
                             <input onChange={handleChange} id='passwordinp' name='password' required  minLength="8" maxLength="20" type="password" value={formData.password} placeholder='Choose a secure password '/>                                               
@@ -87,11 +85,9 @@ function Login() {
 
 
             <button className='btn-green login-btn' type='submit'>Log in</button>
+            <p>Don´t have an account?</p>
+            <button className='btn-green journey-btn'><Link to={'/register'}>Start journey!</Link></button>
         </form>
-
-        <div>
-            <p>Don´t have an account?  <Link to={'/register'}>Create</Link></p>
-        </div>
       </div>
       <div className="login-img-container">
 
@@ -102,7 +98,12 @@ function Login() {
 
         </div>
 
-        <div className="login-img-wrapper" style={{ transform: `translateX(-${currentImageIndex * 100}%)`, height:'100%' }}>
+        <div className="login-img-wrapper" style={{ transform: `translateX(-${currentImageIndex * 100}%)`, height:'100%', width: '100%' }}>
+        {imagesArr.map((image, index) => (
+          <img key={index} src={image} alt={`Image ${index}`} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+        ))}
+      </div>
+       <div className="login-img-wrapper" style={{ transform: `translateX(-${currentImageIndex * 100}%)`, height:'100%' }}>
           {imagesArr.map((image, index) => (
             <img key={index} src={image} alt={`Image ${index}`} />
           ))}

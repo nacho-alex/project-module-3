@@ -70,11 +70,6 @@ a {
 }
 
 
-body {
-}
-
-
-
 p {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
@@ -103,8 +98,18 @@ p {
     z-index: 999;
     
 }
+.speech-up:before {
+    display: none;
+}
 
 
+.black-speach i{
+    display: none;
+}
+
+.black-speach{
+    padding: 20px 50px;
+}
 .speech i, .speech p {
     margin-right: 20px;
     color: white;
@@ -133,6 +138,7 @@ p {
     border-top-color: transparent;
     z-index: 999;
 }
+
 
 .speech-right:before {
     content: '';

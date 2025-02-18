@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from 'react';
 import Calendar from 'react-calendar';
-import './Calendar.css';
+import './calendar.css';
 import { getCalendarEntry } from '../../services/api.service';
 import AuthContext from '../../contexts/auth.context';
 import dayjs from 'dayjs';

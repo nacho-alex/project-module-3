@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import { createUser } from '../../services/api.service';
 import './register.css'
 import { Link, Navigate } from 'react-router-dom';
@@ -8,15 +8,16 @@ import gainIMG from '../../assets/gain.png'
 import loseIMG from '../../assets/loseDES.png'
 import { useNavigate } from 'react-router-dom';
 import SpeechError from '../../components/UI/speechError';
+import AuthContext from '../../contexts/auth.context';
 
 
 
 const initialState = {
-    username:'',
-    name: '',
-    email: '',
+    username:'invitado',
+    name: 'invitado',
+    email: 'invitado@imail.com',
     avatar: '',
-    password: '',
+    password: '1234567890',
 
     birthDate: '',
     weight:'',
@@ -30,7 +31,9 @@ const initialState = {
 
 function register() {
 const [pageState, setPage] = useState(1)
-const [formData, setFormData] = useState(initialState)
+const [formData, setFormData] = useState(initialState);
+ const [ logData, setlogData ] = useState({username:"invitado", password: "1234567890"});
+ const { doLogin } = useContext(AuthContext);
 const [avatarOpen, setAvatarOpen] = useState(false);
 const [scale, setScale] = useState(1);
 const [errors, setErrors] = useState(null);
@@ -45,16 +48,14 @@ const handlePageNext = (e) => {
         if (!formData.username) newErrors.username = "Username is required";
         if (!formData.email) newErrors.email = "Email is required";
         if (formData.password.length < 8) newErrors.password = "The password must contain at least 8 characters";
-
         if (Object.keys(newErrors).length === 0) {
-            setErrors(null)
+            setErrors(null);
             setPage(2);
         } else {
             setErrors(newErrors);
         }
     }
-
-    if (pageState === 2) {
+        if (pageState === 2) {
         if (!formData.birthDate) newErrors.birthDate = "Birth date is required";
         if (!formData.weight) newErrors.weight = "Weight is required";
         if (!formData.height) newErrors.height = "Height is required";
@@ -78,27 +79,15 @@ const handlePageBack = (e) => {
     if (formData.avatar === undefined) setFormData({...formData, avatar: ''}) 
 };
 
-async function handleSubmit(e) {
-    e.preventDefault();
-    const newErrors = {};
-    if (!formData.goal) newErrors.goal = "Goal is required";
-
-    if(formData.avatar === '') setFormData({...formData, avatar: undefined}) 
-
-    if (Object.keys(newErrors).length === 0) {
-
+async function handleSubmit(event) {
+    
     try {
-        await createUser(formData)
-        navigate("/login")
+      await doLogin({username: 'invitado', password: '01234689'})
+      navigate("/");
     } catch (err) {
-        newErrors.exist = err.message
-        setErrors(newErrors)
-        setPage(1)
+      setErrors({unauthorized: 'Invalid credentials'});
     }
-    } else {
-        setErrors(newErrors);
-    }
-};
+  }
 
 
 const handleChange = (event) => {
@@ -137,6 +126,9 @@ let imageIndex = 0
      
     <div className="register-page">
         {errors ? <SpeechError errors={errors} direction='right' y='40' x='40'/> : null }
+        <div className="speech speech-up black-speach" role="alert">
+          <i className="fa-solid fa-circle-exclamation"></i>You don't need to fill in this information for the guest session
+        </div>
         <div className={"login-image-container1"}>
             {pageState >= 2 && ( 
             <div className="login-image-container2">
@@ -172,22 +164,22 @@ let imageIndex = 0
                     <div className="input-group">
                             <i className="inp-icon fa-solid fa-user"></i>
                             <label htmlFor="usernameinp"> Username: </label>
-                            <input onChange={handleChange} id='usernameinp' name='username' required type="text" value={formData.username} placeholder='Choose an username...'/>
+                            <input onChange={handleChange} id='usernameinp' name='username' required type="text" disabled value='invitado' placeholder='Choose an username...'/>
                     </div>
                     <div className="input-group">
                             <i className="inp-icon fa-regular fa-face-smile"></i>
                             <label htmlFor="nameinp"> Name: </label>             
-                            <input onChange={handleChange} id='nameinp' name='name' maxLength="20" type="text" value={formData.name} placeholder='Your real name...'/>                                               
+                            <input onChange={handleChange} id='nameinp' name='name' maxLength="20" type="text" disabled value='invitado' placeholder='Your real name...'/>                                               
                     </div>
                     <div className="input-group">
                             <i className="inp-icon fa-solid fa-envelope"></i>
                             <label htmlFor="emailinp"> E-mail: </label> 
-                            <input onChange={handleChange} id='emailinp' name='email' type="email" value={formData.email} placeholder='E-mail address...'/>                       
+                            <input onChange={handleChange} id='emailinp' name='email' type="email" disabled value='invitado@mail.com' placeholder='E-mail address...'/>                       
                     </div>
                     <div className="input-group">
                             <i className="inp-icon fa-solid fa-lock"></i>
                             <label htmlFor="passwordinp"> Password: </label>                                                   
-                            <input onChange={handleChange} id='passwordinp' name='password' required  minLength="8" maxLength="20" type="password" value={formData.password} placeholder='Choose a secure password '/>                                               
+                            <input onChange={handleChange} id='passwordinp' name='password' required  minLength="8" maxLength="20" type="password" value='1234567890' placeholder='Choose a secure password '/>                                               
                     </div>
                     <Link to={'/login'}><button type='button' className='register-btn-cancel' >Cancel</button></Link>
                     <button className='register-btn' onClick={handlePageNext} >Next</button>
@@ -293,7 +285,7 @@ let imageIndex = 0
                     </div>                       
                 </div>
                 <button type='button' className='register-btn-cancel' onClick={handlePageBack} >Back</button>
-                <button className='register-btn' type='submit'>Sign up</button>                  
+                <button className='register-btn' onClick={handleSubmit}> go to home</button>                  
                 </>
                 )}
                 </div>
