@@ -30,7 +30,7 @@ const initialState = {
 }
 
 function register() {
-const [pageState, setPage] = useState(1)
+const [pageState, setPage] = useState(3)
 const [formData, setFormData] = useState(initialState);
  const [ logData, setlogData ] = useState({username:"invitado", password: "1234567890"});
  const { doLogin } = useContext(AuthContext);
@@ -79,15 +79,15 @@ const handlePageBack = (e) => {
     if (formData.avatar === undefined) setFormData({...formData, avatar: ''}) 
 };
 
-async function handleSubmit(event) {
-    
+const handleSubmit = async (event) => {
     try {
-      await doLogin({username: 'invitado', password: '01234689'})
+      await doLogin({ username: 'invitado', password: '1234567890'});
       navigate("/");
     } catch (err) {
-      setErrors({unauthorized: 'Invalid credentials'});
+        navigate("/");
     }
-  }
+};
+
 
 
 const handleChange = (event) => {
@@ -260,34 +260,35 @@ let imageIndex = 0
                 </>
                 )}
                 {pageState === 3 && (
-                <>
-                <div className="pag3">
-                <h1 className="register-h1">Your goal</h1>
-                    <p className='goallabel'>Finally, tell us what is your goal</p>
+                    <>
+                    <div className="pag3">
+                        <h1 className="register-h1">Your goal</h1>
+                        <p className='goallabel'>Finally, tell us what is your goal</p>
 
-                    <div className="goal-buttons">  
-                        <div>
+                        <div className="goal-buttons">
+                            <div>
                                 <button type='button'
                                     className={`goal-button ${formData.goal === 'gain' ? 'selected-btn-goal' : ''}`}
                                     onClick={() => handleGoalSelect('gain')}>
                                     <img src={gainIMG} alt="" />
                                 </button>
                                 <h2 className={`${formData.goal === 'gain' ? 'selected-btn-goal-text' : ''}`} >Gain muscle</h2>
-                        </div> 
-                        <div>
+                            </div> 
+                            <div>
                                 <button type='button'
                                     className={`goal-button ${formData.goal === 'lose' ? 'selected-btn-goal' : ''}`}
                                     onClick={() => handleGoalSelect('lose')} >
                                     <img src={loseIMG} alt="" />
                                 </button>
                                 <h2 className={`${formData.goal === 'lose' ? 'selected-btn-goal-text' : ''}`} >Lose weight</h2>
-                        </div>
-                    </div>                       
-                </div>
-                <button type='button' className='register-btn-cancel' onClick={handlePageBack} >Back</button>
-                <button className='register-btn' onClick={handleSubmit}> go to home</button>                  
-                </>
+                            </div>
+                        </div>                       
+                    </div>
+                    <button type='button' className='register-btn-cancel' onClick={handlePageBack} >Back</button>
+                    <button className='register-btn' onClick={handleSubmit}> Go to home </button>                  
+                    </>
                 )}
+
                 </div>
             </div>
         </form>
