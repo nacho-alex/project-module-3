@@ -1,0 +1,48 @@
+ .demo-container {
+   background-color: rgba(54, 54, 54, 0.747);
+   z-index: 9999;
+   position: absolute;
+   left: -50%;
+   right: 25%;
+   top: 120%;
+   display: flex;
+   flex-direction: row;
+   justify-content: space-between;
+   border-radius: 5px;
+   padding: 10px;
+ }
+ .demo-container h2 {
+   margin: 0;
+   font-size: 14px;
+   font-weight: 500;
+   font-family: Arial, Helvetica, sans-serif;
+   color: white;
+   margin-right: 15px;
+   margin-left: 15px;
+   text-align: left;
+ }
+ .demo-container i {
+   margin: 10px;
+   color: white;
+   position: static;
+ }
+
+ .demo-container .fa-x {
+   font-size: 10px;
+   position: absolute;
+   top: -10px;
+   left: -10px;
+
+ }
+
+  .demo-container .fa-x:hover {
+   color: rgb(179, 67, 67);
+ }
+
+ .demo-container button {
+   border: none;
+   color: none;
+   background: none;
+   position: relative;
+   padding-top: 0;
+ }

@@ -57,7 +57,6 @@ export function login(data) {
     .catch((err) => {
       throw error
     })
-  
 }
 
 export function getProfile() {

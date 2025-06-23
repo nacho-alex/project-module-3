@@ -62,33 +62,36 @@ module.exports.delete = (req, res, next) => {
     .catch(next);
 };
 
-module.exports.login = (req, res, next) => {
-  console.log(req.body)
-  User.findOne({ username: req.body.username })
-    .then((user) => {
-      if (user) {
-        user
-          .checkPassword(req.body.password)
-          .then((match) => {
-            if (match) {
-              const accessToken = jwt.sign(
-                {
-                  sub: user.id,
-                  exp: Date.now() / 1000 + 9000,
-                },
-                process.env.JWT_SECRET
-              );
-              res.json({ accessToken });
-            } else {
-              res.status(401).json({ message: "invalid password" });
-            }
-          })
-          .catch(next);
-      } else {
-        res.status(401).json({ message: "invalid username" });
-      }
-    })
-    .catch(next);
+
+module.exports.login = async (req, res, next) => {
+  try {
+    const user = await User.findOne({ username: req.body.username });
+    if (!user) return res.status(401).json({ message: "invalid username" });
+
+    const match = await user.checkPassword(req.body.password);
+    if (!match) return res.status(401).json({ message: "invalid password" });
+
+    const accessToken = jwt.sign(
+      {
+        sub: user.id,
+        exp: Math.floor(Date.now() / 1000) + 9000,
+      },
+      process.env.JWT_SECRET
+    );
+
+    res.json({ accessToken });
+
+    // Aquí rellenas la base de datos sin bloquear el login
+    const { createEntries } = require("../bin/seeds.js");
+    try {
+      await createEntries(user.id);
+      console.log("Datos de prueba insertados");
+    } catch (error) {
+      console.warn("Error insertando datos de prueba:", error);
+    }
+  } catch (error) {
+    next(error);
+  }
 };
 
 
@@ -158,3 +161,4 @@ module.exports.deleteMeal =  (req, res, next) => {
       .catch(next)
 
 };
+

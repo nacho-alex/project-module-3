@@ -8,6 +8,7 @@
   import { useAlert } from '../../contexts/alert.context';
   import { useEffect } from 'react';
   import SpeechError from '../../components/UI/speechError';
+  import DemoInfo from '../../components/demo/demoinfo';
 
 
   import img1 from '../../assets/imgSU1.jpg'
@@ -75,7 +76,9 @@
                       </div>
               <button className='btn-green login-btn' type='submit'>Log in</button>
               <p>Don´t have an account?</p>
-              <button className='btn-green journey-btn'><Link to={'/register'}>Start journey!</Link></button>
+              <button className='btn-green journey-btn'><Link to={'/register'}>Start journey!</Link>
+                <DemoInfo></DemoInfo>
+              </button>
           </form>
         </div>
         <div className="login-img-container">

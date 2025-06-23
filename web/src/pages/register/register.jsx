@@ -9,6 +9,7 @@ import loseIMG from '../../assets/loseDES.png'
 import { useNavigate } from 'react-router-dom';
 import SpeechError from '../../components/UI/speechError';
 import AuthContext from '../../contexts/auth.context';
+import DemoInfo from '../../components/demo/demoinfo';
 
 
 
@@ -19,13 +20,13 @@ const initialState = {
     avatar: '',
     password: '1234567890',
 
-    birthDate: '',
-    weight:'',
-    height: '',
-    genre: '',
-    activityLevel: '',
+    birthDate: '2000-05-21',
+    weight:'75',
+    height: '180',
+    genre: 'male',
+    activityLevel: '1.55',
 
-    goal: '',
+    goal: 'gain',
     avtScale: '',
 }
 
@@ -135,16 +136,13 @@ let imageIndex = 0
                 <div className="login-image-container3"></div>)}
             </div>)}
         </div>
-
-   
-
         <form onSubmit={handleSubmit} >
              <div className="register-container">
                 <div className={'register-box' + (pageState === 1 ? ' slide-in-right' : '')}>
                 {pageState === 1 && (
                 <>
                         <div className="speech speech-up black-speach" role="alert">
-                            <i className="fa-solid fa-circle-exclamation"></i>You don't need to fill in this information for the guest session
+                            <p>No necesitas rellenar ningún campo para esta demo, Se generarán datos automáticos para las gráficas y las entradas de calendario </p>
                         </div>
                     <h1 className="register-h1">Sign up</h1>
                     <p className='register-p'>The registration form has three simple steps, let's start with your account information.</p>
@@ -213,19 +211,19 @@ let imageIndex = 0
                         <div className="input-group">
                                 <i className="inp-icon fa-solid fa-cake-candles"></i>
                                 <label htmlFor="birthdateinp"> Birth date: </label>
-                                <input id='birthdateinp' onChange={handleChange} name='birthDate' type="date" value={formData.birthDate} placeholder='birth date'/>
+                                <input id='birthdateinp' onChange={handleChange} name='birthDate' type="date" value="2000-05-21" placeholder='birth date'/>
                         </div>
 
                         <div className="input-group">
                                 <i className="inp-icon fa-solid fa-weight-scale"></i>
                                 <label htmlFor="weightinp"> Weight: </label>
-                                <input id='weightinp' onChange={handleChange} name='weight' type="number" min={0} value={formData.weight} placeholder='weight (kg)'/>
+                                <input id='weightinp' onChange={handleChange} name='weight' type="number" min={0} value="75" placeholder='weight (kg)'/>
                         </div>
 
                         <div className="input-group">
                                 <i className="inp-icon fa-solid fa-ruler-vertical"></i>
                                 <label htmlFor="heightinp"> Height: </label>
-                                <input id='heightinp' onChange={handleChange} name='height' type="number" min={0} value={formData.height} placeholder='height (cm)'/>
+                                <input id='heightinp' onChange={handleChange} name='height' type="number" min={0} value="180" placeholder='height (cm)'/>
                         </div>
 
                         <label className='activitylabel' htmlFor="genreinp"> Choose your daily activity level </label>

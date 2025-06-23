@@ -93,7 +93,7 @@
     left: 50%;
     transform: translateX(-50%) ;
     color: var(--smoked-white-light);
-    font-size: 0px;
+    font-size: 25px;
     text-align: center;
     z-index: 100;
     font-family:  Arial, Helvetica, sans-serif;
